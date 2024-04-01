@@ -1,3 +1,5 @@
+import styles from './profile.css';
+
 export enum Attribute {
 	'uid' = 'uid',
 	'name' = 'name',
@@ -41,11 +43,15 @@ class profile extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
-    <section>
-    <img src='${this.image}'></img>
+    <section class="profile">
+    <div class="contenedor-imagen"><img src='${this.image}'></img></div>
     <p>${this.name}</p>
     </section>`;
 		}
+
+		const cssProfile = this.ownerDocument.createElement('style');
+		cssProfile.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssProfile);
 	}
 }
 

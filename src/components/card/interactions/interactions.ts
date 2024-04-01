@@ -1,3 +1,4 @@
+import styles from './interactions.css';
 export enum Attribute {
 	'uid' = 'uid',
 	'unlike' = 'unlike',
@@ -56,15 +57,27 @@ class interactions extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
-    <section>
+    <section class="interactions">
+
+		<section class="like">
     <svg>${this.unlike}'</svg>
 		<p>${this.cantidadlike}</p>
+		</section>
+
+		<section class="share">
 		<svg>${this.share}'></svg>
 		<p>${this.cantidadshare}</p>
+		</section>
+
+		<section class="comentar">
 		<svg> src='${this.comentar}'</svg>
 		<p>${this.cantidadcomentar}</p>
+		</section>
     </section>`;
 		}
+		const cssIntercations = this.ownerDocument.createElement('style');
+		cssIntercations.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssIntercations);
 	}
 }
 
