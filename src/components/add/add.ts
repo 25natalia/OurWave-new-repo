@@ -1,3 +1,5 @@
+import styles from './add.css';
+
 export enum Attributess {
 	'uid' = 'uid',
 	'iconoadd' = 'iconoadd',
@@ -37,20 +39,20 @@ class AddContent extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
-			<section class="boton">
-			<button id="ButtonPost">
-			<svg id="iconoadd">${this.iconoadd}</svg>
-			</button>
-			</section>
-			<section class="modalContainer" style="display:none;">
-					<form class="my-wave">
-							<span class="close">X</span>
-							<h2>Share your wave</h2>
-							<textarea id="descriptionWave" name="wave"></textarea>
-							<button class="enviar" type="submit">Enviar</button>
-					</form>
-			</section>
-	`;
+			        <section class="boton">
+							<button id="ButtonPost">
+							<svg id="iconoadd">${this.iconoadd}</svg>
+							</button>
+							</section>
+							<section class="modalContainer" style="display:none;">
+									<form class="my-wave">
+											<span class="close">X</span>
+											<h2>Share your wave</h2>
+											<textarea id="descriptionWave" name="wave"></textarea>
+											<button class="enviar" type="submit">Enviar</button>
+									</form>
+							</section>
+					`;
 
 			const modal = this.shadowRoot.querySelector('.modalContainer') as HTMLDivElement;
 			const button = this.shadowRoot.querySelector('#ButtonPost') as HTMLButtonElement;
@@ -80,6 +82,10 @@ class AddContent extends HTMLElement {
 				modal.style.display = 'none';
 			});
 		}
+
+		const cssAdd = this.ownerDocument.createElement('style');
+		cssAdd.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssAdd);
 	}
 }
 
