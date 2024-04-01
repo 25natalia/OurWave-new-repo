@@ -1,24 +1,24 @@
 {
-	"name": "ourwave-dca",
-	"version": "1.0.0",
-	"main": "index.js",
-	"scripts": {
-		"start": "serve",
-		"build": "webpack --watch --mode=production"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"css-loader": "^6.10.0",
-		"serve": "^14.2.1"
-	},
-	"devDependencies": {
-		"style-loader": "^3.3.4",
-		"ts-loader": "^9.5.1",
-		"typescript": "^5.4.3",
-		"webpack": "^5.91.0",
-		"webpack-cli": "^5.1.4"
-	},
-	"description": ""
+  "name": "ourwave-dca",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve",
+    "build": "webpack --watch --mode=production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "css-loader": "^6.10.0",
+    "serve": "^14.2.1"
+  },
+  "devDependencies": {
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "description": ""
 }
