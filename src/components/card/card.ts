@@ -85,6 +85,7 @@ class Card extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
+
 			<my-profile
 			uid="${this.profileuid}"
 			<section class="name">
