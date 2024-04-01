@@ -1,4 +1,4 @@
-export enum Attributessss {
+export enum Attribute {
 	'uid' = 'uid',
 	'wave' = 'wave',
 }
@@ -13,16 +13,16 @@ class waves extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		const attrs: Record<Attributessss, null> = {
+		const attrs: Record<Attribute, null> = {
 			uid: null,
 			wave: null,
 		};
 		return Object.keys(attrs);
 	}
 
-	attributeChangedCallback(propName: Attributessss, oldValue: string | undefined, newValue: string | undefined) {
+	attributeChangedCallback(propName: Attribute, oldValue: string | undefined, newValue: string | undefined) {
 		switch (propName) {
-			case Attributessss.uid:
+			case Attribute.uid:
 				this.uid = newValue ? Number(newValue) : undefined;
 				break;
 

@@ -28,36 +28,32 @@ class AppContainer extends HTMLElement {
 				myHeader.setAttribute(Attributes.perfil, iconoHeader.perfil);
 				this.shadowRoot?.appendChild(myHeader);
 			});
-		}
 
-		if (this.shadowRoot) {
 			profile.forEach((userProfile) => {
-				const myProfile = document.createElement('my-card');
-				myProfile.setAttribute(Attributesss.profilename, userProfile.name);
-				myProfile.setAttribute(Attributesss.profileimage, userProfile.image);
+				const myProfile = document.createElement('my-profile');
+				myProfile.setAttribute(Attributesss.name, userProfile.name);
+				myProfile.setAttribute(Attributesss.image, userProfile.image);
 				this.shadowRoot?.appendChild(myProfile);
 			});
 
 			waves.forEach((userWave) => {
 				const myWave = document.createElement('my-waves');
-				myWave.setAttribute(Attributesss.waveswave, userWave.wave);
+				myWave.setAttribute(Attributesss.wave, userWave.wave);
 				this.shadowRoot?.appendChild(myWave);
 			});
 
 			interactions.forEach((userInteractions) => {
-				const myInteractions = document.createElement('my-card');
-				myInteractions.setAttribute(Attributesss.interactionsunlike, userInteractions.unlike);
-				myInteractions.setAttribute(Attributesss.interactionslike, userInteractions.like);
-				myInteractions.setAttribute(Attributesss.interactionscantidadlike, userInteractions.cantidadlike);
-				myInteractions.setAttribute(Attributesss.interactionsshare, userInteractions.share);
-				myInteractions.setAttribute(Attributesss.interactionscantidadshare, userInteractions.cantidadshare);
-				myInteractions.setAttribute(Attributesss.interactionscomentar, userInteractions.comentar);
-				myInteractions.setAttribute(Attributesss.interactionscantidadcomentar, userInteractions.cantidadcomentar);
+				const myInteractions = document.createElement('my-interactions');
+				myInteractions.setAttribute(Attributesss.unlike, userInteractions.unlike);
+				myInteractions.setAttribute(Attributesss.like, userInteractions.like);
+				myInteractions.setAttribute(Attributesss.cantidadlike, userInteractions.cantidadlike);
+				myInteractions.setAttribute(Attributesss.share, userInteractions.share);
+				myInteractions.setAttribute(Attributesss.cantidadshare, userInteractions.cantidadshare);
+				myInteractions.setAttribute(Attributesss.comentar, userInteractions.comentar);
+				myInteractions.setAttribute(Attributesss.cantidadcomentar, userInteractions.cantidadcomentar);
 				this.shadowRoot?.appendChild(myInteractions);
 			});
-		}
 
-		if (this.shadowRoot) {
 			iconos.forEach((iconoData) => {
 				const myIcono = document.createElement('my-iconos');
 				myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
@@ -66,9 +62,7 @@ class AppContainer extends HTMLElement {
 				myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
 				this.shadowRoot?.appendChild(myIcono);
 			});
-		}
 
-		if (this.shadowRoot) {
 			addcontent.forEach((addButton) => {
 				const addContent = document.createElement('my-addcontent');
 				addContent.setAttribute(Attributess.iconoadd, addButton.iconoadd);

@@ -5,34 +5,34 @@ import './waves/waves';
 
 export enum Attributesss {
 	'interactionsuid' = 'interactionsuid',
-	'interactionsunlike' = 'interactionsunlike',
-	'interactionslike' = 'interactionslike',
-	'interactionscantidadlike' = 'interactionscantidadlike',
-	'interactionsshare' = 'interactionsshare',
-	'interactionscantidadshare' = 'interactionscantidadshare',
-	'interactionscomentar' = 'interactionscomentar',
-	'interactionscantidadcomentar' = 'interactionscantidadcomentar',
+	'unlike' = 'unlike',
+	'like' = 'like',
+	'cantidadlike' = 'cantidadlike',
+	'share' = 'share',
+	'cantidadshare' = 'cantidadshare',
+	'comentar' = 'comentar',
+	'cantidadcomentar' = 'cantidadcomentar',
 	'profileuid' = 'profileuid',
-	'profilename' = 'profilename',
-	'profileimage' = 'profileimage',
+	'name' = 'name',
+	'image' = 'image',
 	'wavesuid' = 'wavesuid',
-	'waveswave' = 'waveswave',
+	'wave' = 'wave',
 }
 
 class Card extends HTMLElement {
 	interactionsuid?: number;
-	interactionsunlike?: string;
-	interactionslike?: string;
-	interactionscantidadlike?: string;
-	interactionsshare?: string;
-	interactionscantidadshare?: string;
-	interactionscomentar?: string;
-	interactionscantidadcomentar?: string;
+	unlike?: string;
+	like?: string;
+	cantidadlike?: string;
+	share?: string;
+	cantidadshare?: string;
+	comentar?: string;
+	cantidadcomentar?: string;
 	profileuid?: number;
-	profilename?: string;
-	profileimage?: string;
+	name?: string;
+	image?: string;
 	wavesuid?: number;
-	waveswave?: string;
+	wave?: string;
 
 	constructor() {
 		super();
@@ -42,18 +42,18 @@ class Card extends HTMLElement {
 	static get observedAttributes() {
 		const attrs: Record<Attributesss, null> = {
 			interactionsuid: null,
-			interactionsunlike: null,
-			interactionslike: null,
-			interactionscantidadlike: null,
-			interactionsshare: null,
-			interactionscantidadshare: null,
-			interactionscomentar: null,
-			interactionscantidadcomentar: null,
+			unlike: null,
+			like: null,
+			cantidadlike: null,
+			share: null,
+			cantidadshare: null,
+			comentar: null,
+			cantidadcomentar: null,
 			profileuid: null,
-			profilename: null,
-			profileimage: null,
+			name: null,
+			image: null,
 			wavesuid: null,
-			waveswave: null,
+			wave: null,
 		};
 		return Object.keys(attrs);
 	}
@@ -85,27 +85,31 @@ class Card extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
-				<my-interactions
-					uid="${this.interactionsuid}"
-					unlike="${this.interactionsunlike}"
-					like="${this.interactionslike}"
-					cantidadlike="${this.interactionscantidadlike}"
-					share="${this.interactionsshare}"
-					cantidadshare="${this.interactionscantidadshare}"
-					comentar="${this.interactionscomentar}"
-					cantidadcomentar="${this.interactionscantidadcomentar}">
-				</my-interactions>
+			<my-profile
+			uid="${this.profileuid}"
+			<section class="name">
+			name="${this.name || 'No Username'}"
+			</section>
+			<section class="image">
+			image="${this.image}">
+			</section>
+			</my-profile>
 
-				<my-profile
-				uid="${this.profileuid}"
-				name="${this.profilename}"
-				image="${this.profileimage}">
-				</my-profile>
+			<my-waves
+			uid="${this.wavesuid}"
+			wave="${this.wave}">
+			</my-waves>
 
-        <my-waves
-        uid="${this.wavesuid}"
-        wave="${this.waveswave}">
-      </my-waves>
+			<my-interactions
+			uid="${this.interactionsuid}"
+			unlike="${this.unlike}"
+			like="${this.like}"
+			cantidadlike="${this.cantidadlike}"
+			share="${this.share}"
+			cantidadshare="${this.cantidadshare}"
+			comentar="${this.comentar}"
+			cantidadcomentar="${this.cantidadcomentar}">
+			</my-interactions>
 			`;
 		}
 		const cssCard = this.ownerDocument.createElement('style');

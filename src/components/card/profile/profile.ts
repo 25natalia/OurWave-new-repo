@@ -9,7 +9,6 @@ class profile extends HTMLElement {
 	name?: string;
 	image?: string;
 
-
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
@@ -20,7 +19,6 @@ class profile extends HTMLElement {
 			uid: null,
 			name: null,
 			image: null,
-
 		};
 		return Object.keys(attrs);
 	}
