@@ -45,7 +45,6 @@ class AppContainer extends HTMLElement {
 			interactions.forEach((userInteractions) => {
 				const myInteractions = document.createElement('my-interactions');
 				myInteractions.setAttribute(Attributesss.unlike, userInteractions.unlike);
-				myInteractions.setAttribute(Attributesss.like, userInteractions.like);
 				myInteractions.setAttribute(Attributesss.cantidadlike, userInteractions.cantidadlike);
 				myInteractions.setAttribute(Attributesss.share, userInteractions.share);
 				myInteractions.setAttribute(Attributesss.cantidadshare, userInteractions.cantidadshare);

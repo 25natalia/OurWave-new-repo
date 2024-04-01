@@ -57,7 +57,7 @@ class interactions extends HTMLElement {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
     <section>
-    <svg>${this.like}'</svg>
+    <svg>${this.unlike}'</svg>
 		<p>${this.cantidadlike}</p>
 		<svg>${this.share}'></svg>
 		<p>${this.cantidadshare}</p>

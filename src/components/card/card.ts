@@ -103,7 +103,6 @@ class Card extends HTMLElement {
 			<my-interactions
 			uid="${this.interactionsuid}"
 			unlike="${this.unlike}"
-			like="${this.like}"
 			cantidadlike="${this.cantidadlike}"
 			share="${this.share}"
 			cantidadshare="${this.cantidadshare}"
