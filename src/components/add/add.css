@@ -1,0 +1,118 @@
+.modalContainer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: Arial;
+}
+
+#iconoadd {
+	height: 24px;
+	width: 24px;
+}
+
+#descriptionWave {
+	padding: 3%;
+	margin-bottom: 2%;
+	width: 50%;
+	border-radius: 30px;
+}
+
+h2 {
+	color: #ff9f1c;
+	font-size: 30px;
+}
+
+.my-wave {
+	background-color: white;
+	padding: 20px;
+	border-radius: 40px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	width: 60%;
+	height: 40%;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	margin: auto;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.enviar {
+	background-color: #2ec4b6;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	height: 40px;
+	width: 120px;
+	transition: background-color 0.2s ease;
+	color: white;
+}
+
+#descriptionWave {
+	padding: 4%;
+	margin-top: 2%;
+	margin-bottom: 6%;
+	width: 40%;
+	border-radius: 30px;
+}
+.close {
+	position: absolute;
+	top: 50px;
+	right: 50px;
+	cursor: pointer;
+	font-family: Arial;
+	color: #2ec4b6;
+}
+
+.boton {
+	display: flex;
+	flex-direction: row-reverse;
+	padding-right: 3%;
+}
+
+#ButtonPost {
+	background-color: #ff9f1c;
+	position: fixed;
+	border: none;
+	border-radius: 100px;
+	padding-right: 4px;
+	cursor: pointer;
+	height: 55px;
+	width: 55px;
+	bottom: 14vh;
+	z-index: 2;
+	transition: background-color 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+	#ButtonPost {
+		background-color: #ff9f1c;
+		position: fixed;
+		border: none;
+		border-radius: 100px;
+		padding-right: 4px;
+		cursor: pointer;
+		height: 45px;
+		width: 45px;
+		bottom: 10vh;
+		z-index: 2;
+		transition: background-color 0.3s ease;
+	}
+}
+
+.enviar:hover {
+	background-color: #cbf3f0;
+}
+
+#ButtonPost:hover {
+	background-color: #ffbf69;
+}

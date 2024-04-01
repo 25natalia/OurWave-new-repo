@@ -1,0 +1,35 @@
+.menubar {
+	display: flex;
+	justify-content: space-evenly;
+	position: fixed;
+	bottom: 0;
+	align-items: center;
+	width: 100%;
+	height: 10vh;
+	background-color: white;
+	z-index: 2;
+	box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.1);
+}
+
+#home,
+#explore,
+#chats,
+#profile {
+	height: 24px;
+	width: 24px;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+	.menubar {
+		display: flex;
+		justify-content: space-evenly;
+		position: fixed;
+		bottom: 0;
+		align-items: center;
+		width: 100%;
+		height: 8vh;
+		background-color: white;
+		box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.1);
+	}
+}
