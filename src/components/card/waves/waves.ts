@@ -1,3 +1,4 @@
+import styles from './waves.css';
 export enum Attribute {
 	'uid' = 'uid',
 	'wave' = 'wave',
@@ -42,6 +43,9 @@ class waves extends HTMLElement {
     <p>${this.wave}</p>
     </section>`;
 		}
+		const cssWaves = this.ownerDocument.createElement('style');
+		cssWaves.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssWaves);
 	}
 }
 
