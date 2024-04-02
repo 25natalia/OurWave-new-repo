@@ -68,21 +68,36 @@ class Card extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
-			<section class="name">
-			<p>${this.name || 'No Username'}</p>
-			</section>
+			<section class= "cardEntera">
+			<section class= profile>
 			<section class="image">
 			<img src="${this.image}"></img>
 			</section>
+			<p>${this.name || 'No Username'}</p>
+			</section>
 
+<section class="comment">
 			<p>"${this.wave}"</p>
-			<svg>${this.unlike}</svg>
+			</section>
+
+			<section class="interacciones">
+
+			<section class="like">
+			<svg id="svg">${this.unlike}</svg>
 			<p>${this.cantidadlike}</p>
-			<svg>${this.share}</svg>
+			</section>
+
+			<sections class='share'>
+			<svg id="svg">${this.share}</svg>
 			<p>${this.cantidadshare}</p>
-			<svg>${this.comentar}</svg>
+			</sections>
+
+			<section class='comment'>
+			<svg id="svg">${this.comentar}</svg>
 			<p>${this.cantidadcomentar}</p>
-			`;
+			</section>
+			</section>
+			</section>`;
 		}
 		const cssCard = this.ownerDocument.createElement('style');
 		cssCard.innerHTML = styles;

@@ -1,3 +1,51 @@
 .image img {
 	width: 30px;
+	height: 30px; /* Ancho del contenedor */ /* Altura del contenedor */
+	overflow: hidden; /* Oculta cualquier contenido que exceda los límites del contenedor */
+	border-radius: 50%;
+	display: block; /* Asegura que la imagen se comporte como un bloque */
+	border-radius: 50%; /* Hace que la imagen sea circular */
+	margin: 10px;
+}
+
+.comment,
+.like,
+.share {
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.cardEntera {
+	background-color: rgb(255, 255, 255);
+	width: 70%;
+	height: 15%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0.3, 0.3);
+	margin-left: 15%;
+	margin-top: 2%;
+	font-family: 'inter';
+}
+
+.profile {
+	display: flex;
+}
+.interacciones {
+	display: flex;
+	color: #2ec4b6;
+	align-items: center;
+	justify-content: end;
+}
+.like,
+.share,
+.comment {
+	display: flex;
+	align-items: center;
+}
+
+#svg {
+	width: 26px;
+	height: 26px;
+	margin: 3px;
 }

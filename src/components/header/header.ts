@@ -44,7 +44,9 @@ class header extends HTMLElement {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
     <section class="header">
+		<section class="logo">
     <img src='${this.logo}'></img>
+		</section>
     <svg id="perfil">${this.perfil}</svg>
     </section>`;
 		}
