@@ -6,8 +6,6 @@ import { Attributes } from './components/header/header';
 import { addcontent } from './data/dataAdd';
 import { Attributess } from './components/add/add';
 import { profile } from './data/dataProfile';
-import { interactions } from './data/dataInteractions';
-import { waves } from './data/dataWaves';
 import { Attributesss } from './components/card/card';
 
 class AppContainer extends HTMLElement {
@@ -29,28 +27,19 @@ class AppContainer extends HTMLElement {
 				this.shadowRoot?.appendChild(myHeader);
 			});
 
-			profile.forEach((userProfile) => {
-				const myProfile = document.createElement('my-profile');
-				myProfile.setAttribute(Attributesss.name, userProfile.name);
-				myProfile.setAttribute(Attributesss.image, userProfile.image);
-				this.shadowRoot?.appendChild(myProfile);
-			});
-
-			waves.forEach((userWave) => {
-				const myWave = document.createElement('my-waves');
-				myWave.setAttribute(Attributesss.wave, userWave.wave);
-				this.shadowRoot?.appendChild(myWave);
-			});
-
-			interactions.forEach((userInteractions) => {
-				const myInteractions = document.createElement('my-interactions');
-				myInteractions.setAttribute(Attributesss.unlike, userInteractions.unlike);
-				myInteractions.setAttribute(Attributesss.cantidadlike, userInteractions.cantidadlike);
-				myInteractions.setAttribute(Attributesss.share, userInteractions.share);
-				myInteractions.setAttribute(Attributesss.cantidadshare, userInteractions.cantidadshare);
-				myInteractions.setAttribute(Attributesss.comentar, userInteractions.comentar);
-				myInteractions.setAttribute(Attributesss.cantidadcomentar, userInteractions.cantidadcomentar);
-				this.shadowRoot?.appendChild(myInteractions);
+			profile.forEach((element) => {
+				const myCard = document.createElement('my-card');
+				console.log(element);
+				myCard.setAttribute(Attributesss.name, element.name);
+				myCard.setAttribute(Attributesss.image, element.image);
+				myCard.setAttribute(Attributesss.wave, element.wave);
+				myCard.setAttribute(Attributesss.unlike, element.unlike);
+				myCard.setAttribute(Attributesss.cantidadlike, element.cantidadlike);
+				myCard.setAttribute(Attributesss.share, element.share);
+				myCard.setAttribute(Attributesss.cantidadshare, element.cantidadshare);
+				myCard.setAttribute(Attributesss.comentar, element.comentar);
+				myCard.setAttribute(Attributesss.cantidadcomentar, element.cantidadcomentar);
+				this.shadowRoot?.appendChild(myCard);
 			});
 
 			iconos.forEach((iconoData) => {
