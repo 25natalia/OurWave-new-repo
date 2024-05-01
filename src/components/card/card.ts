@@ -1,6 +1,6 @@
 import styles from './card.css';
 
-export enum Attributesss {
+export enum AttributesCard {
 	'unlike' = 'unlike',
 	'like' = 'like',
 	'cantidadlike' = 'cantidadlike',
@@ -33,7 +33,7 @@ class Card extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		const attrs: Record<Attributesss, null> = {
+		const attrs: Record<AttributesCard, null> = {
 			unlike: null,
 			like: null,
 			cantidadlike: null,
@@ -49,9 +49,9 @@ class Card extends HTMLElement {
 		return Object.keys(attrs);
 	}
 
-	attributeChangedCallback(propName: Attributesss, oldValue: string | any, newValue: string | any) {
+	attributeChangedCallback(propName: AttributesCard, oldValue: string | any, newValue: string | any) {
 		switch (propName) {
-			case Attributesss.profileuid:
+			case AttributesCard.profileuid:
 				this.profileuid = newValue ? Number(newValue) : undefined;
 				break;
 

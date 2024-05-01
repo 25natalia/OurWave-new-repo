@@ -1,6 +1,6 @@
 import styles from './add.css';
 
-export enum Attributess {
+export enum AttributesAdd {
 	'uid' = 'uid',
 	'iconoadd' = 'iconoadd',
 }

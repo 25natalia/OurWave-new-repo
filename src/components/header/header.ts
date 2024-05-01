@@ -1,6 +1,6 @@
 import styles from './header.css';
 
-export enum Attributes {
+export enum AttributesHeader {
 	'uid' = 'uid',
 	'logo' = 'logo',
 	'perfil' = 'perfil',
@@ -17,7 +17,7 @@ class header extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		const attrs: Record<Attributes, null> = {
+		const attrs: Record<AttributesHeader, null> = {
 			uid: null,
 			logo: null,
 			perfil: null,
@@ -25,9 +25,9 @@ class header extends HTMLElement {
 		return Object.keys(attrs);
 	}
 
-	attributeChangedCallback(propName: Attributes, oldValue: string | undefined, newValue: string | undefined) {
+	attributeChangedCallback(propName: AttributesHeader, oldValue: string | undefined, newValue: string | undefined) {
 		switch (propName) {
-			case Attributes.uid:
+			case AttributesHeader.uid:
 				this.uid = newValue ? Number(newValue) : undefined;
 				break;
 

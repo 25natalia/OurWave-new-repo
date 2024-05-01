@@ -1,3 +1,6 @@
+import './screens/dashboard';
+import './components/indexpadre';
+
 class AppContainer extends HTMLElement {
 	constructor() {
 		super();

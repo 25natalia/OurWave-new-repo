@@ -2,11 +2,11 @@ import './components/indexpadre';
 import { iconos } from '../services/dataMenu';
 import { Attribute } from '../components/menu/menu';
 import { header } from '../services/dataHeader';
-import { Attributes } from '../components/header/header';
+import { AttributesHeader } from '../components/header/header';
 import { addcontent } from '../services/dataAdd';
-import { Attributess } from '../components/add/add';
+import { AttributesAdd } from '../components/add/add';
 import { profile } from '../services/dataProfile';
-import { Attributesss } from '../components/card/card';
+import { AttributesCard } from '../components/card/card';
 
 class Dashboard extends HTMLElement {
 	constructor() {
@@ -22,23 +22,23 @@ class Dashboard extends HTMLElement {
 		if (this.shadowRoot) {
 			header.forEach((iconoHeader) => {
 				const myHeader = document.createElement('my-header');
-				myHeader.setAttribute(Attributes.logo, iconoHeader.logo);
-				myHeader.setAttribute(Attributes.perfil, iconoHeader.perfil);
+				myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
+				myHeader.setAttribute(AttributesHeader.perfil, iconoHeader.perfil);
 				this.shadowRoot?.appendChild(myHeader);
 			});
 
 			profile.forEach((element) => {
 				const myCard = document.createElement('my-card');
 				console.log(element);
-				myCard.setAttribute(Attributesss.name, element.name);
-				myCard.setAttribute(Attributesss.image, element.image);
-				myCard.setAttribute(Attributesss.wave, element.wave);
-				myCard.setAttribute(Attributesss.unlike, element.unlike);
-				myCard.setAttribute(Attributesss.cantidadlike, element.cantidadlike);
-				myCard.setAttribute(Attributesss.share, element.share);
-				myCard.setAttribute(Attributesss.cantidadshare, element.cantidadshare);
-				myCard.setAttribute(Attributesss.comentar, element.comentar);
-				myCard.setAttribute(Attributesss.cantidadcomentar, element.cantidadcomentar);
+				myCard.setAttribute(AttributesCard.name, element.name);
+				myCard.setAttribute(AttributesCard.image, element.image);
+				myCard.setAttribute(AttributesCard.wave, element.wave);
+				myCard.setAttribute(AttributesCard.unlike, element.unlike);
+				myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
+				myCard.setAttribute(AttributesCard.share, element.share);
+				myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
+				myCard.setAttribute(AttributesCard.comentar, element.comentar);
+				myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
 				this.shadowRoot?.appendChild(myCard);
 			});
 
@@ -46,14 +46,13 @@ class Dashboard extends HTMLElement {
 				const myIcono = document.createElement('my-iconos');
 				myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
 				myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
-				myIcono.setAttribute(Attribute.iconochats, iconoData.iconochats);
 				myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
 				this.shadowRoot?.appendChild(myIcono);
 			});
 
 			addcontent.forEach((addButton) => {
 				const addContent = document.createElement('my-addcontent');
-				addContent.setAttribute(Attributess.iconoadd, addButton.iconoadd);
+				addContent.setAttribute(AttributesAdd.iconoadd, addButton.iconoadd);
 				this.shadowRoot?.appendChild(addContent);
 			});
 		}
