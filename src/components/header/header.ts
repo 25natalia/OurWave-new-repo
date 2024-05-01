@@ -3,13 +3,11 @@ import styles from './header.css';
 export enum AttributesHeader {
 	'uid' = 'uid',
 	'logo' = 'logo',
-	'perfil' = 'perfil',
 }
 
 class header extends HTMLElement {
 	uid?: number;
 	logo?: string;
-	perfil?: string;
 
 	constructor() {
 		super();
@@ -20,7 +18,6 @@ class header extends HTMLElement {
 		const attrs: Record<AttributesHeader, null> = {
 			uid: null,
 			logo: null,
-			perfil: null,
 		};
 		return Object.keys(attrs);
 	}
@@ -47,7 +44,6 @@ class header extends HTMLElement {
 		<section class="logo">
     <img src='${this.logo}'></img>
 		</section>
-    <svg id="perfil">${this.perfil}</svg>
     </section>`;
 		}
 		const cssHeader = this.ownerDocument.createElement('style');

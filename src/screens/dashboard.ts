@@ -1,4 +1,4 @@
-import './components/indexpadre';
+import '../components/indexpadre';
 import { iconos } from '../services/dataMenu';
 import { Attribute } from '../components/menu/menu';
 import { header } from '../services/dataHeader';
@@ -23,7 +23,6 @@ class Dashboard extends HTMLElement {
 			header.forEach((iconoHeader) => {
 				const myHeader = document.createElement('my-header');
 				myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
-				myHeader.setAttribute(AttributesHeader.perfil, iconoHeader.perfil);
 				this.shadowRoot?.appendChild(myHeader);
 			});
 
