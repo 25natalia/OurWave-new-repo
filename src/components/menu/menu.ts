@@ -4,7 +4,6 @@ export enum Attribute {
 	'uid' = 'uid',
 	'iconohome' = 'iconohome',
 	'iconoexplore' = 'iconoexplore',
-	'iconochats' = 'iconochats',
 	'iconoprofile' = 'iconoprofile',
 }
 
@@ -12,7 +11,6 @@ class iconos extends HTMLElement {
 	uid?: number;
 	iconohome?: string;
 	iconoexplore?: string;
-	iconochats?: string;
 	iconoprofile?: string;
 
 	constructor() {
@@ -25,7 +23,6 @@ class iconos extends HTMLElement {
 			uid: null,
 			iconohome: null,
 			iconoexplore: null,
-			iconochats: null,
 			iconoprofile: null,
 		};
 		return Object.keys(attrs);
@@ -53,7 +50,6 @@ class iconos extends HTMLElement {
 			<section class="menubar">
 		<svg id="home">${this.iconohome}</svg>
 		<svg id="explore">${this.iconoexplore}</svg>
-		<svg id="chats">${this.iconochats}</svg>
 		<svg id="profile">${this.iconoprofile}</svg>
 			</section>`;
 		}
