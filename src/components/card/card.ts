@@ -77,7 +77,7 @@ class Card extends HTMLElement {
 			</section>
 
 <section class="comment">
-			<p>"${this.wave}"</p>
+			<p>${this.wave}</p>
 			</section>
 
 			<section class="interacciones">
