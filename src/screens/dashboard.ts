@@ -1,4 +1,4 @@
-import './components/indexpadre';
+import '../components/indexpadre';
 import { iconos } from '../services/dataMenu';
 import { Attribute } from '../components/menu/menu';
 import { header } from '../services/dataHeader';
