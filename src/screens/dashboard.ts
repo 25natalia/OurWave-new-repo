@@ -1,4 +1,3 @@
-import '../components/indexpadre';
 import { iconos } from '../services/dataMenu';
 import { Attribute } from '../components/menu/menu';
 import { header } from '../services/dataHeader';
@@ -8,7 +7,7 @@ import { AttributesAdd } from '../components/add/add';
 import { profile } from '../services/dataProfile';
 import { AttributesCard } from '../components/card/card';
 
-class Dashboard extends HTMLElement {
+export class Dashboard extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });

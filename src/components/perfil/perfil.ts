@@ -6,7 +6,7 @@ export enum AttributePerfil {
 	'image' = 'image',
 }
 
-class iconos extends HTMLElement {
+class PerfilComponent extends HTMLElement {
 	artist?: string;
 	song_title?: string;
 	image?: string;
@@ -52,5 +52,5 @@ class iconos extends HTMLElement {
 	}
 }
 
-export default iconos;
-customElements.define('my-iconos', iconos);
+export default PerfilComponent;
+customElements.define('my-perfil', PerfilComponent);
