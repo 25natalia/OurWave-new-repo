@@ -1,5 +1,6 @@
 import './screens/dashboard';
 import './components/indexpadre';
+import { getSongs } from './services/Firebase';
 
 class AppContainer extends HTMLElement {
 	constructor() {
@@ -9,6 +10,7 @@ class AppContainer extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
+		const dataSongs = getSongs();
 	}
 
 	render() {
