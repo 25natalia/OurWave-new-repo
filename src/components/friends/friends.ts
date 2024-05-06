@@ -8,7 +8,7 @@ export enum AttributesHeader {
 	'song' = 'song',
 }
 
-class header extends HTMLElement {
+class friends extends HTMLElement {
 	uid?: number;
 	photo?: string;
 	name?: string;
@@ -49,14 +49,10 @@ class header extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
-    <section class="header">
-		<section class="logo">
     <img src='${this.photo}'></img>
-    <img src='${this.name}'></img>
+    <p>${this.name}</p>
     <img src='${this.profile}'></img>
-    <img src='${this.song}'></img>
-		</section>
-    </section>`;
+    <h3>${this.song}</h3>`;
 		}
 		const cssHeader = this.ownerDocument.createElement('style');
 		cssHeader.innerHTML = styles;
@@ -64,5 +60,5 @@ class header extends HTMLElement {
 	}
 }
 
-export default header;
-customElements.define('my-header', header);
+export default friends;
+customElements.define('my-friend', friends);
