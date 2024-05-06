@@ -1,5 +1,7 @@
-import { AttributePerfil } from '../components/perfil/perfil';
-import { getSongs } from '../services/Firebase';
+import { header } from '../services/dataHeader';
+import { AttributesHeader } from '../components/header/header';
+import { iconos } from '../services/dataMenu';
+import { Attribute } from '../components/menu/menu';
 
 export class Perfil extends HTMLElement {
 	constructor() {
@@ -11,15 +13,22 @@ export class Perfil extends HTMLElement {
 		this.render();
 	}
 
-	async render() {
+	render() {
 		if (this.shadowRoot) {
-			const dataSongs = await getSongs();
-			dataSongs.forEach((song: any) => {
-				const mySong = document.createElement('my-perfil');
-				mySong.setAttribute(AttributePerfil.song_title, song.song_title);
-				this.shadowRoot?.appendChild(mySong);
+			header.forEach((iconoHeader) => {
+				const myHeader = document.createElement('my-header');
+				myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
+				this.shadowRoot?.appendChild(myHeader);
 			});
 		}
+
+		iconos.forEach((iconoData) => {
+			const myIcono = document.createElement('my-iconos');
+			myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
+			myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
+			myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
+			this.shadowRoot?.appendChild(myIcono);
+		});
 	}
 }
 customElements.define('app-perfil', Perfil);
