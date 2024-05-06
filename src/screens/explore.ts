@@ -1,5 +1,5 @@
 import { AttributesFriends } from '../components/friends/friends';
-import { AttributePerfil } from '../components/perfil/perfil';
+import { AttributeSongs } from '../components/Songs/Songs';
 import { getFriends } from '../services/Firebase';
 import { getSongs } from '../services/Firebase';
 
@@ -33,7 +33,9 @@ export class Explore extends HTMLElement {
 			const dataSongs = await getSongs();
 			dataSongs.forEach((song: any) => {
 				const mySong = document.createElement('my-perfil');
-				mySong.setAttribute(AttributePerfil.song_title, song.song_title);
+				mySong.setAttribute(AttributeSongs.song_title, song.song_title);
+				mySong.setAttribute(AttributeSongs.artist, song.artist);
+				mySong.setAttribute(AttributeSongs.image, song.image);
 				this.shadowRoot?.appendChild(mySong);
 			});
 		}

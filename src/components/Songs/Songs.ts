@@ -1,12 +1,12 @@
 import styles from './perfil.css';
 
-export enum AttributePerfil {
+export enum AttributeSongs {
 	'artist' = 'artist',
 	'song_title' = 'song_title',
 	'image' = 'image',
 }
 
-class PerfilComponent extends HTMLElement {
+class SongsComponent extends HTMLElement {
 	artist?: string;
 	song_title?: string;
 	image?: string;
@@ -17,7 +17,7 @@ class PerfilComponent extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		const attrs: Record<AttributePerfil, null> = {
+		const attrs: Record<AttributeSongs, null> = {
 			artist: null,
 			song_title: null,
 			image: null,
@@ -25,7 +25,7 @@ class PerfilComponent extends HTMLElement {
 		return Object.keys(attrs);
 	}
 
-	attributeChangedCallback(propName: AttributePerfil, oldValue: string | undefined, newValue: string | undefined) {
+	attributeChangedCallback(propName: AttributeSongs, oldValue: string | undefined, newValue: string | undefined) {
 		switch (propName) {
 			default:
 				this[propName] = newValue;
@@ -52,5 +52,5 @@ class PerfilComponent extends HTMLElement {
 	}
 }
 
-export default PerfilComponent;
-customElements.define('my-perfil', PerfilComponent);
+export default SongsComponent;
+customElements.define('my-perfil', SongsComponent);
