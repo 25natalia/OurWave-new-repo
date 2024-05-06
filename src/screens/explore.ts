@@ -34,6 +34,8 @@ export class Explore extends HTMLElement {
 			dataSongs.forEach((song: any) => {
 				const mySong = document.createElement('my-perfil');
 				mySong.setAttribute(AttributePerfil.song_title, song.song_title);
+				mySong.setAttribute(AttributePerfil.artist, song.artist);
+				mySong.setAttribute(AttributePerfil.image, song.image);
 				this.shadowRoot?.appendChild(mySong);
 			});
 		}
