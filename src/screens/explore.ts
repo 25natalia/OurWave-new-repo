@@ -1,7 +1,7 @@
-import { AttributePerfil } from '../components/perfil/perfil';
-import { getSongs } from '../services/Firebase';
+import { AttributesFriends } from '../components/friends/friends';
+import { getFriends } from '../services/Firebase';
 
-export class Perfil extends HTMLElement {
+export class Explore extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
@@ -13,13 +13,16 @@ export class Perfil extends HTMLElement {
 
 	async render() {
 		if (this.shadowRoot) {
-			const dataSongs = await getSongs();
-			dataSongs.forEach((song: any) => {
-				const mySong = document.createElement('my-perfil');
-				mySong.setAttribute(AttributePerfil.song_title, song.song_title);
-				this.shadowRoot?.appendChild(mySong);
+			const dataFriends = await getFriends();
+			dataFriends.forEach((friend: any) => {
+				const myFriend = document.createElement('my-friend');
+				myFriend.setAttribute(AttributesFriends.name, friend.name);
+				myFriend.setAttribute(AttributesFriends.profile, friend.profile);
+        myFriend.setAttribute(AttributesFriends.photo, friend.photo);
+        myFriend.setAttribute(AttributesFriends.song, friend.song);
+				this.shadowRoot?.appendChild(myFriend);
 			});
 		}
 	}
 }
-customElements.define('app-perfil', Perfil);
+customElements.define('app-explore', Explore);

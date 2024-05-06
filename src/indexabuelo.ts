@@ -1,5 +1,6 @@
 import './screens/dashboard';
 import './screens/perfil';
+import './screens/explore';
 import { getSongs } from './services/Firebase';
 
 class AppContainer extends HTMLElement {
@@ -14,7 +15,7 @@ class AppContainer extends HTMLElement {
 	}
 
 	render() {
-		const dashboard = this.ownerDocument.createElement('app-perfil');
+		const dashboard = this.ownerDocument.createElement('app-explore');
 		this.shadowRoot?.appendChild(dashboard);
 	}
 }

@@ -25,3 +25,12 @@ export const getSongs = async () => {
 	return arraySongs;
 };
 
+export const getFriends = async () => {
+	const arrayFriends: any = [];
+
+	const querySnapshot = await getDocs(collection(db, 'Friends-playlist'));
+	querySnapshot.forEach((doc) => {
+		arrayFriends.push(doc.data());
+	});
+	return arrayFriends;
+};

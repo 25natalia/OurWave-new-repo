@@ -1,6 +1,4 @@
-import styles from './header.css';
-
-export enum AttributesHeader {
+export enum AttributesFriends {
 	'uid' = 'uid',
 	'name' = 'name',
 	'photo' = 'photo',
@@ -21,7 +19,7 @@ class friends extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		const attrs: Record<AttributesHeader, null> = {
+		const attrs: Record<AttributesFriends, null> = {
 			uid: null,
 			photo: null,
 			name: null,
@@ -31,9 +29,9 @@ class friends extends HTMLElement {
 		return Object.keys(attrs);
 	}
 
-	attributeChangedCallback(propName: AttributesHeader, oldValue: string | undefined, newValue: string | undefined) {
+	attributeChangedCallback(propName: AttributesFriends, oldValue: string | undefined, newValue: string | undefined) {
 		switch (propName) {
-			case AttributesHeader.uid:
+			case AttributesFriends.uid:
 				this.uid = newValue ? Number(newValue) : undefined;
 				break;
 
@@ -54,9 +52,6 @@ class friends extends HTMLElement {
     <img src='${this.profile}'></img>
     <h3>${this.song}</h3>`;
 		}
-		const cssHeader = this.ownerDocument.createElement('style');
-		cssHeader.innerHTML = styles;
-		this.shadowRoot?.appendChild(cssHeader);
 	}
 }
 
