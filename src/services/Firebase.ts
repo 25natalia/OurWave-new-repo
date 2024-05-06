@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
+import { typeAddSongs } from '../types/songs';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAS_sGDbQYUNZAoF-ZqZcpjWtLQtBmDvsw',
@@ -33,4 +34,31 @@ export const getFriends = async () => {
 		arrayFriends.push(doc.data());
 	});
 	return arrayFriends;
+};
+
+export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
+	try {
+		const where = collection(db, 'playlist');
+		await addDoc(where, song);
+		console.log('se añadió con éxito');
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+const getCreatedSongs = async () => {
+	const querySnapshot = await getDocs(collection(db, 'Profile'));
+	const transformed: Array<typeAddSongs> = [];
+
+	querySnapshot.forEach((doc) => {
+		const data: Omit<typeAddSongs, 'id'> = doc.data() as any;
+		transformed.push({ id: doc.id, ...data });
+	});
+
+	return transformed;
+};
+
+export default {
+	getCreatedSongs,
+	addSong,
 };

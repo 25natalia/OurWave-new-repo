@@ -1,4 +1,4 @@
-import styles from './perfil.css';
+import styles from './Songs.css';
 
 export enum AttributeSongs {
 	'artist' = 'artist',
