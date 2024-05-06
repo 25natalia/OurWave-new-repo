@@ -10,22 +10,8 @@ export class Explore extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.renderFriends();
 		this.renderSongs();
-	}
-
-	async renderFriends() {
-		if (this.shadowRoot) {
-			const dataFriends = await getFriends();
-			dataFriends.forEach((friend: any) => {
-				const myFriend = document.createElement('my-friend');
-				myFriend.setAttribute(AttributesFriends.name, friend.name);
-				myFriend.setAttribute(AttributesFriends.profile, friend.profile);
-				myFriend.setAttribute(AttributesFriends.photo, friend.photo);
-				myFriend.setAttribute(AttributesFriends.song, friend.song);
-				this.shadowRoot?.appendChild(myFriend);
-			});
-		}
+		this.renderFriends();
 	}
 
 	async renderSongs() {
@@ -37,6 +23,19 @@ export class Explore extends HTMLElement {
 				mySong.setAttribute(AttributePerfil.artist, song.artist);
 				mySong.setAttribute(AttributePerfil.image, song.image);
 				this.shadowRoot?.appendChild(mySong);
+			});
+		}
+	}
+	async renderFriends() {
+		if (this.shadowRoot) {
+			const dataFriends = await getFriends();
+			dataFriends.forEach((friend: any) => {
+				const myFriend = document.createElement('my-friend');
+				myFriend.setAttribute(AttributesFriends.name, friend.name);
+				myFriend.setAttribute(AttributesFriends.profile, friend.profile);
+				myFriend.setAttribute(AttributesFriends.photo, friend.photo);
+				myFriend.setAttribute(AttributesFriends.song, friend.song);
+				this.shadowRoot?.appendChild(myFriend);
 			});
 		}
 	}
