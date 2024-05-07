@@ -6,11 +6,14 @@ import { addcontent } from '../services/dataAdd';
 import { AttributesAdd } from '../components/add/add';
 import { profile } from '../services/dataProfile';
 import { AttributesCard } from '../components/card/card';
+import { addObserver, appState, dispatch } from '../store';
+import { navigate } from '../store/actions';
 
 export class Dashboard extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
+		addObserver(this);
 	}
 
 	connectedCallback() {
@@ -52,9 +55,9 @@ export class Dashboard extends HTMLElement {
 				this.shadowRoot?.appendChild(myIcono);
 			});
 
-			const homeIcon = this.shadowRoot?.querySelector('.home');
+			const homeIcon = this.shadowRoot?.querySelector('.profile');
 			homeIcon?.addEventListener('click', () => {
-				console.log('Hola desde el dashboard');
+				dispatch(navigate('PROFILE'));
 			});
 
 			addcontent.forEach((addButton) => {

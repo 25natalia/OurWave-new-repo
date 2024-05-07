@@ -9,6 +9,8 @@ import { SongsComponent } from '../components/indexpadre';
 import { AttributeSongs } from '../components/Songs/Songs';
 import { dataUser } from '../services/dataUser';
 import styles from './perfil.css';
+import { addObserver, appState, dispatch } from '../store';
+import { navigate } from '../store/actions';
 
 const formData: Omit<typeAddSongs, 'id'> = {
 	artist: '',
@@ -20,6 +22,7 @@ export class Perfil extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
+		addObserver(this);
 	}
 
 	connectedCallback() {
@@ -114,7 +117,7 @@ export class Perfil extends HTMLElement {
 
 		const homeIcon = this.shadowRoot?.querySelector('.home');
 		homeIcon?.addEventListener('click', () => {
-			console.log('Hola');
+			dispatch(navigate('HOME'));
 		});
 
 		const cssPerfil = this.ownerDocument.createElement('style');

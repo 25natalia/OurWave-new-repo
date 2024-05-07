@@ -1,33 +1,19 @@
-import Storage, { PersistanceKeys } from '../utils/storage';
-import { Actions, AppState, Observer } from '../types/store';
 import { reducer } from './reducer';
 
-const emptyState: AppState = {
+export let appState = {
 	screen: 'HOME',
 };
 
-export let appState = Storage.get({
-	key: PersistanceKeys.STORE,
-	defaultValue: emptyState,
-});
-
 //--//
 
-let observers: Observer[] = [];
+let observers: any[] = [];
 
-const persistStore = (state: AppState) => Storage.set({ key: PersistanceKeys.STORE, value: state });
-
-const notifyObservers = () => observers.forEach((o) => o.render());
-
-export const dispatch = (action: Actions) => {
+export const dispatch = (action: any) => {
 	const clone = JSON.parse(JSON.stringify(appState));
-	const newState = reducer(action, clone);
-	appState = newState;
-
-	persistStore(newState);
-	notifyObservers();
+	appState = reducer(action, clone);
+	observers.forEach((o: any) => o.render());
 };
 
-export const addObserver = (ref: Observer) => {
+export const addObserver = (ref: any) => {
 	observers = [...observers, ref];
 };
