@@ -53,4 +53,4 @@ class SongsComponent extends HTMLElement {
 }
 
 export default SongsComponent;
-customElements.define('my-perfil', SongsComponent);
+customElements.define('my-songs', SongsComponent);

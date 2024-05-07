@@ -79,7 +79,7 @@ export class Perfil extends HTMLElement {
 
 		const addedSongs = await Firebase.getCreatedSongs();
 		addedSongs.forEach((p: typeAddSongs) => {
-			const card = this.ownerDocument.createElement('my-perfil') as SongsComponent;
+			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
 			card.setAttribute(AttributeSongs.image, p.image);
 			card.setAttribute(AttributeSongs.artist, p.artist);
 			card.setAttribute(AttributeSongs.song_title, p.song_title);
