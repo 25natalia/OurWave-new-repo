@@ -41,6 +41,7 @@ h1 {
 	font-weight: 500;
 	font-size: 25px;
 	color: rgb(46, 196, 182);
+	cursor: pointer;
 }
 
 .name-following {
@@ -74,6 +75,7 @@ h1 {
 	align-items: center;
 	font-size: 16px;
 	color: #1e1e1e;
+	cursor: pointer;
 }
 
 .followers {
@@ -89,6 +91,7 @@ h1 {
 	font-size: 18px;
 	margin: 4px;
 	box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+	cursor: pointer;
 }
 
 .playlist {
@@ -106,4 +109,9 @@ h1 {
 	border: none;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 	margin-top: 8px;
+	cursor: pointer;
+}
+
+.playlist:hover {
+	background-color: #ffbf69;
 }

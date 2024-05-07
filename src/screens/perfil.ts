@@ -63,22 +63,32 @@ export class Perfil extends HTMLElement {
 
 		const h1Add = this.ownerDocument.createElement('h1');
 		h1Add.textContent = 'Add your own song';
+		h1Add.classList.add('h1Add');
 		this.shadowRoot?.appendChild(h1Add);
+
+		const section = this.ownerDocument.createElement('section');
+		section.classList.add('create-song');
 
 		const artist = this.ownerDocument.createElement('input');
 		artist.placeholder = 'Add an artist';
-		this.shadowRoot?.appendChild(artist);
+		artist.classList.add('artist');
+		section.appendChild(artist);
 
 		const title = this.ownerDocument.createElement('input');
-		title.placeholder = 'Add the song tittle';
-		this.shadowRoot?.appendChild(title);
+		title.placeholder = 'Add the song title';
+		title.classList.add('title');
+		section.appendChild(title);
 
 		const image = this.ownerDocument.createElement('input');
 		image.placeholder = 'Add the album cover';
-		this.shadowRoot?.appendChild(image);
+		image.classList.add('image');
+		section.appendChild(image);
+
+		this.shadowRoot?.appendChild(section);
 
 		const save = this.ownerDocument.createElement('button');
 		save.innerText = 'Save';
+		save.classList.add('save');
 		save.addEventListener('click', this.submitForm);
 		this.shadowRoot?.appendChild(save);
 

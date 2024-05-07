@@ -47,7 +47,7 @@ export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
 };
 
 const getCreatedSongs = async () => {
-	const querySnapshot = await getDocs(collection(db, 'Profile'));
+	const querySnapshot = await getDocs(collection(db, 'playlist'));
 	const transformed: Array<typeAddSongs> = [];
 
 	querySnapshot.forEach((doc) => {
