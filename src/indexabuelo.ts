@@ -24,14 +24,19 @@ class AppContainer extends HTMLElement {
 				this.shadowRoot?.appendChild(dashboard);
 				break;
 
-			// case 'EXPLORE':
-			// 	const explore = this.ownerDocument.createElement('app-explore');
-			// 	this.shadowRoot?.appendChild(explore);
-			// 	break;
+			case 'EXPLORE':
+				const explore = this.ownerDocument.createElement('app-explore');
+				this.shadowRoot?.appendChild(explore);
+				break;
 
 			case 'PROFILE':
 				const profile = this.ownerDocument.createElement('app-perfil');
 				this.shadowRoot?.appendChild(profile);
+				break;
+
+			case 'REGISTER':
+				const register = this.ownerDocument.createElement('app-register');
+				this.shadowRoot?.appendChild(register);
 				break;
 
 			default:

@@ -19,7 +19,12 @@
 }
 
 .logo img {
-	width: 150px;
+	height: 10vh;
 	margin-left: 20px;
+	cursor: pointer;
+}
+
+svg {
+	margin-right: 20px;
 	cursor: pointer;
 }

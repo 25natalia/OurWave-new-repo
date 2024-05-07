@@ -1,5 +1,5 @@
 import styles from './menu.css';
-import { addObserver, appState, dispatch } from '../../store';
+import { dispatch } from '../../store';
 import { navigate } from '../../store/actions';
 
 export enum Attribute {
