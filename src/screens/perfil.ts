@@ -7,6 +7,7 @@ import { AttributeProfile } from '../components/profile/profile';
 import { typeAddSongs } from '../types/songs';
 import SongsComponent from '../components/Songs/Songs';
 import { AttributeSongs } from '../components/Songs/Songs';
+import { dataUser } from '../services/dataUser';
 
 const formData: Omit<typeAddSongs, 'id'> = {
 	artist: '',
@@ -48,6 +49,16 @@ export class Perfil extends HTMLElement {
 				this.shadowRoot?.appendChild(myHeader);
 			});
 		}
+		dataUser.forEach((user) => {
+			const myUser = document.createElement('my-perfil');
+			myUser.setAttribute(AttributeProfile.profile_image, user.profile_image);
+			myUser.setAttribute(AttributeProfile.username, user.username);
+			myUser.setAttribute(AttributeProfile.fav_song, user.fav_song);
+			myUser.setAttribute(AttributeProfile.name, user.name);
+			myUser.setAttribute(AttributeProfile.followers, user.followers);
+			myUser.setAttribute(AttributeProfile.following, user.following);
+			this.shadowRoot?.appendChild(myUser);
+		});
 
 		const artist = this.ownerDocument.createElement('input');
 		artist.placeholder = 'Add an artist';
