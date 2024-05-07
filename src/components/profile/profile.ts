@@ -5,7 +5,6 @@ export enum AttributeProfile {
 	'name' = 'name',
 	'followers' = 'followers',
 	'following' = 'following',
-	'playlists' = 'playlists',
 }
 
 class Perfil extends HTMLElement {
@@ -15,7 +14,6 @@ class Perfil extends HTMLElement {
 	name?: string;
 	followers?: string;
 	following?: string;
-	playlists?: string;
 
 	constructor() {
 		super();
@@ -30,7 +28,6 @@ class Perfil extends HTMLElement {
 			name: null,
 			followers: null,
 			following: null,
-			playlists: null,
 		};
 		return Object.keys(attrs);
 	}
@@ -51,13 +48,13 @@ class Perfil extends HTMLElement {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
     <img src="${this.profile_image}"></img>
-		<p>${this.profile_image}</p>
     <p>${this.username}</p>
     <p>${this.name}</p>
-    <p>${this.fav_song}</p>
+    <p><svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M15 11.586V6h2V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2h2v5.586l-2.707 1.707A.996.996 0 0 0 6 14v2a1 1 0 0 0 1 1h4v3l1 2 1-2v-3h4a1 1 0 0 0 1-1v-2a.996.996 0 0 0-.293-.707L15 11.586z"></path></svg></svg>
+		${this.fav_song}</p>
     <p>${this.followers}</p>
     <p>${this.following}</p>
-    <p>${this.playlists}</p>
+    <Button>Playlists</Button>
     `;
 		}
 	}
