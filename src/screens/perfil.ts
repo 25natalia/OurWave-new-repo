@@ -1,5 +1,5 @@
-import { header } from '../services/dataHeader';
-import { AttributesHeader } from '../components/header/header';
+import { headerPerfil } from '../services/dataHeaderPerfil';
+import { AttributesHeaderProfile } from '../components/header/headerProfile';
 import { iconosProfile } from '../services/dataMenuProfile';
 import { Attribute } from '../components/menu/menu';
 import Firebase from '../services/Firebase';
@@ -35,21 +35,22 @@ export class Perfil extends HTMLElement {
 	}
 
 	changeArtist(e: any) {
-		formData.artist = e?.target?.value;
+		formData.artist = e.target.value;
 	}
 
 	changeTitle(e: any) {
-		formData.song_title = e?.target?.value;
+		formData.song_title = e.target.value;
 	}
 	changeImage(e: any) {
-		formData.image = e?.target?.value;
+		formData.image = e.target.value;
 	}
 
 	async render() {
 		if (this.shadowRoot) {
-			header.forEach((iconoHeader) => {
-				const myHeader = document.createElement('my-header');
-				myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
+			headerPerfil.forEach((iconoHeader) => {
+				const myHeader = document.createElement('my-headerprofile');
+				myHeader.setAttribute(AttributesHeaderProfile.logo, iconoHeader.logo);
+				myHeader.setAttribute(AttributesHeaderProfile.log_out, iconoHeader.log_out);
 				this.shadowRoot?.appendChild(myHeader);
 			});
 		}
@@ -75,16 +76,19 @@ export class Perfil extends HTMLElement {
 		const artist = this.ownerDocument.createElement('input');
 		artist.placeholder = 'Add an artist';
 		artist.classList.add('artist');
+		artist.addEventListener('change', this.changeArtist);
 		section.appendChild(artist);
 
 		const title = this.ownerDocument.createElement('input');
 		title.placeholder = 'Add the song title';
 		title.classList.add('title');
+		title.addEventListener('change', this.changeTitle);
 		section.appendChild(title);
 
 		const image = this.ownerDocument.createElement('input');
 		image.placeholder = 'Add the album cover';
 		image.classList.add('image');
+		image.addEventListener('change', this.changeImage);
 		section.appendChild(image);
 
 		this.shadowRoot?.appendChild(section);
