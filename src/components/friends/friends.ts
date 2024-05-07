@@ -1,3 +1,4 @@
+import styles from './friends.css';
 export enum AttributesFriends {
 	'uid' = 'uid',
 	'name' = 'name',
@@ -52,6 +53,10 @@ class friends extends HTMLElement {
     <img src='${this.profile}'></img>
     <h3>${this.song}</h3>`;
 		}
+
+		const cssFriends = this.ownerDocument.createElement('style');
+		cssFriends.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssFriends);
 	}
 }
 
