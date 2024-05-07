@@ -45,7 +45,16 @@ export class Dashboard extends HTMLElement {
 				myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
 				myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
 				myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
+				if (iconoData.iconoprofile) {
+					myIcono.classList.add('profile');
+				}
+
 				this.shadowRoot?.appendChild(myIcono);
+			});
+
+			const homeIcon = this.shadowRoot?.querySelector('.home');
+			homeIcon?.addEventListener('click', () => {
+				console.log('Hola desde el dashboard');
 			});
 
 			addcontent.forEach((addButton) => {
