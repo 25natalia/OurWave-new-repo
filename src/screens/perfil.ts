@@ -5,7 +5,7 @@ import { Attribute } from '../components/menu/menu';
 import Firebase from '../services/Firebase';
 import { AttributeProfile } from '../components/profile/profile';
 import { typeAddSongs } from '../types/songs';
-import SongsComponent from '../components/Songs/Songs';
+import { SongsComponent } from '../components/indexpadre';
 import { AttributeSongs } from '../components/Songs/Songs';
 import { dataUser } from '../services/dataUser';
 import styles from './perfil.css';
