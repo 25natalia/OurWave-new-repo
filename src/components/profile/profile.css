@@ -1,0 +1,117 @@
+.profile {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	font-family: 'inter';
+	margin-top: 30px;
+}
+
+.image {
+	height: 200px;
+	border-radius: 100px;
+}
+
+.pin {
+	height: 24px;
+	width: 24px;
+}
+
+h1 {
+	font-size: 24px;
+	margin-bottom: 0;
+	font-weight: 700;
+	color: #1e1e1e;
+}
+
+.edit {
+	background-color: transparent;
+	border-width: 0;
+	color: #ff9f1c;
+	cursor: pointer;
+	font-family: 'inter';
+	font-size: 16px;
+	margin-top: 0;
+	font-weight: 500;
+}
+
+.fav_song {
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+	font-size: 25px;
+	color: rgb(46, 196, 182);
+	cursor: pointer;
+}
+
+.name-following {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.name {
+	margin: 5px;
+	border: 2px solid rgba(30, 30, 30, 0.2);
+	border-radius: 10px;
+	height: 30px;
+	width: 193px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	color: #1e1e1e;
+}
+
+.following {
+	margin: 5px;
+	border: 2px solid rgba(30, 30, 30, 0.2);
+	border-radius: 10px;
+	height: 30px;
+	width: 193px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	color: #1e1e1e;
+	cursor: pointer;
+}
+
+.followers {
+	height: 55px;
+	width: 400px;
+	background-color: #2ec4b6;
+	font-weight: 500;
+	color: white;
+	border-radius: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+	margin: 4px;
+	box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+	cursor: pointer;
+}
+
+.playlist {
+	height: 35px;
+	width: 400px;
+	background-color: #ff9f1c;
+	font-weight: 500;
+	color: white;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 15px;
+	margin: 4px;
+	border: none;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+	margin-top: 8px;
+	cursor: pointer;
+}
+
+.playlist:hover {
+	background-color: #ffbf69;
+}

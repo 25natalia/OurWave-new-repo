@@ -6,11 +6,13 @@ import { header } from '../services/dataHeader';
 import { AttributesHeader } from '../components/header/header';
 import { iconosExplore } from '../services/dataMenuExplore';
 import { Attribute } from '../components/menu/menu';
+import { addObserver, appState, dispatch } from '../store';
 
 export class Explore extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
+		addObserver(this);
 	}
 
 	connectedCallback() {

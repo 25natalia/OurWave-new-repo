@@ -1,0 +1,37 @@
+.card {
+	font-family: 'inter';
+	background-color: rgb(209, 209, 209);
+	padding: 10px;
+	border-radius: 10px;
+	margin: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.artist {
+	font-size: 12px;
+	margin: 0%;
+}
+
+.title {
+	font-size: 15px;
+	font-weight: 600;
+	margin: 0;
+}
+
+.letters {
+	margin-left: 10px;
+padding-top: 5px;
+padding-bottom: 5px;
+}
+
+img {
+	height: 40px;
+	width: 40px;
+	border-radius: 5px;
+}
+
+.imagen{
+	justify-content: center;
+}
+

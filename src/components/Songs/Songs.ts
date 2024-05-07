@@ -42,10 +42,20 @@ class SongsComponent extends HTMLElement {
 			this.shadowRoot.innerHTML = `
 			<section class = "card">
 
+			<section class= "imagen">
+			<img src="${this.image}"></img>
+			</section>
+
+			<section class = "letters">
+
+			<section class = "title">
+			<p>${this.song_title}</p>
+			</section>
+
+		<section class = "artist">
 		<p>${this.artist}</p>
-    <p>${this.song_title}</p>
-		<section class= "imagen">
-		<img src="${this.image}"></img>
+		</section>
+
 		</section>
 
 		</section>
@@ -59,4 +69,4 @@ class SongsComponent extends HTMLElement {
 }
 
 export default SongsComponent;
-customElements.define('my-perfil', SongsComponent);
+customElements.define('my-songs', SongsComponent);
