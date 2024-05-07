@@ -54,22 +54,56 @@ h1 {
 	margin: 5px;
 	border: 2px solid rgba(30, 30, 30, 0.2);
 	border-radius: 10px;
-	height: 33px;
-	width: 165px;
+	height: 30px;
+	width: 193px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 16px;
+	color: #1e1e1e;
 }
 
 .following {
 	margin: 5px;
 	border: 2px solid rgba(30, 30, 30, 0.2);
 	border-radius: 10px;
-	height: 33px;
-	width: 165px;
+	height: 30px;
+	width: 193px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 16px;
+	color: #1e1e1e;
+}
+
+.followers {
+	height: 55px;
+	width: 400px;
+	background-color: #2ec4b6;
+	font-weight: 500;
+	color: white;
+	border-radius: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+	margin: 4px;
+	box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+}
+
+.playlist {
+	height: 35px;
+	width: 400px;
+	background-color: #ff9f1c;
+	font-weight: 500;
+	color: white;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 15px;
+	margin: 4px;
+	border: none;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+	margin-top: 8px;
 }

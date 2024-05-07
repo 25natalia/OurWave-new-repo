@@ -61,8 +61,8 @@ class Perfil extends HTMLElement {
 		<p class="following">${this.following}</p>
 		</section>
 
-    <p>${this.followers}</p>
-    <Button>Playlists</Button>
+    <p class="followers">${this.followers}</p>
+    <Button class="playlist">Playlists</Button>
 		</section>
     `;
 		}

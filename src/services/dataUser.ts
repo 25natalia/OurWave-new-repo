@@ -13,7 +13,7 @@ export const dataUser: DataShape[] = [
 		username: 'susana_22',
 		fav_song: 'Cruel Summer - Taylor Swift',
 		name: 'Susana Jiménez',
-		followers: '435 followers',
-		following: '618 following',
+		followers: '435 Followers',
+		following: '618 Following',
 	},
 ];

@@ -8,6 +8,7 @@ import { typeAddSongs } from '../types/songs';
 import SongsComponent from '../components/Songs/Songs';
 import { AttributeSongs } from '../components/Songs/Songs';
 import { dataUser } from '../services/dataUser';
+import styles from './perfil.css';
 
 const formData: Omit<typeAddSongs, 'id'> = {
 	artist: '',
@@ -60,6 +61,10 @@ export class Perfil extends HTMLElement {
 			this.shadowRoot?.appendChild(myUser);
 		});
 
+		const h1Add = this.ownerDocument.createElement('h1');
+		h1Add.textContent = 'Add your own song';
+		this.shadowRoot?.appendChild(h1Add);
+
 		const artist = this.ownerDocument.createElement('input');
 		artist.placeholder = 'Add an artist';
 		this.shadowRoot?.appendChild(artist);
@@ -92,6 +97,10 @@ export class Perfil extends HTMLElement {
 			myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
 			this.shadowRoot?.appendChild(myIcono);
 		});
+
+		const cssPerfil = this.ownerDocument.createElement('style');
+		cssPerfil.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssPerfil);
 	}
 }
 customElements.define('app-perfil', Perfil);
