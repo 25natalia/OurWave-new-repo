@@ -4,7 +4,7 @@ import { getFriends } from '../services/Firebase';
 import { getSongs } from '../services/Firebase';
 import { header } from '../services/dataHeader';
 import { AttributesHeader } from '../components/header/header';
-import { iconos } from '../services/dataMenu';
+import { iconosExplore } from '../services/dataMenuExplore';
 import { Attribute } from '../components/menu/menu';
 
 export class Explore extends HTMLElement {
@@ -28,7 +28,7 @@ export class Explore extends HTMLElement {
 			});
 		}
 
-		iconos.forEach((iconoData) => {
+		iconosExplore.forEach((iconoData) => {
 			const myIcono = document.createElement('my-iconos');
 			myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
 			myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
