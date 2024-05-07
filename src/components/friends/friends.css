@@ -1,3 +1,25 @@
 p {
-	color: blue;
+	font-family: 'inter';
+}
+.image img {
+	width: 30px;
+	height: 30px; /* Ancho del contenedor */ /* Altura del contenedor */
+	overflow: hidden; /* Oculta cualquier contenido que exceda los límites del contenedor */
+	display: block; /* Asegura que la imagen se comporte como un bloque */
+	border-radius: 50%; /* Hace que la imagen sea circular */
+	margin: 10px;
+}
+
+.profile {
+	display: flex;
+	align-items: flex-start;
+}
+
+.background {
+	width: 10%;
+	height: 5%; /* Ancho del contenedor */ /* Altura del contenedor */
+	overflow: hidden; /* Oculta cualquier contenido que exceda los límites del contenedor */
+	border-radius: 20%;
+	display: block; /* Asegura que la imagen se comporte como un bloque */
+	margin: 20px;
 }

@@ -48,9 +48,17 @@ class friends extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
-    <img src='${this.photo}'></img>
+
+		<section class= "profile">
+		<section class= "image">
+		<img src='${this.profile}'></img>
     <p>${this.name}</p>
-    <img src='${this.profile}'></img>
+		</section>
+		</section>
+
+		<section class = "background">
+    <img src='${this.photo}'></img>
+		</section>
     <h3>${this.song}</h3>`;
 		}
 
