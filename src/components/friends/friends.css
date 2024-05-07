@@ -1,5 +1,6 @@
 p {
 	font-family: 'inter';
+	font-size: 14px;
 }
 .image img {
 	width: 30px;
@@ -16,10 +17,23 @@ p {
 }
 
 .background {
-	width: 10%;
-	height: 5%; /* Ancho del contenedor */ /* Altura del contenedor */
+	width: 300px;
+	height: 150px; /* Ancho del contenedor */ /* Altura del contenedor */
 	overflow: hidden; /* Oculta cualquier contenido que exceda los límites del contenedor */
-	border-radius: 20%;
+	border-radius: 40px;
 	display: block; /* Asegura que la imagen se comporte como un bloque */
 	margin: 20px;
 }
+
+.song {
+	font-family: 'inter';
+	font-weight: 500;
+	font-size: 20px;
+	width: 250px;
+	align-items: flex-end;
+}
+
+.card {
+	display: flex;
+}
+

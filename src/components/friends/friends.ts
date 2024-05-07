@@ -49,17 +49,27 @@ class friends extends HTMLElement {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
 
+		<section class="card">
+
 		<section class= "profile">
+
 		<section class= "image">
 		<img src='${this.profile}'></img>
     <p>${this.name}</p>
 		</section>
+		
 		</section>
 
 		<section class = "background">
     <img src='${this.photo}'></img>
 		</section>
-    <h3>${this.song}</h3>`;
+
+		<section class="song">
+    <h3>${this.song}</h3>
+		</section>
+
+		</section>
+		`;
 		}
 
 		const cssFriends = this.ownerDocument.createElement('style');
