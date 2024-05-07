@@ -1,4 +1,6 @@
 import styles from './menu.css';
+import { addObserver, appState, dispatch } from '../../store';
+import { navigate } from '../../store/actions';
 
 export enum Attribute {
 	'uid' = 'uid',
@@ -53,6 +55,21 @@ class iconos extends HTMLElement {
 		<svg id="profile">${this.iconoprofile}</svg>
 			</section>`;
 		}
+
+		const homeIcon = this.shadowRoot?.querySelector('#home');
+		homeIcon?.addEventListener('click', () => {
+			dispatch(navigate('HOME'));
+		});
+
+		const exploreIcon = this.shadowRoot?.querySelector('#explore');
+		exploreIcon?.addEventListener('click', () => {
+			dispatch(navigate('EXPLORE'));
+		});
+
+		const profileIcon = this.shadowRoot?.querySelector('#profile');
+		profileIcon?.addEventListener('click', () => {
+			dispatch(navigate('PROFILE'));
+		});
 
 		const cssMenu = this.ownerDocument.createElement('style');
 		cssMenu.innerHTML = styles;

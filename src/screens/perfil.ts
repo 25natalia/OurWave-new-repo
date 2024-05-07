@@ -50,14 +50,6 @@ export class Perfil extends HTMLElement {
 			header.forEach((iconoHeader) => {
 				const myHeader = document.createElement('my-header');
 				myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
-				if (iconoHeader.logo) {
-					myHeader.classList.add('logo');
-				}
-				const homeLogo = this.shadowRoot?.querySelector('.logo');
-				homeLogo?.addEventListener('click', () => {
-					dispatch(navigate('HOME'));
-				});
-
 				this.shadowRoot?.appendChild(myHeader);
 			});
 		}
@@ -114,18 +106,9 @@ export class Perfil extends HTMLElement {
 		iconosProfile.forEach((iconoData) => {
 			const myIcono = document.createElement('my-iconos');
 			myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
-			if (iconoData.iconohome) {
-				myIcono.classList.add('home');
-			}
-
 			myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
 			myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
 			this.shadowRoot?.appendChild(myIcono);
-		});
-
-		const homeIcon = this.shadowRoot?.querySelector('.home');
-		homeIcon?.addEventListener('click', () => {
-			dispatch(navigate('HOME'));
 		});
 
 		const cssPerfil = this.ownerDocument.createElement('style');

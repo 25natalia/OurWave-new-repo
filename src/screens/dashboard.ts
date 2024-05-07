@@ -7,7 +7,6 @@ import { AttributesAdd } from '../components/add/add';
 import { profile } from '../services/dataProfile';
 import { AttributesCard } from '../components/card/card';
 import { addObserver, appState, dispatch } from '../store';
-import { navigate } from '../store/actions';
 
 export class Dashboard extends HTMLElement {
 	constructor() {
@@ -48,16 +47,7 @@ export class Dashboard extends HTMLElement {
 				myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
 				myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
 				myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
-				if (iconoData.iconoprofile) {
-					myIcono.classList.add('profile');
-				}
-
 				this.shadowRoot?.appendChild(myIcono);
-			});
-
-			const homeIcon = this.shadowRoot?.querySelector('.profile');
-			homeIcon?.addEventListener('click', () => {
-				dispatch(navigate('PROFILE'));
 			});
 
 			addcontent.forEach((addButton) => {
