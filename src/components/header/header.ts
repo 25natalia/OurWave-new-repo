@@ -1,4 +1,6 @@
 import styles from './header.css';
+import { dispatch } from '../../store';
+import { navigate } from '../../store/actions';
 
 export enum AttributesHeader {
 	'uid' = 'uid',
@@ -46,6 +48,12 @@ class header extends HTMLElement {
 		</section>
     </section>`;
 		}
+
+		const homeLogo = this.shadowRoot?.querySelector('.logo');
+		homeLogo?.addEventListener('click', () => {
+			dispatch(navigate('HOME'));
+		});
+
 		const cssHeader = this.ownerDocument.createElement('style');
 		cssHeader.innerHTML = styles;
 		this.shadowRoot?.appendChild(cssHeader);
