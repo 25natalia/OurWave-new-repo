@@ -1,6 +1,6 @@
 import { header } from '../services/dataHeader';
 import { AttributesHeader } from '../components/header/header';
-import { iconos } from '../services/dataMenu';
+import { iconosProfile } from '../services/dataMenuProfile';
 import { Attribute } from '../components/menu/menu';
 import Firebase from '../services/Firebase';
 import { AttributeProfile } from '../components/profile/profile';
@@ -100,7 +100,7 @@ export class Perfil extends HTMLElement {
 			card.setAttribute(AttributeSongs.song_title, p.song_title);
 		});
 
-		iconos.forEach((iconoData) => {
+		iconosProfile.forEach((iconoData) => {
 			const myIcono = document.createElement('my-iconos');
 			myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
 			myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
