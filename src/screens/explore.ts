@@ -49,6 +49,7 @@ export class Explore extends HTMLElement {
 			});
 		}
 	}
+
 	async renderFriends() {
 		if (this.shadowRoot) {
 			const dataFriends = await getFriends();
