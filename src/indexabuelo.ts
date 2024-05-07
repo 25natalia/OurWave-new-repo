@@ -2,21 +2,41 @@ import './screens/dashboard';
 import './screens/perfil';
 import './screens/explore';
 import { getSongs } from './services/Firebase';
+import { appState } from './store';
+import { addObserver } from './store';
 
 class AppContainer extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
+		addObserver(this);
 	}
 
 	connectedCallback() {
 		this.render();
-		const dataSongs = getSongs();
 	}
 
 	render() {
-		const dashboard = this.ownerDocument.createElement('app-explore');
-		this.shadowRoot?.appendChild(dashboard);
+		if (this.shadowRoot) this.shadowRoot.innerHTML = '';
+		switch (appState.screen) {
+			case 'HOME':
+				const dashboard = this.ownerDocument.createElement('app-dashboard');
+				this.shadowRoot?.appendChild(dashboard);
+				break;
+
+			// case 'EXPLORE':
+			// 	const explore = this.ownerDocument.createElement('app-explore');
+			// 	this.shadowRoot?.appendChild(explore);
+			// 	break;
+
+			case 'PROFILE':
+				const profile = this.ownerDocument.createElement('app-perfil');
+				this.shadowRoot?.appendChild(profile);
+				break;
+
+			default:
+				break;
+		}
 	}
 }
 
