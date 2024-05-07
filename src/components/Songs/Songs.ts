@@ -40,15 +40,21 @@ class SongsComponent extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
+			<section class = "card">
+
 		<p>${this.artist}</p>
     <p>${this.song_title}</p>
+		<section class= "imagen">
 		<img src="${this.image}"></img>
+		</section>
+
+		</section>
     `;
 		}
 
-		const cssMenu = this.ownerDocument.createElement('style');
-		cssMenu.innerHTML = styles;
-		this.shadowRoot?.appendChild(cssMenu);
+		const cssSongs = this.ownerDocument.createElement('style');
+		cssSongs.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssSongs);
 	}
 }
 

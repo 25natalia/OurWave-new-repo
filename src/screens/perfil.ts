@@ -50,6 +50,14 @@ export class Perfil extends HTMLElement {
 			header.forEach((iconoHeader) => {
 				const myHeader = document.createElement('my-header');
 				myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
+				if (iconoHeader.logo) {
+					myHeader.classList.add('logo');
+				}
+				const homeLogo = this.shadowRoot?.querySelector('.logo');
+				homeLogo?.addEventListener('click', () => {
+					dispatch(navigate('HOME'));
+				});
+
 				this.shadowRoot?.appendChild(myHeader);
 			});
 		}
