@@ -1,16 +1,19 @@
 .card {
 	font-family: 'inter';
-	background-color: rgb(209, 209, 209);
+	background-color: rgb(237, 237, 237);
+	width: 90%;
+	height: 15%;
 	padding: 10px;
 	border-radius: 10px;
 	margin: 10px;
 	display: flex;
 	align-items: center;
+	box-shadow: 30 10 20;
 }
 
 .artist {
 	font-size: 12px;
-	margin: 0%;
+	margin-top: 2px;
 }
 
 .title {
@@ -21,8 +24,8 @@
 
 .letters {
 	margin-left: 10px;
-padding-top: 5px;
-padding-bottom: 5px;
+padding-top: 10px;
+padding-bottom: 10px;
 }
 
 img {

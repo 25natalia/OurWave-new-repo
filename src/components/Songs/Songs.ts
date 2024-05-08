@@ -42,6 +42,8 @@ class SongsComponent extends HTMLElement {
 			this.shadowRoot.innerHTML = `
 			<section class = "card">
 
+			<p>${this.id}</p>
+
 			<section class= "imagen">
 			<img src="${this.image}"></img>
 			</section>
