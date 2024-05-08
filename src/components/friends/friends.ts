@@ -49,26 +49,19 @@ class friends extends HTMLElement {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
 
-		<section class="card">
-
-		<section class= "profile">
-
+		<section class="card" style="background-image: url('${this.photo}');background-position-x: center;background-size: cover;">
+		<section class="todo">
 		<section class= "image">
 		<img src='${this.profile}'></img>
     <p>${this.name}</p>
 		</section>
-		
-		</section>
-
-		<section class = "background">
-    <img src='${this.photo}'></img>
-		</section>
-
 		<section class="song">
     <h3>${this.song}</h3>
 		</section>
-
 		</section>
+		</section>
+
+
 		`;
 		}
 

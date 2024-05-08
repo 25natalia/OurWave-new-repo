@@ -1,0 +1,90 @@
+input {
+	width: 70vh;
+	padding: 10px;
+	margin: 2vh;
+	border: none;
+	border-radius: 12px;
+	font-size: 15px;
+	color: rgba(30, 30, 30, 0.8);
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+	height: 4vh;
+}
+
+input:focus {
+	border-color: #2ec4b6;
+	outline: none;
+}
+
+.logo {
+	width: 80vh;
+}
+
+.todo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+	font-family: 'inter';
+}
+
+.google {
+	width: 9vh;
+	margin-right: 100px;
+	box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.2);
+	border-radius: 2vh;
+}
+
+h1 {
+	color: #1e1e1e;
+	font-weight: 500;
+	font-size: 20px;
+	margin-bottom: 60px;
+}
+
+.facebook {
+	width: 6vh;
+	margin-right: 100px;
+	box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.2);
+	border-radius: 2vh;
+	padding: 8px;
+	background-color: #fdfdfd;
+}
+
+.outlook {
+	width: 6vh;
+	margin: 10px;
+	box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.2);
+	border-radius: 2vh;
+	padding: 8px;
+	background-color: #fdfdfd;
+}
+
+#apps {
+	display: flex;
+	align-items: center;
+}
+
+button {
+	width: 70vh;
+	padding: 10px;
+	margin: 2vh;
+	border: none;
+	border-radius: 12px;
+	font-size: 15px;
+	color: white;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+	height: 6vh;
+	background-color: #2ec4b6;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+button:hover {
+	background-color: #ffbf69;
+}
+
+form {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}

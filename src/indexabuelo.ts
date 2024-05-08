@@ -1,7 +1,7 @@
 import './screens/dashboard';
 import './screens/perfil';
 import './screens/explore';
-import { getSongs } from './services/Firebase';
+import './screens/register';
 import { appState } from './store';
 import { addObserver } from './store';
 
