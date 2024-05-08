@@ -19,7 +19,7 @@
 	padding: 10px;
 	margin: 4px;
 	border: 2px solid #ccc;
-	border-radius: 5px;
+	border-radius: 10px;
 	font-size: 15px;
 	position: relative;
 	z-index: 2;
@@ -49,6 +49,7 @@
 	transition: 0.3s;
 	margin-left: 45%;
 	margin-top: 20px;
+	margin-bottom: 20px;
 }
 .save:hover {
 	background-color: #ffbf69;

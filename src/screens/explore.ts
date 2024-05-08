@@ -65,6 +65,7 @@ export class Explore extends HTMLElement {
 			myFriend.setAttribute(AttributesFriends.song, friend.song);
 			this.shadowRoot?.appendChild(myFriend);
 		});
+<<<<<<< HEAD
 
 		const cssExplore = this.ownerDocument.createElement('style');
 		cssExplore.innerHTML = styles;
@@ -73,3 +74,8 @@ export class Explore extends HTMLElement {
 }
 customElements.define('app-explore', Explore);
 
+=======
+	}
+}
+customElements.define('app-explore', Explore);
+>>>>>>> f9b1046bafcaec106cb451df1fe3173908d844e5
