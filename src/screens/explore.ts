@@ -72,3 +72,4 @@ export class Explore extends HTMLElement {
 	}
 }
 customElements.define('app-explore', Explore);
+

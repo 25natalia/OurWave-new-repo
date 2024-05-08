@@ -15,15 +15,6 @@ p {
 	display: flex;
 }
 
-.background {
-	width: 300px;
-	height: 150px; /* Ancho del contenedor */ /* Altura del contenedor */
-	overflow: hidden; /* Oculta cualquier contenido que exceda los límites del contenedor */
-	border-radius: 40px;
-	display: block; /* Asegura que la imagen se comporte como un bloque */
-	margin: 20px;
-}
-
 .song {
 	font-family: 'inter';
 	font-weight: 500;
@@ -33,8 +24,37 @@ p {
 }
 
 .card {
-overflow-x: auto;
-white-space: nowrap;
-display: inline-block
+	width: 400px;
+	height: 180px;
+	border-radius: 20px;
+	margin: 20px;
 }
 
+.todo {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(154, 37, 37, 0.5);
+	z-index: 1;
+	border-radius: 20px;
+}
+
+/* .card {
+	overflow-x: auto;
+	white-space: nowrap;
+	display: inline-block;
+} */
+
+/* .background {
+	width: 300px;
+	height: 150px;
+	// Ancho del contenedor Altura del contenedor
+	overflow: hidden;
+	// Oculta cualquier contenido que exceda los límites del contenedor
+	border-radius: 40px;
+	display: block;
+	// Asegura que la imagen se comporte como un bloque
+	margin: 20px;
+} */
