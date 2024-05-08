@@ -11,9 +11,8 @@ p {
 	margin: 10px;
 }
 
-.profile {
+.image {
 	display: flex;
-	align-items: flex-start;
 }
 
 .background {
@@ -30,10 +29,12 @@ p {
 	font-weight: 500;
 	font-size: 20px;
 	width: 250px;
-	align-items: flex-end;
+	align-items: flex-start;
 }
 
 .card {
-	display: flex;
+overflow-x: auto;
+white-space: nowrap;
+display: inline-block
 }
 
