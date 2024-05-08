@@ -1,5 +1,5 @@
-import { header } from '../services/dataHeader';
-import { AttributesHeader } from '../components/header/header';
+import { AttributeRegister } from '../components/register/register';
+import { signin } from '../services/dataSignIn';
 import { addObserver } from '../store';
 
 export class Register extends HTMLElement {
@@ -13,14 +13,18 @@ export class Register extends HTMLElement {
 		this.render();
 	}
 
-	async render() {
+	render() {
 		if (this.shadowRoot) {
-			header.forEach((iconoHeader) => {
-				const myHeader = document.createElement('my-header');
-				myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
-				this.shadowRoot?.appendChild(myHeader);
+			signin.forEach((attrs) => {
+				const mySignin = document.createElement('my-register');
+				mySignin.setAttribute(AttributeRegister.logo, attrs.logo);
+				mySignin.setAttribute(AttributeRegister.google, attrs.google);
+				mySignin.setAttribute(AttributeRegister.facebook, attrs.facebook);
+				mySignin.setAttribute(AttributeRegister.outlook, attrs.outlook);
+				this.shadowRoot?.appendChild(mySignin);
 			});
 		}
 	}
 }
+
 customElements.define('app-register', Register);
