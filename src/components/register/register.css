@@ -10,13 +10,19 @@ input {
 	height: 4vh;
 }
 
+svg {
+	margin: 40px;
+	height: 35px;
+	width: 35px;
+}
+
 input:focus {
 	border-color: #2ec4b6;
 	outline: none;
 }
 
 .logo {
-	width: 80vh;
+	width: 60vh;
 }
 
 .todo {
@@ -87,4 +93,9 @@ form {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+}
+
+p {
+	color: rgba(30, 30, 30, 0.6);
+	margin: 45px;
 }
