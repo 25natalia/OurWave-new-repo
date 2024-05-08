@@ -7,6 +7,7 @@ import { AttributesHeader } from '../components/header/header';
 import { iconosExplore } from '../services/dataMenuExplore';
 import { Attribute } from '../components/menu/menu';
 import { addObserver, appState, dispatch } from '../store';
+import styles from './explore.css';
 
 export class Explore extends HTMLElement {
 	constructor() {
@@ -16,13 +17,13 @@ export class Explore extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		const dataFriends =  await getFriends()
-		const dataSongs =  await getSongs()
-		console.log(dataFriends, dataSongs)
-		this.render(dataFriends, dataSongs );
+		const dataFriends = await getFriends();
+		const dataSongs = await getSongs();
+		console.log(dataFriends, dataSongs);
+		this.render(dataFriends, dataSongs);
 	}
 
-	render(dataSongs: any, dataFriends:any) {
+	render(dataSongs: any, dataFriends: any) {
 		if (this.shadowRoot) {
 			header.forEach((iconoHeader) => {
 				const myHeader = document.createElement('my-header');
@@ -39,6 +40,10 @@ export class Explore extends HTMLElement {
 			this.shadowRoot?.appendChild(myIcono);
 		});
 
+		const titleSongs = this.ownerDocument.createElement('h1');
+		titleSongs.textContent = 'On trending';
+		this.shadowRoot?.appendChild(titleSongs);
+
 		dataFriends.forEach((song: any) => {
 			const mySong = document.createElement('my-songs') as SongsComponent;
 			mySong.setAttribute(AttributeSongs.song_title, song.song_title);
@@ -46,9 +51,14 @@ export class Explore extends HTMLElement {
 			mySong.setAttribute(AttributeSongs.image, song.image);
 			this.shadowRoot?.appendChild(mySong);
 		});
+
+		const titleFriends = this.ownerDocument.createElement('h1');
+		titleFriends.textContent = 'My friends playlist';
+		this.shadowRoot?.appendChild(titleFriends);
+
 		dataSongs.forEach((friend: any) => {
 			const myFriend = document.createElement('my-friend') as friends;
-			console.log(friend)
+			console.log(friend);
 			myFriend.setAttribute(AttributesFriends.name, friend.name);
 			myFriend.setAttribute(AttributesFriends.profile, friend.profile);
 			myFriend.setAttribute(AttributesFriends.photo, friend.photo);
@@ -56,8 +66,9 @@ export class Explore extends HTMLElement {
 			this.shadowRoot?.appendChild(myFriend);
 		});
 
+		const cssExplore = this.ownerDocument.createElement('style');
+		cssExplore.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssExplore);
 	}
-
-
 }
 customElements.define('app-explore', Explore);
