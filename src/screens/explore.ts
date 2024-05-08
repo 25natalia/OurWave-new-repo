@@ -7,6 +7,7 @@ import { AttributesHeader } from '../components/header/header';
 import { iconosExplore } from '../services/dataMenuExplore';
 import { Attribute } from '../components/menu/menu';
 import { addObserver, appState, dispatch } from '../store';
+import styles from './explore.css';
 
 export class Explore extends HTMLElement {
 	constructor() {
@@ -39,6 +40,10 @@ export class Explore extends HTMLElement {
 			this.shadowRoot?.appendChild(myIcono);
 		});
 
+		const titleSongs = this.ownerDocument.createElement('h1');
+		titleSongs.textContent = 'On trending';
+		this.shadowRoot?.appendChild(titleSongs);
+
 		dataFriends.forEach((song: any) => {
 			const mySong = document.createElement('my-songs') as SongsComponent;
 			mySong.setAttribute(AttributeSongs.song_title, song.song_title);
@@ -46,6 +51,11 @@ export class Explore extends HTMLElement {
 			mySong.setAttribute(AttributeSongs.image, song.image);
 			this.shadowRoot?.appendChild(mySong);
 		});
+
+		const titleFriends = this.ownerDocument.createElement('h1');
+		titleFriends.textContent = 'My friends playlist';
+		this.shadowRoot?.appendChild(titleFriends);
+
 		dataSongs.forEach((friend: any) => {
 			const myFriend = document.createElement('my-friend') as friends;
 			console.log(friend);
@@ -55,6 +65,17 @@ export class Explore extends HTMLElement {
 			myFriend.setAttribute(AttributesFriends.song, friend.song);
 			this.shadowRoot?.appendChild(myFriend);
 		});
+<<<<<<< HEAD
+
+		const cssExplore = this.ownerDocument.createElement('style');
+		cssExplore.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssExplore);
 	}
 }
 customElements.define('app-explore', Explore);
+
+=======
+	}
+}
+customElements.define('app-explore', Explore);
+>>>>>>> f9b1046bafcaec106cb451df1fe3173908d844e5

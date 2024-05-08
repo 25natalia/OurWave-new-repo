@@ -1,0 +1,9 @@
+h1 {
+	font-family: 'inter';
+	margin-left: 20px;
+	font-size: 30px;
+}
+
+.todo {
+	background-color: aqua;
+}
