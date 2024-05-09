@@ -83,7 +83,6 @@ export const updateFavCancion = async (favSong: any) => {
 };
 
 export default {
-	// addFavCancion,
 	getCreatedSongs,
 	addSong,
 };

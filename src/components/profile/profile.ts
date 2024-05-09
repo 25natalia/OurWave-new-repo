@@ -77,7 +77,7 @@ class Perfil extends HTMLElement {
         <span class="close">X</span>
         <h2>What's your wave song at the moment?</h2>
         <textarea id="writtenSong" name="wave"></textarea>
-        <button class="enviar" type="submit">Post</button>
+        <span role="button" class="post">Post</span>
     </form>
     `;
 		}
@@ -85,7 +85,7 @@ class Perfil extends HTMLElement {
 		const modal = this.shadowRoot?.querySelector('.modalContainer') as HTMLDivElement;
 		const button = this.shadowRoot?.querySelector('#ButtonSong') as HTMLButtonElement;
 		const span = this.shadowRoot?.querySelector('.close') as HTMLSpanElement;
-		const postNewSong = this.shadowRoot?.querySelector('.enviar') as HTMLDivElement;
+		const postNewSong = this.shadowRoot?.querySelector('.post') as HTMLDivElement;
 
 		postNewSong.addEventListener('click', async () => {
 			const textArea = this.shadowRoot?.querySelector('#writtenSong') as HTMLTextAreaElement;
@@ -114,8 +114,8 @@ class Perfil extends HTMLElement {
 					}
 				});
 
-				const form = this.shadowRoot?.querySelector('.waveSong') as HTMLFormElement;
-				form.addEventListener('submit', (event) => {
+				const form = this.shadowRoot?.querySelector('.post') as HTMLFormElement;
+				form.addEventListener('click', (event) => {
 					event.preventDefault();
 					const textArea = this.shadowRoot?.querySelector('#writtenSong') as HTMLTextAreaElement;
 					const waveSong = textArea.value;

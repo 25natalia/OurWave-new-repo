@@ -52,7 +52,7 @@
 	font-family: Arial;
 }
 
-.enviar {
+.post {
 	background-color: #2ec4b6;
 	border: none;
 	border-radius: 50px;
@@ -61,6 +61,9 @@
 	width: 120px;
 	transition: background-color 0.2s ease;
 	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 h2 {
