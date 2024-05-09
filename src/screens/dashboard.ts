@@ -8,6 +8,14 @@ import { profile } from '../services/dataProfile';
 import { AttributesCard } from '../components/card/card';
 import { addObserver, appState, dispatch } from '../store';
 
+import './components/indexpadre';
+import Firebase, {addWave} from '../services/Firebase';
+import { AddContent}  from '../components/indexpadre';
+import {waves} from '../types/waves'
+
+const formData: Omit<waves, 'id'> = {
+	wave:''
+};
 export class Dashboard extends HTMLElement {
 	constructor() {
 		super();
@@ -17,6 +25,11 @@ export class Dashboard extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
+	}
+
+	submitForm() {
+		console.log(formData);
+		Firebase.addWave(formData);
 	}
 
 	render() {

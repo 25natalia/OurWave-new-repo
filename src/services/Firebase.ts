@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
+import { waves} from '../types/waves';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAS_sGDbQYUNZAoF-ZqZcpjWtLQtBmDvsw',
@@ -26,6 +27,8 @@ export const getSongs = async () => {
 	return arraySongs;
 };
 
+
+
 export const getFriends = async () => {
 	const arrayFriends: any = [];
 
@@ -40,6 +43,16 @@ export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
 	try {
 		const where = collection(db, 'playlist');
 		await addDoc(where, song);
+		console.log('se añadió con éxito');
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const addWave = async (wave: Omit<waves, 'id'>) => {
+	try {
+		const where = collection(db, 'wave');
+		await addDoc(where, wave);
 		console.log('se añadió con éxito');
 	} catch (error) {
 		console.error(error);
@@ -61,4 +74,5 @@ const getCreatedSongs = async () => {
 export default {
 	getCreatedSongs,
 	addSong,
+	addWave,
 };
