@@ -44,11 +44,13 @@ export class Explore extends HTMLElement {
 		titleSongs.textContent = 'On trending';
 		this.shadowRoot?.appendChild(titleSongs);
 
-		dataFriends.forEach((song: any) => {
+		dataFriends.forEach((song: any, index: number) => {
 			const mySong = document.createElement('my-songs') as SongsComponent;
+			mySong.setAttribute(AttributeSongs.top, song.top);
 			mySong.setAttribute(AttributeSongs.song_title, song.song_title);
 			mySong.setAttribute(AttributeSongs.artist, song.artist);
 			mySong.setAttribute(AttributeSongs.image, song.image);
+			mySong.setAttribute('data-index', (index + 1).toString());
 			this.shadowRoot?.appendChild(mySong);
 		});
 

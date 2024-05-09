@@ -8,7 +8,16 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 	display: flex;
-align-items: center;
+	align-items: center;
+	color: rgb(30, 30, 30);
+}
+
+.top {
+	margin: 10px;
+	margin-right: 20px;
+	font-family: 'inter';
+	font-weight: 600;
+	color: rgba(30, 30, 30, 0.7);
 }
 
 .artist {
@@ -32,11 +41,11 @@ img {
 	border-radius: 5px;
 }
 
-.imagen{
+.imagen {
 	justify-content: center;
 }
 
-p{
+p {
 	margin-top: 0%;
 	margin-bottom: 0%;
 }
