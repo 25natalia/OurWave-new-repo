@@ -34,11 +34,13 @@ export class Dashboard extends HTMLElement {
 				myCard.setAttribute(AttributesCard.image, element.image);
 				myCard.setAttribute(AttributesCard.wave, element.wave);
 				myCard.setAttribute(AttributesCard.unlike, element.unlike);
+				myCard.setAttribute(AttributesCard.like, element.like);
 				myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
 				myCard.setAttribute(AttributesCard.share, element.share);
 				myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
 				myCard.setAttribute(AttributesCard.comentar, element.comentar);
 				myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
+
 				this.shadowRoot?.appendChild(myCard);
 			});
 
@@ -58,5 +60,4 @@ export class Dashboard extends HTMLElement {
 		}
 	}
 }
-
 customElements.define('app-dashboard', Dashboard);

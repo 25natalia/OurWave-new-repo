@@ -12,6 +12,7 @@ import { addObserver } from '../store';
 import { getUser } from '../services/Firebase';
 
 const formData: Omit<typeAddSongs, 'id'> = {
+	top: '',
 	artist: '',
 	song_title: '',
 	image: '',
@@ -102,6 +103,7 @@ export class Perfil extends HTMLElement {
 		const addedSongs = await Firebase.getCreatedSongs();
 		addedSongs.forEach((p: typeAddSongs) => {
 			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
+			card.setAttribute(AttributeSongs.top, '●');
 			card.setAttribute(AttributeSongs.image, p.image);
 			card.setAttribute(AttributeSongs.artist, p.artist);
 			card.setAttribute(AttributeSongs.song_title, p.song_title);

@@ -63,6 +63,24 @@ class Card extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
+		this.attachEventHandlers();
+	}
+
+	attachEventHandlers() {
+		const likeIcon = this.shadowRoot?.querySelector('.like') as HTMLElement;
+		const unlikeIcon = this.shadowRoot?.querySelector('.unlike') as HTMLElement;
+
+		if (likeIcon && unlikeIcon) {
+			likeIcon.addEventListener('click', () => {
+				likeIcon.style.display = 'none';
+				unlikeIcon.style.display = 'block';
+			});
+
+			unlikeIcon.addEventListener('click', () => {
+				likeIcon.style.display = 'block';
+				unlikeIcon.style.display = 'none';
+			});
+		}
 	}
 
 	render() {
@@ -82,8 +100,9 @@ class Card extends HTMLElement {
 
 			<section class="interacciones">
 
-			<section class="like">
-			<svg id="svg">${this.unlike}</svg>
+			<section class="like_group">
+			<svg id="svg" class="unlike">${this.unlike}</svg>
+			<svg id="svg_like" class="like" style="display: none;">${this.like}</svg>
 			<p>${this.cantidadlike}</p>
 			</section>
 

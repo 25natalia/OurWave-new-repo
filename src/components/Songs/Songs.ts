@@ -11,7 +11,7 @@ class SongsComponent extends HTMLElement {
 	artist?: string;
 	song_title?: string;
 	image?: string;
-	top?: number;
+	top?: string;
 
 	constructor() {
 		super();
@@ -30,9 +30,6 @@ class SongsComponent extends HTMLElement {
 
 	attributeChangedCallback(propName: AttributeSongs, oldValue: string | undefined, newValue: string | undefined) {
 		switch (propName) {
-			case AttributeSongs.top:
-				this.top = newValue ? Number(newValue) : undefined;
-				break;
 			default:
 				this[propName] = newValue;
 				break;
