@@ -1,7 +1,7 @@
 import { reducer } from './reducer';
 
 export let appState = {
-	screen: 'HOME',
+	screen: 'REGISTER',
 };
 
 //--//

@@ -58,7 +58,6 @@ export class Perfil extends HTMLElement {
 			const myUser = document.createElement('my-perfil');
 			myUser.setAttribute(AttributeProfile.profile_image, user.profile_image);
 			myUser.setAttribute(AttributeProfile.username, user.username);
-			myUser.setAttribute(AttributeProfile.fav_song, user.fav_song);
 			myUser.setAttribute(AttributeProfile.name, user.name);
 			myUser.setAttribute(AttributeProfile.followers, user.followers);
 			myUser.setAttribute(AttributeProfile.following, user.following);
