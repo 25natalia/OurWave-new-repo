@@ -7,10 +7,9 @@ import { AttributeProfile } from '../components/profile/profile';
 import { typeAddSongs } from '../types/songs';
 import { SongsComponent } from '../components/indexpadre';
 import { AttributeSongs } from '../components/Songs/Songs';
-import { dataUser } from '../services/dataUser';
 import styles from './perfil.css';
-import { addObserver, appState, dispatch } from '../store';
-import { navigate } from '../store/actions';
+import { addObserver } from '../store';
+import { getUser } from '../services/Firebase';
 
 const formData: Omit<typeAddSongs, 'id'> = {
 	artist: '',
@@ -25,8 +24,9 @@ export class Perfil extends HTMLElement {
 		addObserver(this);
 	}
 
-	connectedCallback() {
-		this.render();
+	async connectedCallback() {
+		const dataUser = await getUser();
+		this.render(dataUser);
 	}
 
 	submitForm() {
@@ -45,7 +45,7 @@ export class Perfil extends HTMLElement {
 		formData.image = e.target.value;
 	}
 
-	async render() {
+	async render(dataUser: any) {
 		if (this.shadowRoot) {
 			headerPerfil.forEach((iconoHeader) => {
 				const myHeader = document.createElement('my-headerprofile');
@@ -54,11 +54,12 @@ export class Perfil extends HTMLElement {
 				this.shadowRoot?.appendChild(myHeader);
 			});
 		}
-		dataUser.forEach((user) => {
+		dataUser.forEach((user: any) => {
 			const myUser = document.createElement('my-perfil');
 			myUser.setAttribute(AttributeProfile.profile_image, user.profile_image);
 			myUser.setAttribute(AttributeProfile.username, user.username);
 			myUser.setAttribute(AttributeProfile.name, user.name);
+			myUser.setAttribute(AttributeProfile.fav_song, user.fav_song);
 			myUser.setAttribute(AttributeProfile.followers, user.followers);
 			myUser.setAttribute(AttributeProfile.following, user.following);
 			this.shadowRoot?.appendChild(myUser);

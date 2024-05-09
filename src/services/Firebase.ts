@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, updateDoc } from 'firebase/firestore';
 import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
+import { typeFavSong } from '../types/favSong';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAS_sGDbQYUNZAoF-ZqZcpjWtLQtBmDvsw',
@@ -16,6 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// aquí se trae la data de cancionces
 export const getSongs = async () => {
 	const arraySongs: any = [];
 
@@ -26,6 +28,7 @@ export const getSongs = async () => {
 	return arraySongs;
 };
 
+// aquí se trae la data de playlist de amigos
 export const getFriends = async () => {
 	const arrayFriends: any = [];
 
@@ -35,6 +38,19 @@ export const getFriends = async () => {
 	});
 	return arrayFriends;
 };
+
+// aquí se trae la data de users
+export const getUser = async () => {
+	const arrayUser: any = [];
+
+	const querySnapshot = await getDocs(collection(db, 'users'));
+	querySnapshot.forEach((doc) => {
+		arrayUser.push(doc.data());
+	});
+	return arrayUser;
+};
+
+// con esto se añaden las nuevas canciones del perfil
 
 export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
 	try {
@@ -58,7 +74,16 @@ const getCreatedSongs = async () => {
 	return transformed;
 };
 
+// aquí se crean las nuevas canciones favoritas
+export const updateFavCancion = async (favSong: any) => {
+	const userRef = doc(db, 'users', 'e14Adty5xAvKNl0ceGnc');
+	await updateDoc(userRef, {
+		fav_song: favSong,
+	});
+};
+
 export default {
+	// addFavCancion,
 	getCreatedSongs,
 	addSong,
 };
