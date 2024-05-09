@@ -1,15 +1,15 @@
-import styles from './register.css';
+import styles from '../register/register.css';
 import { dispatch } from '../../store';
 import { navigate } from '../../store/actions';
 
-export enum AttributeRegister {
+export enum AttributeLogin {
 	'logo' = 'logo',
 	'google' = 'google',
 	'facebook' = 'facebook',
 	'outlook' = 'outlook',
 }
 
-class RegisterComponent extends HTMLElement {
+class LoginComponent extends HTMLElement {
 	logo?: string;
 	google?: string;
 	facebook?: string;
@@ -21,7 +21,7 @@ class RegisterComponent extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		const attrs: Record<AttributeRegister, null> = {
+		const attrs: Record<AttributeLogin, null> = {
 			logo: null,
 			google: null,
 			facebook: null,
@@ -30,7 +30,7 @@ class RegisterComponent extends HTMLElement {
 		return Object.keys(attrs);
 	}
 
-	attributeChangedCallback(propName: AttributeRegister, oldValue: string | undefined, newValue: string | undefined) {
+	attributeChangedCallback(propName: AttributeLogin, oldValue: string | undefined, newValue: string | undefined) {
 		switch (propName) {
 			default:
 				this[propName] = newValue;
@@ -52,18 +52,17 @@ class RegisterComponent extends HTMLElement {
       <img class="logo" src="${this.logo}"></img>
 
       <section class="info">
-			<h1 class="text_create">Create your account</h1>
+			<h1 class="text_create">Log in to your account</h1>
 
       <section class="inputs">
 			<form>
-			<input type="Email" placeholder="Email"></input>
-			<input type="Username" placeholder="Username"></input>
+			<input type="Email" placeholder="Email or Username"></input>
 			<input type="Password" placeholder="Password"></input>
       </section>
-			<button type="submit">Sign Up</button>
+			<button type="submit">Sign In</button>
 			</form>
       </section>
-			<p class="text">Or sign up with</p>
+			<p class="text">Or sign in with</p>
 
       <section id="apps">
       <img class="google" src="${this.google}"></img>
@@ -71,8 +70,8 @@ class RegisterComponent extends HTMLElement {
       <img class="outlook" src="${this.outlook}"></img>
       </section>
       <section class="already_have">
-      <p class="text">Already have an account?</p>
-      <p class="signup_btn">Log In</p>
+      <p class="text">Don't have an account?</p>
+      <p class="signup_btn" >Sign Up</p>
       </section>
       </section>
     `;
@@ -83,9 +82,9 @@ class RegisterComponent extends HTMLElement {
 			dispatch(navigate('PROFILE'));
 		});
 
-		const login = this.shadowRoot?.querySelector('.signup_btn');
-		login?.addEventListener('click', () => {
-			dispatch(navigate('LOGIN'));
+		const profileIcon = this.shadowRoot?.querySelector('.signup_btn');
+		profileIcon?.addEventListener('click', () => {
+			dispatch(navigate('REGISTER'));
 		});
 
 		const cssRegister = this.ownerDocument.createElement('style');
@@ -94,5 +93,5 @@ class RegisterComponent extends HTMLElement {
 	}
 }
 
-export default RegisterComponent;
-customElements.define('my-register', RegisterComponent);
+export default LoginComponent;
+customElements.define('my-login', LoginComponent);

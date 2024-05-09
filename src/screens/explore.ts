@@ -6,7 +6,7 @@ import { header } from '../services/dataHeader';
 import { AttributesHeader } from '../components/header/header';
 import { iconosExplore } from '../services/dataMenuExplore';
 import { Attribute } from '../components/menu/menu';
-import { addObserver, appState, dispatch } from '../store';
+import { addObserver } from '../store';
 import styles from './explore.css';
 
 export class Explore extends HTMLElement {
@@ -44,17 +44,22 @@ export class Explore extends HTMLElement {
 		titleSongs.textContent = 'On trending';
 		this.shadowRoot?.appendChild(titleSongs);
 
-		dataFriends.forEach((song: any) => {
+		dataFriends.forEach((song: any, index: number) => {
 			const mySong = document.createElement('my-songs') as SongsComponent;
+			mySong.setAttribute(AttributeSongs.top, song.top);
 			mySong.setAttribute(AttributeSongs.song_title, song.song_title);
 			mySong.setAttribute(AttributeSongs.artist, song.artist);
 			mySong.setAttribute(AttributeSongs.image, song.image);
+			mySong.setAttribute('data-index', (index + 1).toString());
 			this.shadowRoot?.appendChild(mySong);
 		});
 
 		const titleFriends = this.ownerDocument.createElement('h1');
 		titleFriends.textContent = 'My friends playlist';
 		this.shadowRoot?.appendChild(titleFriends);
+
+		const section = this.ownerDocument.createElement('section');
+		section.classList.add('playlists');
 
 		dataSongs.forEach((friend: any) => {
 			const myFriend = document.createElement('my-friend') as friends;
@@ -63,8 +68,10 @@ export class Explore extends HTMLElement {
 			myFriend.setAttribute(AttributesFriends.profile, friend.profile);
 			myFriend.setAttribute(AttributesFriends.photo, friend.photo);
 			myFriend.setAttribute(AttributesFriends.song, friend.song);
-			this.shadowRoot?.appendChild(myFriend);
+			section.appendChild(myFriend);
 		});
+
+		this.shadowRoot?.appendChild(section);
 
 		const cssExplore = this.ownerDocument.createElement('style');
 		cssExplore.innerHTML = styles;
@@ -72,4 +79,3 @@ export class Explore extends HTMLElement {
 	}
 }
 customElements.define('app-explore', Explore);
-

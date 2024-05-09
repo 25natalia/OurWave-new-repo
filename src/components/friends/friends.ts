@@ -60,8 +60,6 @@ class friends extends HTMLElement {
 		</section>
 		</section>
 		</section>
-
-
 		`;
 		}
 
