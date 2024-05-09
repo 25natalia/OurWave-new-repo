@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, updateDoc } from 'firebase/firestore';
 import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
-import { typeFavSong } from '../types/favSong';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAS_sGDbQYUNZAoF-ZqZcpjWtLQtBmDvsw',

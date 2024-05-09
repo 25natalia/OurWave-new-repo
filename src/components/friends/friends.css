@@ -27,6 +27,9 @@ p {
 	margin-top: 0;
 }
 
+h3 {
+	margin-top: 0;
+}
 .card {
 	width: 400px;
 	height: 180px;
@@ -44,21 +47,3 @@ p {
 	z-index: 1;
 	border-radius: 20px;
 }
-
-/* .card {
-	overflow-x: auto;
-	white-space: nowrap;
-	display: inline-block;
-} */
-
-/* .background {
-	width: 300px;
-	height: 150px;
-	// Ancho del contenedor Altura del contenedor
-	overflow: hidden;
-	// Oculta cualquier contenido que exceda los límites del contenedor
-	border-radius: 40px;
-	display: block;
-	// Asegura que la imagen se comporte como un bloque
-	margin: 20px;
-} */

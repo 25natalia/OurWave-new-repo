@@ -51,7 +51,7 @@ class iconos extends HTMLElement {
 			this.shadowRoot.innerHTML = `
 			<section class="menubar">
 		<svg id="home">${this.iconohome}</svg>
-		<svg id="explore">${this.iconoexplore}</svg>
+		<img id="explore" src=${this.iconoexplore}></svg>
 		<svg id="profile">${this.iconoprofile}</svg>
 			</section>`;
 		}

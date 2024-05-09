@@ -1,6 +1,5 @@
 export interface waves {
-  id: string;
-  wave: string;
-  name:string;
-
+	id: string;
+	wave: string;
+	name: string;
 }

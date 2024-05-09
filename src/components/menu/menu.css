@@ -12,11 +12,16 @@
 }
 
 #home,
-#explore,
 #chats,
 #profile {
 	height: 30px;
 	width: 30px;
+	cursor: pointer;
+}
+
+#explore {
+	height: 24px;
+	width: 34px;
 	cursor: pointer;
 }
 
