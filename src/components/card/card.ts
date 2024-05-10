@@ -1,4 +1,10 @@
 import styles from './card.css';
+import Firebase, { addWave } from '../../services/Firebase';
+import { waves } from '../../types/waves';
+
+const formData: Omit<waves, 'id'> = {
+	wave: '',
+};
 
 export enum AttributesCard {
 	'unlike' = 'unlike',
@@ -63,6 +69,7 @@ class Card extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
+		this.restoreSavedWaves();
 		this.attachEventHandlers();
 	}
 
@@ -94,8 +101,7 @@ class Card extends HTMLElement {
 			<p>${this.name || 'No Username'}</p>
 			</section>
 
-<section class="comment">
-			<p>${this.wave}</p>
+<section class="wave">
 			</section>
 
 			<section class="interacciones">
@@ -118,9 +124,20 @@ class Card extends HTMLElement {
 			</section>
 			</section>`;
 		}
+
 		const cssCard = this.ownerDocument.createElement('style');
 		cssCard.innerHTML = styles;
 		this.shadowRoot?.appendChild(cssCard);
+	}
+
+	restoreSavedWaves() {
+		const sectionWave = this.shadowRoot?.querySelector('.wave');
+		const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
+		savedWaves.forEach((wave: string) => {
+			const waveDisplay = document.createElement('p');
+			waveDisplay.textContent = wave;
+			sectionWave?.appendChild(waveDisplay);
+		});
 	}
 }
 
