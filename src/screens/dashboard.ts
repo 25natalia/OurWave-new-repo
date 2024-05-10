@@ -3,7 +3,6 @@ import { Attribute } from '../components/menu/menu';
 import { header } from '../services/dataHeader';
 import { AttributesHeader } from '../components/header/header';
 import { addcontent } from '../services/dataAdd';
-// import { AttributesAdd } from '../components/addWave/addwave';
 import { profile } from '../services/dataProfile';
 import { AttributesCard } from '../components/card/card';
 import { addObserver, appState, dispatch } from '../store';
@@ -11,105 +10,105 @@ import Firebase, { addWave } from '../services/Firebase';
 import { waves } from '../types/waves';
 
 const formData: Omit<waves, 'id'> = {
-	wave: '',
+    wave: ''
 };
 
 export class Dashboard extends HTMLElement {
-	waves: string[] = []; // Array para almacenar todas las olas ingresadas
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        addObserver(this);
+    }
 
-	constructor() {
-		super();
-		this.attachShadow({ mode: 'open' });
-		addObserver(this);
-	}
+    connectedCallback() {
+        this.render();
+    }
 
-	connectedCallback() {
-		this.render();
-	}
+    render() {
+        if (this.shadowRoot) {
+            // Render initial content
+            header.forEach((iconoHeader) => {
+                const myHeader = document.createElement('my-header');
+                myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
+                this.shadowRoot?.appendChild(myHeader);
+            });
 
-	render() {
-		if (this.shadowRoot) {
-			// Render initial content
-			header.forEach((iconoHeader) => {
-				const myHeader = document.createElement('my-header');
-				myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
-				this.shadowRoot?.appendChild(myHeader);
-			});
+            const enterWave = this.ownerDocument.createElement('input');
+            enterWave.placeholder = 'Enter your Wave';
+            enterWave.classList.add('image');
+            this.shadowRoot.appendChild(enterWave);
 
-			// Render input field
-			const enterWave = this.ownerDocument.createElement('input');
-			enterWave.placeholder = 'Enter your Wave';
-			enterWave.classList.add('image');
-			this.shadowRoot.appendChild(enterWave);
+            const save = this.ownerDocument.createElement('button');
+            save.innerText = 'Save';
+            save.classList.add('save');
+            save.addEventListener('click', this.submitForm.bind(this)); // Bind 'this' context
+            this.shadowRoot?.appendChild(save);
 
-			// Render save button
-			const save = this.ownerDocument.createElement('button');
-			save.innerText = 'Save';
-			save.classList.add('save');
-			save.addEventListener('click', this.submitForm.bind(this)); // Bind 'this' context
-			this.shadowRoot?.appendChild(save);
+            // Render previously saved waves
+            const savedWaves = localStorage.getItem('savedWaves');
+            if (savedWaves) {
+                const wavesArray = JSON.parse(savedWaves) as string[];
+                wavesArray.forEach(wave => {
+                    const waveDisplay = document.createElement('p');
+                    waveDisplay.textContent = wave;
+                    this.shadowRoot?.appendChild(waveDisplay);
+                });
+            }
 
-			// Render todas las olas previamente guardadas al cargar la página
-			const savedWaves = localStorage.getItem('savedWaves');
-			if (savedWaves) {
-				this.waves = JSON.parse(savedWaves);
-				this.waves.forEach((wave) => {
-					this.renderWave(wave);
-				});
-			}
+            profile.forEach((element) => {
+                const myCard = document.createElement('my-card');
+                myCard.setAttribute(AttributesCard.name, element.name);
+                myCard.setAttribute(AttributesCard.image, element.image);
+                myCard.setAttribute(AttributesCard.wave, element.wave);
+                myCard.setAttribute(AttributesCard.unlike, element.unlike);
+                myCard.setAttribute(AttributesCard.like, element.like);
+                myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
+                myCard.setAttribute(AttributesCard.share, element.share);
+                myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
+                myCard.setAttribute(AttributesCard.comentar, element.comentar);
+                myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
+                this.shadowRoot?.appendChild(myCard);
+            });
 
-			// Render profile cards
-			profile.forEach((element) => {
-				const myCard = document.createElement('my-card');
-				console.log(element);
-				myCard.setAttribute(AttributesCard.name, element.name);
-				myCard.setAttribute(AttributesCard.image, element.image);
-				myCard.setAttribute(AttributesCard.wave, element.wave);
-				myCard.setAttribute(AttributesCard.unlike, element.unlike);
-				myCard.setAttribute(AttributesCard.like, element.like);
-				myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
-				myCard.setAttribute(AttributesCard.share, element.share);
-				myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
-				myCard.setAttribute(AttributesCard.comentar, element.comentar);
-				myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
-				this.shadowRoot?.appendChild(myCard);
-			});
-		}
-	}
+            // Render icons
+            iconos.forEach((iconoData) => {
+                const myIcono = document.createElement('my-iconos');
+                myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
+                myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
+                myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
+                this.shadowRoot?.appendChild(myIcono);
+            });
+        }
+    }
 
-	submitForm() {
-		// Get the value of the input field
-		const enterWaveInput = this.shadowRoot?.querySelector('.image') as HTMLInputElement;
-		const waveText = enterWaveInput.value;
+    submitForm() {
+        const enterWaveInput = this.shadowRoot?.querySelector('.image') as HTMLInputElement;
+        const waveText = enterWaveInput.value.trim();
+        if (!waveText) return; // Ignore empty wave submissions
 
-		// Agregar la ola al array y al almacenamiento local al principio
-		this.waves.unshift(waveText); // Agregar al principio del array
-		localStorage.setItem('savedWaves', JSON.stringify(this.waves));
+        // Add the wave to local storage
+        const savedWaves = localStorage.getItem('savedWaves');
+        const wavesArray = savedWaves ? JSON.parse(savedWaves) : [];
+        wavesArray.unshift(waveText); // Add wave to the beginning of the array
+        localStorage.setItem('savedWaves', JSON.stringify(wavesArray));
 
-		// Set the value of the input field in the formData
-		formData.wave = waveText;
+        // Render the entered wave
+        const waveDisplay = document.createElement('p');
+        waveDisplay.textContent = waveText;
 
-		// Log formData
-		console.log(formData);
+        // Insert the new wave just after the input and the button
+        if (enterWaveInput.nextSibling) {
+            this.shadowRoot?.insertBefore(waveDisplay, enterWaveInput.nextSibling.nextSibling);
+        } else {
+            this.shadowRoot?.appendChild(waveDisplay);
+        }
 
-		// Call addWave method with formData
-		Firebase.addWave(formData);
+        // Clear the input field
+        enterWaveInput.value = '';
 
-		// Render the entered wave text below other content
-		this.renderWave(waveText);
-
-		// Clear the input field
-		enterWaveInput.value = '';
-	}
-
-	renderWave(waveText: string) {
-		const waveDisplay = document.createElement('p');
-		waveDisplay.textContent = waveText;
-		// Obtener el botón de guardar
-		const saveButton = this.shadowRoot?.querySelector('.save') as HTMLButtonElement;
-		// Insertar la nueva ola justo antes del botón de guardar
-		this.shadowRoot?.insertBefore(waveDisplay, saveButton.nextSibling);
-	}
+        // Log the submitted wave
+        console.log('Submitted wave:', waveText);
+    }
 }
 
 customElements.define('app-dashboard', Dashboard);
