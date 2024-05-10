@@ -69,7 +69,7 @@ class Card extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
-		this.restoreSavedWaves();
+		// this.restoreSavedWaves();
 		this.attachEventHandlers();
 	}
 
@@ -98,14 +98,14 @@ class Card extends HTMLElement {
 			<section class="image">
 			<img src="${this.image}"></img>
 			</section>
-			<p>${this.name || 'No Username'}</p>
+			<p class="username">${this.name || 'No Username'}</p>
 			</section>
 
-<section class="wave">
+			<section class='wave'>
+			<p id='wave'>${this.wave}</p>
 			</section>
 
 			<section class="interacciones">
-
 			<section class="like_group">
 			<svg id="svg" class="unlike">${this.unlike}</svg>
 			<svg id="svg_like" class="like" style="display: none;">${this.like}</svg>
@@ -128,16 +128,6 @@ class Card extends HTMLElement {
 		const cssCard = this.ownerDocument.createElement('style');
 		cssCard.innerHTML = styles;
 		this.shadowRoot?.appendChild(cssCard);
-	}
-
-	restoreSavedWaves() {
-		const sectionWave = this.shadowRoot?.querySelector('.wave');
-		const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
-		savedWaves.forEach((wave: string) => {
-			const waveDisplay = document.createElement('p');
-			waveDisplay.textContent = wave;
-			sectionWave?.appendChild(waveDisplay);
-		});
 	}
 }
 

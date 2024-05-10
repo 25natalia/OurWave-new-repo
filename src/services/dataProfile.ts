@@ -2,6 +2,7 @@ interface DataShape {
 	id: number;
 	name: string;
 	image: string;
+	wave: string;
 	unlike: string;
 	like: string;
 	cantidadlike: string;
@@ -15,6 +16,7 @@ export const profile: DataShape[] = [
 	{
 		id: 1,
 		name: 'Sofía García',
+		wave: '',
 		image:
 			'https://images.pexels.com/photos/3646160/pexels-photo-3646160.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
 		unlike:

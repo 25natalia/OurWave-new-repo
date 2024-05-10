@@ -39,24 +39,28 @@ export class Dashboard extends HTMLElement {
 			this.shadowRoot.appendChild(enterWave);
 
 			const save = this.ownerDocument.createElement('button');
-			save.innerText = 'Save';
+			save.innerText = 'Share';
 			save.classList.add('save');
 			save.addEventListener('click', this.submitForm.bind(this));
 			this.shadowRoot?.appendChild(save);
 
-			profile.forEach((element) => {
-				const myCard = document.createElement('my-card');
-				console.log(element);
-				myCard.setAttribute(AttributesCard.name, element.name);
-				myCard.setAttribute(AttributesCard.image, element.image);
-				myCard.setAttribute(AttributesCard.unlike, element.unlike);
-				myCard.setAttribute(AttributesCard.like, element.like);
-				myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
-				myCard.setAttribute(AttributesCard.share, element.share);
-				myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
-				myCard.setAttribute(AttributesCard.comentar, element.comentar);
-				myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
-				this.shadowRoot?.appendChild(myCard);
+			const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
+
+			savedWaves.forEach((wave: string) => {
+				profile.forEach((element) => {
+					const myCard = document.createElement('my-card');
+					myCard.setAttribute(AttributesCard.name, element.name);
+					myCard.setAttribute(AttributesCard.image, element.image);
+					myCard.setAttribute(AttributesCard.unlike, element.unlike);
+					myCard.setAttribute(AttributesCard.like, element.like);
+					myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
+					myCard.setAttribute(AttributesCard.share, element.share);
+					myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
+					myCard.setAttribute(AttributesCard.comentar, element.comentar);
+					myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
+					myCard.setAttribute(AttributesCard.wave, wave);
+					this.shadowRoot?.appendChild(myCard);
+				});
 			});
 
 			iconos.forEach((iconoData) => {
@@ -71,6 +75,16 @@ export class Dashboard extends HTMLElement {
 			cssDashboard.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssDashboard);
 		}
+	}
+
+	restoreSavedWaves() {
+		const sectionWave = this.shadowRoot?.querySelector('.wave');
+		const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
+		savedWaves.forEach((wave: string) => {
+			const waveDisplay = document.createElement('p');
+			waveDisplay.textContent = wave;
+			sectionWave?.appendChild(waveDisplay);
+		});
 	}
 
 	submitForm() {
