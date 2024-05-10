@@ -84,7 +84,7 @@ export class Dashboard extends HTMLElement {
 
 		// Agregar la ola al array y al almacenamiento local al principio
 		this.waves.unshift(waveText); // Agregar al principio del array
-		localStorage.setItem('savedWaves', JSON.stringify(this.waves)); // Save waves
+		localStorage.setItem('savedWaves', JSON.stringify(this.waves));
 
 		// Set the value of the input field in the formData
 		formData.wave = waveText;
