@@ -52,7 +52,7 @@ class SongsComponent extends HTMLElement {
 			<p class="top">${this.top}</p>
 
 			<section class= "imagen">
-			<img src="${this.image}"></img>
+			<img src="${this.image}" alt= "cover album"></img>
 			</section>
 
 			<section class = "letters">
