@@ -3,14 +3,11 @@ import { Attribute } from '../components/menu/menu';
 import { header } from '../services/dataHeader';
 import { AttributesHeader } from '../components/header/header';
 import { addcontent } from '../services/dataAdd';
-import { AttributesAdd } from '../components/add/add';
+// import { AttributesAdd } from '../components/addWave/addwave';
 import { profile } from '../services/dataProfile';
 import { AttributesCard } from '../components/card/card';
 import { addObserver, appState, dispatch } from '../store';
-
-import './components/indexpadre';
 import Firebase, {addWave} from '../services/Firebase';
-import { AddContent}  from '../components/indexpadre';
 import {waves} from '../types/waves'
 
 const formData: Omit<waves, 'id'> = {
@@ -32,6 +29,10 @@ export class Dashboard extends HTMLElement {
 		Firebase.addWave(formData);
 	}
 
+	changeWave(e: any) {
+				formData.wave = e.target.value;
+			}
+
 	render() {
 		if (this.shadowRoot) {
 			header.forEach((iconoHeader) => {
@@ -39,6 +40,18 @@ export class Dashboard extends HTMLElement {
 				myHeader.setAttribute(AttributesHeader.logo, iconoHeader.logo);
 				this.shadowRoot?.appendChild(myHeader);
 			});
+
+						const enterWave = this.ownerDocument.createElement('input');
+			enterWave.placeholder = 'Enter your Wave';
+			enterWave.classList.add('image');
+			enterWave.addEventListener('change', this.changeWave);
+			this.shadowRoot.appendChild(enterWave);
+
+			const save = this.ownerDocument.createElement('button');
+			save.innerText = 'Save';
+			save.classList.add('save');
+			save.addEventListener('click', this.submitForm);
+			this.shadowRoot?.appendChild(save);
 
 			profile.forEach((element) => {
 				const myCard = document.createElement('my-card');
@@ -64,13 +77,8 @@ export class Dashboard extends HTMLElement {
 				myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
 				this.shadowRoot?.appendChild(myIcono);
 			});
-
-			addcontent.forEach((addButton) => {
-				const addContent = document.createElement('my-addcontent');
-				addContent.setAttribute(AttributesAdd.iconoadd, addButton.iconoadd);
-				this.shadowRoot?.appendChild(addContent);
-			});
+			};
 		}
 	}
-}
+
 customElements.define('app-dashboard', Dashboard);
