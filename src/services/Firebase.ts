@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, updateDoc } from 'firebase/firestore';
 import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
-import { waves} from '../types/waves';
+import { waves } from '../types/waves';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAS_sGDbQYUNZAoF-ZqZcpjWtLQtBmDvsw',
@@ -64,7 +64,7 @@ export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
 
 export const addWave = async (wave: Omit<waves, 'id'>) => {
 	try {
-		const where = collection(db, 'wave');
+		const where = collection(db, 'waves');
 		await addDoc(where, wave);
 		console.log('se añadió con éxito');
 	} catch (error) {

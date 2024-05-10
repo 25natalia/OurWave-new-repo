@@ -1,4 +1,10 @@
 import styles from './card.css';
+import Firebase, { addWave } from '../../services/Firebase';
+import { waves } from '../../types/waves';
+
+const formData: Omit<waves, 'id'> = {
+	wave: '',
+};
 
 export enum AttributesCard {
 	'unlike' = 'unlike',
@@ -74,12 +80,20 @@ class Card extends HTMLElement {
 			likeIcon.addEventListener('click', () => {
 				likeIcon.style.display = 'none';
 				unlikeIcon.style.display = 'block';
+				localStorage.setItem('likeState', 'block');
 			});
 
 			unlikeIcon.addEventListener('click', () => {
 				likeIcon.style.display = 'block';
 				unlikeIcon.style.display = 'none';
+				localStorage.setItem('likeState', 'none');
 			});
+
+			const likeState = localStorage.getItem('likeState');
+			if (likeState === 'none') {
+				likeIcon.style.display = 'none';
+				unlikeIcon.style.display = 'block';
+			}
 		}
 	}
 
@@ -91,15 +105,14 @@ class Card extends HTMLElement {
 			<section class="image">
 			<img src="${this.image}"></img>
 			</section>
-			<p>${this.name || 'No Username'}</p>
+			<p class="username">${this.name || 'No Username'}</p>
 			</section>
 
-<section class="comment">
-			<p>${this.wave}</p>
+			<section class='wave'>
+			<p id='wave'>${this.wave}</p>
 			</section>
 
 			<section class="interacciones">
-
 			<section class="like_group">
 			<svg id="svg" class="unlike">${this.unlike}</svg>
 			<svg id="svg_like" class="like" style="display: none;">${this.like}</svg>
@@ -118,6 +131,7 @@ class Card extends HTMLElement {
 			</section>
 			</section>`;
 		}
+
 		const cssCard = this.ownerDocument.createElement('style');
 		cssCard.innerHTML = styles;
 		this.shadowRoot?.appendChild(cssCard);
