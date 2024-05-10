@@ -4,4 +4,5 @@ export interface typeAddSongs {
 	artist: string;
 	song_title: string;
 	image: string;
+	duration:string;
 }

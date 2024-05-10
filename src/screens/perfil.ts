@@ -16,6 +16,7 @@ const formData: Omit<typeAddSongs, 'id'> = {
 	artist: '',
 	song_title: '',
 	image: '',
+	duration: '',
 };
 
 export class Perfil extends HTMLElement {
@@ -107,6 +108,7 @@ export class Perfil extends HTMLElement {
 			card.setAttribute(AttributeSongs.image, p.image);
 			card.setAttribute(AttributeSongs.artist, p.artist);
 			card.setAttribute(AttributeSongs.song_title, p.song_title);
+
 			this.shadowRoot?.appendChild(card);
 		});
 

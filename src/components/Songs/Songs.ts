@@ -5,6 +5,7 @@ export enum AttributeSongs {
 	'song_title' = 'song_title',
 	'image' = 'image',
 	'top' = 'top',
+
 }
 
 class SongsComponent extends HTMLElement {
@@ -12,6 +13,7 @@ class SongsComponent extends HTMLElement {
 	song_title?: string;
 	image?: string;
 	top?: string;
+
 
 	constructor() {
 		super();
@@ -24,6 +26,7 @@ class SongsComponent extends HTMLElement {
 			song_title: null,
 			image: null,
 			top: null,
+
 		};
 		return Object.keys(attrs);
 	}
@@ -45,6 +48,7 @@ class SongsComponent extends HTMLElement {
 			this.shadowRoot.innerHTML = `
 			<section class = "card">
 
+
 			<p class="top">${this.top}</p>
 
 			<section class= "imagen">
@@ -60,6 +64,7 @@ class SongsComponent extends HTMLElement {
 		<section class = "artist">
 		<p>${this.artist}</p>
 		</section>
+
 
 		</section>
 
