@@ -69,7 +69,6 @@ class Card extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
-		// this.restoreSavedWaves();
 		this.attachEventHandlers();
 	}
 
@@ -81,12 +80,20 @@ class Card extends HTMLElement {
 			likeIcon.addEventListener('click', () => {
 				likeIcon.style.display = 'none';
 				unlikeIcon.style.display = 'block';
+				localStorage.setItem('likeState', 'block');
 			});
 
 			unlikeIcon.addEventListener('click', () => {
 				likeIcon.style.display = 'block';
 				unlikeIcon.style.display = 'none';
+				localStorage.setItem('likeState', 'none');
 			});
+
+			const likeState = localStorage.getItem('likeState');
+			if (likeState === 'none') {
+				likeIcon.style.display = 'none';
+				unlikeIcon.style.display = 'block';
+			}
 		}
 	}
 
