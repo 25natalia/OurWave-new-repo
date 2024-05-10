@@ -3,6 +3,7 @@ import { Attribute } from '../components/menu/menu';
 import { header } from '../services/dataHeader';
 import { AttributesHeader } from '../components/header/header';
 import { addcontent } from '../services/dataAdd';
+// import { AttributesAdd } from '../components/addWave/addwave';
 import { profile } from '../services/dataProfile';
 import { AttributesCard } from '../components/card/card';
 import { addObserver, appState, dispatch } from '../store';
@@ -22,6 +23,59 @@ export class Dashboard extends HTMLElement {
 
     connectedCallback() {
         this.render();
+        this.restoreSavedWaves();
+    }
+
+    submitForm() {
+        const enterWaveInput = this.shadowRoot?.querySelector('.image') as HTMLInputElement;
+        const waveText = enterWaveInput.value;
+
+        formData.wave = waveText;
+
+        console.log(formData);
+
+        Firebase.addWave(formData);
+
+        enterWaveInput.value = '';
+
+        const waveDisplay = document.createElement('p');
+        waveDisplay.textContent = waveText;
+
+        if (enterWaveInput.nextSibling) {
+            this.shadowRoot?.insertBefore(waveDisplay, enterWaveInput.nextSibling);
+        } else {
+            this.shadowRoot?.appendChild(waveDisplay);
+        }
+
+        // Guardar el contenido en el almacenamiento local
+        this.saveWaveToLocalStorage(waveText);
+    }
+
+    restoreSavedWaves() {
+        // Restaurar el contenido del almacenamiento local
+        const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
+        savedWaves.forEach((wave: string) => {
+            const waveDisplay = document.createElement('p');
+            waveDisplay.textContent = wave;
+            if (this.shadowRoot?.firstChild) {
+                this.shadowRoot.insertBefore(waveDisplay, this.shadowRoot.firstChild);
+            } else {
+                this.shadowRoot?.appendChild(waveDisplay);
+            }
+        });
+    }
+
+    saveWaveToLocalStorage(wave: string) {
+        // Obtener todas las ondas almacenadas
+        const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
+        // Agregar la nueva onda a la lista
+        savedWaves.push(wave);
+        // Guardar la lista actualizada en el almacenamiento local
+        localStorage.setItem('savedWaves', JSON.stringify(savedWaves));
+    }
+
+    changeWave(e: any) {
+        formData.wave = e.target.value;
     }
 
     render() {
@@ -35,6 +89,7 @@ export class Dashboard extends HTMLElement {
             const enterWave = this.ownerDocument.createElement('input');
             enterWave.placeholder = 'Enter your Wave';
             enterWave.classList.add('image');
+            enterWave.addEventListener('change', this.changeWave);
             this.shadowRoot.appendChild(enterWave);
 
             const save = this.ownerDocument.createElement('button');
@@ -43,18 +98,9 @@ export class Dashboard extends HTMLElement {
             save.addEventListener('click', this.submitForm.bind(this)); // Bind 'this' context
             this.shadowRoot?.appendChild(save);
 
-            const savedWaves = localStorage.getItem('savedWaves');
-            if (savedWaves) {
-                const wavesArray = JSON.parse(savedWaves) as string[];
-                wavesArray.forEach(wave => {
-                    const waveDisplay = document.createElement('p');
-                    waveDisplay.textContent = wave;
-                    this.shadowRoot?.appendChild(waveDisplay);
-                });
-            }
-
             profile.forEach((element) => {
                 const myCard = document.createElement('my-card');
+                console.log(element);
                 myCard.setAttribute(AttributesCard.name, element.name);
                 myCard.setAttribute(AttributesCard.image, element.image);
                 myCard.setAttribute(AttributesCard.wave, element.wave);
@@ -65,6 +111,7 @@ export class Dashboard extends HTMLElement {
                 myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
                 myCard.setAttribute(AttributesCard.comentar, element.comentar);
                 myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
+
                 this.shadowRoot?.appendChild(myCard);
             });
 
@@ -76,32 +123,6 @@ export class Dashboard extends HTMLElement {
                 this.shadowRoot?.appendChild(myIcono);
             });
         }
-    }
-
-    submitForm() {
-        const enterWaveInput = this.shadowRoot?.querySelector('.image') as HTMLInputElement;
-        const waveText = enterWaveInput.value.trim();
-        if (!waveText) return;
-
-
-        const savedWaves = localStorage.getItem('savedWaves');
-        const wavesArray = savedWaves ? JSON.parse(savedWaves) : [];
-        wavesArray.unshift(waveText);
-        localStorage.setItem('savedWaves', JSON.stringify(wavesArray));
-
-
-        const waveDisplay = document.createElement('p');
-        waveDisplay.textContent = waveText;
-
-        if (enterWaveInput.nextSibling) {
-            this.shadowRoot?.insertBefore(waveDisplay, enterWaveInput.nextSibling.nextSibling);
-        } else {
-            this.shadowRoot?.appendChild(waveDisplay);
-        }
-
-        enterWaveInput.value = '';
-
-        console.log('Submitted wave:', waveText);
     }
 }
 
