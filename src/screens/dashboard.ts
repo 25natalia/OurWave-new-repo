@@ -32,6 +32,10 @@ export class Dashboard extends HTMLElement {
 				this.shadowRoot?.appendChild(myHeader);
 			});
 
+			const titleHome = this.ownerDocument.createElement('h1');
+			titleHome.textContent = 'Share your wave!';
+			this.shadowRoot?.appendChild(titleHome);
+
 			const enterWave = this.ownerDocument.createElement('input');
 			enterWave.placeholder = 'Enter your Wave';
 			enterWave.classList.add('image');
@@ -43,6 +47,10 @@ export class Dashboard extends HTMLElement {
 			save.classList.add('save');
 			save.addEventListener('click', this.submitForm.bind(this));
 			this.shadowRoot?.appendChild(save);
+
+			const forYou = this.ownerDocument.createElement('h2');
+			forYou.textContent = 'For You';
+			this.shadowRoot?.appendChild(forYou);
 
 			const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
 
