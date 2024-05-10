@@ -7,6 +7,7 @@ import { AttributesCard } from '../components/card/card';
 import { addObserver } from '../store';
 import Firebase, { addWave } from '../services/Firebase';
 import { waves } from '../types/waves';
+import styles from './dashboard.css';
 
 const formData: Omit<waves, 'id'> = {
 	wave: '',
@@ -65,6 +66,10 @@ export class Dashboard extends HTMLElement {
 				myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
 				this.shadowRoot?.appendChild(myIcono);
 			});
+
+			const cssDashboard = this.ownerDocument.createElement('style');
+			cssDashboard.innerHTML = styles;
+			this.shadowRoot?.appendChild(cssDashboard);
 		}
 	}
 
