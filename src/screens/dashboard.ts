@@ -7,11 +7,11 @@ import { addcontent } from '../services/dataAdd';
 import { profile } from '../services/dataProfile';
 import { AttributesCard } from '../components/card/card';
 import { addObserver, appState, dispatch } from '../store';
-import Firebase, {addWave} from '../services/Firebase';
-import {waves} from '../types/waves'
+import Firebase, { addWave } from '../services/Firebase';
+import { waves } from '../types/waves';
 
 const formData: Omit<waves, 'id'> = {
-	wave:''
+	wave: '',
 };
 export class Dashboard extends HTMLElement {
 	constructor() {
@@ -25,13 +25,26 @@ export class Dashboard extends HTMLElement {
 	}
 
 	submitForm() {
+		const enterWaveInput = this.shadowRoot?.querySelector('.image') as HTMLInputElement;
+		const waveText = enterWaveInput.value;
+
+		formData.wave = waveText;
 		console.log(formData);
+
 		Firebase.addWave(formData);
+		
+		enterWaveInput.value = '';
+
+		// Render the entered wave text on the screen
+		const waveDisplay = document.createElement('p');
+		waveDisplay.textContent = waveText;
+		this.shadowRoot?.appendChild(waveDisplay);
 	}
 
 	changeWave(e: any) {
-				formData.wave = e.target.value;
-			}
+		// Update the formData when the input field value changes
+		formData.wave = e.target.value;
+	}
 
 	render() {
 		if (this.shadowRoot) {
@@ -41,7 +54,7 @@ export class Dashboard extends HTMLElement {
 				this.shadowRoot?.appendChild(myHeader);
 			});
 
-						const enterWave = this.ownerDocument.createElement('input');
+			const enterWave = this.ownerDocument.createElement('input');
 			enterWave.placeholder = 'Enter your Wave';
 			enterWave.classList.add('image');
 			enterWave.addEventListener('change', this.changeWave);
@@ -50,7 +63,7 @@ export class Dashboard extends HTMLElement {
 			const save = this.ownerDocument.createElement('button');
 			save.innerText = 'Save';
 			save.classList.add('save');
-			save.addEventListener('click', this.submitForm);
+			save.addEventListener('click', this.submitForm.bind(this)); // Bind 'this' context
 			this.shadowRoot?.appendChild(save);
 
 			profile.forEach((element) => {
@@ -77,8 +90,8 @@ export class Dashboard extends HTMLElement {
 				myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
 				this.shadowRoot?.appendChild(myIcono);
 			});
-			};
 		}
 	}
+}
 
 customElements.define('app-dashboard', Dashboard);
