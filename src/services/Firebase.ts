@@ -3,6 +3,7 @@ import { getFirestore, updateDoc } from 'firebase/firestore';
 import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
 import { waves } from '../types/waves';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAS_sGDbQYUNZAoF-ZqZcpjWtLQtBmDvsw',
@@ -16,6 +17,36 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+
+//loguear y registrar
+export const createUser = (formData: any) => {
+	createUserWithEmailAndPassword(auth, formData.email, formData.password)
+		.then(async (userCredential) => {
+			//Primer paso es obtener el id
+			const user = userCredential.user;
+			console.log(user.uid);
+
+			//Segundo paso es agregar un documento con más info bajo ese id
+			try {
+				const where = doc(db, 'users', user.uid);
+				const data = {
+					id: user.uid,
+					username: formData.username,
+				};
+				console.log(data);
+				await setDoc(where, data);
+				alert('Se creó el usuario');
+			} catch (error) {
+				console.error(error);
+			}
+		})
+		.catch((error: any) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.error(errorCode, errorMessage);
+		});
+};
 
 // aquí se trae la data de cancionces
 export const getSongs = async () => {
