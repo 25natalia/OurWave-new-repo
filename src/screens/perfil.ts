@@ -27,7 +27,7 @@ export class Perfil extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		const dataUser = await getUser();
+		const dataUser = await getUser('e14Adty5xAvKNl0ceGnc');
 		this.render(dataUser);
 	}
 
@@ -56,16 +56,15 @@ export class Perfil extends HTMLElement {
 				this.shadowRoot?.appendChild(myHeader);
 			});
 		}
-		dataUser.forEach((user: any) => {
-			const myUser = document.createElement('my-perfil');
-			myUser.setAttribute(AttributeProfile.profile_image, user.profile_image);
-			myUser.setAttribute(AttributeProfile.username, user.username);
-			myUser.setAttribute(AttributeProfile.name, user.name);
-			myUser.setAttribute(AttributeProfile.fav_song, user.fav_song);
-			myUser.setAttribute(AttributeProfile.followers, user.followers);
-			myUser.setAttribute(AttributeProfile.following, user.following);
-			this.shadowRoot?.appendChild(myUser);
-		});
+
+		const myUser = document.createElement('my-perfil');
+		myUser.setAttribute(AttributeProfile.profile_image, dataUser.profile_image);
+		myUser.setAttribute(AttributeProfile.username, dataUser.username);
+		myUser.setAttribute(AttributeProfile.name, dataUser.name);
+		myUser.setAttribute(AttributeProfile.fav_song, dataUser.fav_song);
+		myUser.setAttribute(AttributeProfile.followers, dataUser.followers);
+		myUser.setAttribute(AttributeProfile.following, dataUser.following);
+		this.shadowRoot?.appendChild(myUser);
 
 		const h1Add = this.ownerDocument.createElement('h1');
 		h1Add.textContent = 'Add your own song';

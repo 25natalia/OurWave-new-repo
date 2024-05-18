@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, updateDoc } from 'firebase/firestore';
-import { collection, addDoc, getDocs, doc, setDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
 import { waves } from '../types/waves';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
@@ -71,14 +71,10 @@ export const getFriends = async () => {
 };
 
 // aquí se trae la data de users
-export const getUser = async () => {
-	const arrayUser: any = [];
-
-	const querySnapshot = await getDocs(collection(db, 'users'));
-	querySnapshot.forEach((doc) => {
-		arrayUser.push(doc.data());
-	});
-	return arrayUser;
+export const getUser = async (idUser: string) => {
+	const docRef = doc(db, 'users', idUser);
+	const docSnap = await getDoc(docRef);
+	return docSnap.data();
 };
 
 // con esto se añaden las nuevas canciones del perfil
