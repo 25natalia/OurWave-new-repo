@@ -6,6 +6,7 @@ import { createUser } from '../../services/Firebase';
 const formData = {
 	email: '',
 	username: '',
+	completeName: '',
 	password: '',
 };
 
@@ -65,6 +66,11 @@ class RegisterComponent extends HTMLElement {
 		console.log(formData.username);
 	}
 
+	changeCompleteName(e: any) {
+		formData.completeName = e?.target?.value;
+		console.log(formData.completeName);
+	}
+
 	submitForm() {
 		createUser(formData);
 	}
@@ -114,9 +120,14 @@ class RegisterComponent extends HTMLElement {
 			section.appendChild(email);
 
 			const username = this.ownerDocument.createElement('input');
-			username.placeholder = 'Edad';
+			username.placeholder = 'Username';
 			username.addEventListener('change', this.changeUsername);
 			section.appendChild(username);
+
+			const completeName = this.ownerDocument.createElement('input');
+			completeName.placeholder = 'Name and Last name';
+			completeName.addEventListener('change', this.changeCompleteName);
+			section.appendChild(completeName);
 
 			const password = this.ownerDocument.createElement('input');
 			password.placeholder = 'Contraseña';

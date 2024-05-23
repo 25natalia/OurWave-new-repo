@@ -10,7 +10,6 @@ import { AttributeSongs } from '../components/Songs/Songs';
 import styles from './perfil.css';
 import { addObserver } from '../store';
 import { getUser } from '../services/Firebase';
-
 const formData: Omit<typeAddSongs, 'id'> = {
 	top: '',
 	artist: '',
@@ -27,7 +26,7 @@ export class Perfil extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		const dataUser = await getUser('e14Adty5xAvKNl0ceGnc');
+		const dataUser = await getUser('gvwWdixou6QvruLSFuVBhn1vDEF3');
 		this.render(dataUser);
 	}
 
@@ -60,10 +59,8 @@ export class Perfil extends HTMLElement {
 		const myUser = document.createElement('my-perfil');
 		myUser.setAttribute(AttributeProfile.profile_image, dataUser.profile_image);
 		myUser.setAttribute(AttributeProfile.username, dataUser.username);
-		myUser.setAttribute(AttributeProfile.name, dataUser.name);
+		myUser.setAttribute(AttributeProfile.completeName, dataUser.completeName);
 		myUser.setAttribute(AttributeProfile.fav_song, dataUser.fav_song);
-		myUser.setAttribute(AttributeProfile.followers, dataUser.followers);
-		myUser.setAttribute(AttributeProfile.following, dataUser.following);
 		this.shadowRoot?.appendChild(myUser);
 
 		const h1Add = this.ownerDocument.createElement('h1');

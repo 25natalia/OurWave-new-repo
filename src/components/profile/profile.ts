@@ -5,18 +5,14 @@ export enum AttributeProfile {
 	'profile_image' = 'profile_image',
 	'username' = 'username',
 	'fav_song' = 'fav_song',
-	'name' = 'name',
-	'followers' = 'followers',
-	'following' = 'following',
+	'completeName' = 'completeName',
 }
 
 class Perfil extends HTMLElement {
 	profile_image?: string;
 	username?: string;
 	fav_song?: string;
-	name?: string;
-	followers?: string;
-	following?: string;
+	completeName?: string;
 
 	constructor() {
 		super();
@@ -28,9 +24,7 @@ class Perfil extends HTMLElement {
 			profile_image: null,
 			username: null,
 			fav_song: null,
-			name: null,
-			followers: null,
-			following: null,
+			completeName: null,
 		};
 		return Object.keys(attrs);
 	}
@@ -62,11 +56,11 @@ class Perfil extends HTMLElement {
     </section>
 
 		<section class="name-following">
-    <p class="name">${this.name}</p>
-		<p class="following">${this.following}</p>
+    <p class="name">${this.completeName}</p>
+		<p class="following">100 following</p>
 		</section>
 
-    <p class="followers">${this.followers}</p>
+    <p class="followers">238 followers</p>
     <Button class="playlist">Playlists</Button>
 		</section>
 		</section>
@@ -90,7 +84,7 @@ class Perfil extends HTMLElement {
 		postNewSong.addEventListener('click', async () => {
 			const textArea = this.shadowRoot?.querySelector('#writtenSong') as HTMLTextAreaElement;
 			const waveSong = textArea.value;
-			updateFavCancion(waveSong);
+			updateFavCancion(waveSong || 'Add your Wave');
 			textArea.value = '';
 			modal.style.display = 'none';
 			document.body.style.overflow = 'auto';

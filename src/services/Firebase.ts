@@ -19,12 +19,15 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+let userId: string | null = null;
+
 //loguear y registrar
 export const createUser = (formData: any) => {
 	createUserWithEmailAndPassword(auth, formData.email, formData.password)
 		.then(async (userCredential) => {
 			//Primer paso es obtener el id
 			const user = userCredential.user;
+			userId = user.uid;
 			console.log(user.uid);
 
 			//Segundo paso es agregar un documento con más info bajo ese id
@@ -33,6 +36,7 @@ export const createUser = (formData: any) => {
 				const data = {
 					id: user.uid,
 					username: formData.username,
+					completeName: formData.completeName,
 				};
 				console.log(data);
 				await setDoc(where, data);
@@ -99,6 +103,17 @@ export const addWave = async (wave: Omit<waves, 'id'>) => {
 	}
 };
 
+const getWave = async () => {
+	const querySnapshot = await getDocs(collection(db, 'waves'));
+	const transformed: Array<waves> = [];
+	querySnapshot.forEach((doc) => {
+		const data: Omit<waves, 'id'> = doc.data() as any;
+		transformed.push({ id: doc.id, ...data });
+	});
+
+	return transformed;
+};
+
 const getCreatedSongs = async () => {
 	const querySnapshot = await getDocs(collection(db, 'playlist'));
 	const transformed: Array<typeAddSongs> = [];
@@ -113,7 +128,7 @@ const getCreatedSongs = async () => {
 
 // aquí se crean las nuevas canciones favoritas
 export const updateFavCancion = async (favSong: any) => {
-	const userRef = doc(db, 'users', 'e14Adty5xAvKNl0ceGnc');
+	const userRef = doc(db, 'users');
 	await updateDoc(userRef, {
 		fav_song: favSong,
 	});
@@ -123,4 +138,5 @@ export default {
 	getCreatedSongs,
 	addSong,
 	addWave,
+	getWave,
 };

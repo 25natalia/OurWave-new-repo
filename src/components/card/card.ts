@@ -97,7 +97,7 @@ class Card extends HTMLElement {
 		}
 	}
 
-	render() {
+	async render() {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
 			<section class= "cardEntera">
@@ -130,6 +130,16 @@ class Card extends HTMLElement {
 			</section>
 			</section>
 			</section>`;
+
+			const waves = await Firebase.getWave();
+			const waveSection = this.shadowRoot.querySelector('.wave');
+			if (waveSection) {
+				waves.forEach((wave: waves) => {
+					const newWave = document.createElement('p');
+					newWave.innerText = wave.wave;
+					waveSection.appendChild(newWave);
+				});
+			}
 		}
 
 		const cssCard = this.ownerDocument.createElement('style');
