@@ -3,7 +3,7 @@ import { getFirestore, updateDoc } from 'firebase/firestore';
 import { collection, addDoc, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
 import { waves } from '../types/waves';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAS_sGDbQYUNZAoF-ZqZcpjWtLQtBmDvsw',
@@ -17,11 +17,11 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 let userId: string | null = null;
 
-//loguear y registrar
+//registrar
 export const createUser = (formData: any) => {
 	createUserWithEmailAndPassword(auth, formData.email, formData.password)
 		.then(async (userCredential) => {
@@ -44,6 +44,22 @@ export const createUser = (formData: any) => {
 			} catch (error) {
 				console.error(error);
 			}
+		})
+		.catch((error: any) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.error(errorCode, errorMessage);
+		});
+};
+
+//loguear
+export const logIn = (formData: any) => {
+	console.log(formData);
+	signInWithEmailAndPassword(auth, formData.email, formData.password)
+		.then(async (userCredential) => {
+			//Primer paso es obtener el id
+			const user = userCredential.user;
+			console.log(user.uid);
 		})
 		.catch((error: any) => {
 			const errorCode = error.code;

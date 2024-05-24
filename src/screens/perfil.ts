@@ -4,7 +4,7 @@ import { iconosProfile } from '../services/dataMenuProfile';
 import { Attribute } from '../components/menu/menu';
 import { AttributeProfile } from '../components/profile/profile';
 import styles from './perfil.css';
-import { addObserver } from '../store';
+import { addObserver, appState } from '../store';
 import { getUser } from '../services/Firebase';
 
 export class Perfil extends HTMLElement {
@@ -15,8 +15,9 @@ export class Perfil extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		const dataUser = await getUser('gvwWdixou6QvruLSFuVBhn1vDEF3');
-		this.render(dataUser);
+		console.log(appState.userId);
+		// const dataUser = await getUser(appState.userId);
+		// this.render(dataUser);
 	}
 
 	async render(dataUser: any) {
@@ -29,12 +30,12 @@ export class Perfil extends HTMLElement {
 			});
 		}
 
-		const myUser = document.createElement('my-perfil');
-		myUser.setAttribute(AttributeProfile.profile_image, dataUser.profile_image);
-		myUser.setAttribute(AttributeProfile.username, dataUser.username);
-		myUser.setAttribute(AttributeProfile.completeName, dataUser.completeName);
-		myUser.setAttribute(AttributeProfile.fav_song, dataUser.fav_song);
-		this.shadowRoot?.appendChild(myUser);
+		// const myUser = document.createElement('my-perfil');
+		// myUser.setAttribute(AttributeProfile.profile_image, dataUser.profile_image);
+		// myUser.setAttribute(AttributeProfile.username, dataUser.username);
+		// myUser.setAttribute(AttributeProfile.completeName, dataUser.completeName);
+		// myUser.setAttribute(AttributeProfile.fav_song, dataUser.fav_song);
+		// this.shadowRoot?.appendChild(myUser);
 
 		iconosProfile.forEach((iconoData) => {
 			const myIcono = document.createElement('my-iconos');

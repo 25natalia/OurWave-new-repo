@@ -29,7 +29,6 @@ export class Dashboard extends HTMLElement {
 	}
 
 	submitForm() {
-		console.log(formData);
 		Firebase.addWave(formData);
 	}
 

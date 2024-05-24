@@ -1,18 +1,28 @@
 import { reducer } from './reducer';
-import Storage from '../utils/storage';
-import storage, { PersistanceKeys } from '../utils/storage';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../services/Firebase';
+import { navigate } from './actions';
+import { Screens } from '../types/navigation';
+import { setUserCredentials } from './actions';
+
+onAuthStateChanged(auth, (user) => {
+	if (user) {
+		user.uid !== null ? dispatch(setUserCredentials(user.uid)) : '';
+		dispatch(navigate(Screens.HOME));
+	} else {
+		dispatch(navigate(Screens.LOGIN));
+	}
+});
 
 export let emptyState = {
 	screen: 'REGISTER',
+	userId: '',
 };
 
-export let appState = Storage.get({ key: PersistanceKeys.STORE, defaultValue: emptyState });
-
-//--//
+export let appState = emptyState;
+console.log('holis', appState);
 
 let observers: any[] = [];
-
-const persistStore = (state: any) => storage.set({ key: PersistanceKeys.STORE, value: state, session: false });
 
 const notifyObservers = () => observers.forEach((o: any) => o.render());
 
@@ -20,8 +30,6 @@ export const dispatch = (action: any) => {
 	const clone = JSON.parse(JSON.stringify(appState));
 	const newState = reducer(action, clone);
 	appState = newState;
-
-	persistStore(newState);
 	notifyObservers();
 };
 

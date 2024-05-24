@@ -4,3 +4,11 @@ export const navigate = (screen: any) => {
 		payload: screen,
 	};
 };
+
+export const setUserCredentials = (id: string) => {
+	console.log(id);
+	return {
+		type: 'SETUSER',
+		payload: id,
+	};
+};

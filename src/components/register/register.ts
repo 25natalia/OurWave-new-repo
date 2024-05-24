@@ -48,27 +48,22 @@ class RegisterComponent extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
-		console.log(formData);
 	}
 
 	changeEmail(e: any) {
 		formData.email = e?.target?.value;
-		console.log(formData.email);
 	}
 
 	changePassword(e: any) {
 		formData.password = e?.target?.value;
-		console.log(formData.password);
 	}
 
 	changeUsername(e: any) {
 		formData.username = e?.target?.value;
-		console.log(formData.username);
 	}
 
 	changeCompleteName(e: any) {
 		formData.completeName = e?.target?.value;
-		console.log(formData.completeName);
 	}
 
 	submitForm() {

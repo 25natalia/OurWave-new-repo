@@ -1,5 +1,5 @@
 import styles from './card.css';
-import Firebase, { addWave } from '../../services/Firebase';
+import Firebase from '../../services/Firebase';
 import { waves } from '../../types/waves';
 
 const formData: Omit<waves, 'id'> = {
@@ -101,6 +101,10 @@ class Card extends HTMLElement {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = ``;
 
+			const cssCard = this.ownerDocument.createElement('style');
+			cssCard.innerHTML = styles;
+			this.shadowRoot?.appendChild(cssCard);
+
 			const waves = await Firebase.getWave();
 			waves.forEach((wave: waves) => {
 				const sectionCardEntera = document.createElement('section');
@@ -189,12 +193,10 @@ class Card extends HTMLElement {
 				sectionCardEntera.appendChild(sectionInteracciones);
 
 				// Finalmente, añades la sección completa al DOM, por ejemplo al body o a algún contenedor específico
-				document.body.appendChild(sectionCardEntera);
+
+				this.shadowRoot?.appendChild(sectionCardEntera);
 				// o, por ejemplo: document.getElementById('someContainer').appendChild(sectionCardEntera);
 			});
-			const cssCard = this.ownerDocument.createElement('style');
-			cssCard.innerHTML = styles;
-			this.shadowRoot?.appendChild(cssCard);
 		}
 	}
 }

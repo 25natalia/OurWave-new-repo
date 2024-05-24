@@ -5,6 +5,10 @@ export const reducer = (currentAction: any, currentState: any) => {
 		case 'navigate':
 			currentState.screen = payload;
 			break;
+
+		case 'SETUSER':
+			currentState.userId = payload;
+			break;
 	}
 
 	return currentState;
