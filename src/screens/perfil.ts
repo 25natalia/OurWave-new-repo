@@ -16,8 +16,8 @@ export class Perfil extends HTMLElement {
 
 	async connectedCallback() {
 		console.log(appState.userId);
-		// const dataUser = await getUser(appState.userId);
-		// this.render(dataUser);
+		const dataUser = await getUser(appState.userId);
+		this.render(dataUser);
 	}
 
 	async render(dataUser: any) {
@@ -30,12 +30,12 @@ export class Perfil extends HTMLElement {
 			});
 		}
 
-		// const myUser = document.createElement('my-perfil');
-		// myUser.setAttribute(AttributeProfile.profile_image, dataUser.profile_image);
-		// myUser.setAttribute(AttributeProfile.username, dataUser.username);
-		// myUser.setAttribute(AttributeProfile.completeName, dataUser.completeName);
-		// myUser.setAttribute(AttributeProfile.fav_song, dataUser.fav_song);
-		// this.shadowRoot?.appendChild(myUser);
+		const myUser = document.createElement('my-perfil');
+		myUser.setAttribute(AttributeProfile.profile_image, dataUser.profile_image);
+		myUser.setAttribute(AttributeProfile.username, dataUser.username);
+		myUser.setAttribute(AttributeProfile.completeName, dataUser.completeName);
+		myUser.setAttribute(AttributeProfile.fav_song, dataUser.fav_song);
+		this.shadowRoot?.appendChild(myUser);
 
 		iconosProfile.forEach((iconoData) => {
 			const myIcono = document.createElement('my-iconos');
