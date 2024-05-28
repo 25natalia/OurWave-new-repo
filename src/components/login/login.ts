@@ -117,7 +117,6 @@ class LoginComponent extends HTMLElement {
 		buttonLogin.type = 'submit';
 		buttonLogin.addEventListener('click', this.submitForm);
 		buttonLogin.textContent = 'Log In';
-
 		form.appendChild(buttonLogin);
 
 		const pText = document.createElement('p');

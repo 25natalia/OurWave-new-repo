@@ -28,3 +28,93 @@ svg {
 	margin-right: 20px;
 	cursor: pointer;
 }
+
+#log_out {
+	background-color: transparent;
+	border: none;
+}
+
+.modalContainer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: Arial;
+}
+
+.Accept {
+	background-color: #2ec4b6;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	height: 40px;
+	width: 120px;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.3s;
+	margin-left: 6px;
+}
+
+.Cancel {
+	background-color: rgba(46, 196, 182, 0.7);
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	height: 40px;
+	width: 120px;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.3s;
+	margin-right: 6px;
+}
+
+.Accept:hover,
+.Cancel:hover {
+	background-color: #ffbf69;
+}
+
+h2 {
+	color: #ff9f1c;
+	font-size: 25px;
+}
+
+.close {
+	margin-left: 90%;
+	margin-top: 2%;
+	right: 50px;
+	cursor: pointer;
+	font-family: Arial;
+	color: #2ec4b6;
+}
+
+.logout {
+	background-color: white;
+	padding: 20px;
+	border-radius: 40px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	width: 40%;
+	height: 20%;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	margin: auto;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.botones {
+	display: flex;
+	margin: 10px;
+}

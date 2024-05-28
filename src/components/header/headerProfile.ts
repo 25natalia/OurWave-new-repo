@@ -71,28 +71,23 @@ class headerProfile extends HTMLElement {
 
 				<section class="modalContainer" style="display:none;">
 					<form class="logout">
-						<span class="close">X</span>
 						<h2>You are logging out</h2>
-						<span role="button" class="Accept">Accept</span>
+						<section class="botones">
 						<span role="button" class="Cancel">Cancel</span>
+						<span role="button" class="Accept">Accept</span>
+						</section>
 					</form>
 				</section>
 			`;
 
 			const modal = this.shadowRoot.querySelector('.modalContainer') as HTMLDivElement;
 			const button = this.shadowRoot.querySelector('#log_out') as HTMLButtonElement;
-			const span = this.shadowRoot.querySelector('.close') as HTMLSpanElement;
 			const logout = this.shadowRoot.querySelector('.Accept') as HTMLSpanElement;
 			const cancel = this.shadowRoot.querySelector('.Cancel') as HTMLSpanElement;
 
 			button.addEventListener('click', () => {
 				modal.style.display = 'block';
 				document.body.style.overflow = 'hidden';
-			});
-
-			span.addEventListener('click', () => {
-				modal.style.display = 'none';
-				document.body.style.overflow = 'auto';
 			});
 
 			window.addEventListener('click', (event) => {
