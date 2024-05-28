@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, updateDoc } from 'firebase/firestore';
+import { getFirestore, updateDoc, onSnapshot } from 'firebase/firestore';
 import { collection, addDoc, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
 import { waves } from '../types/waves';
@@ -147,6 +147,17 @@ export const updateFavCancion = async (favSong: any) => {
 	const userRef = doc(db, 'users');
 	await updateDoc(userRef, {
 		fav_song: favSong,
+	});
+};
+
+export const getPostListener = (cb: (docs: waves[]) => void) => {
+	const ref = collection(db, 'waves');
+	onSnapshot(ref, (collection) => {
+		const docs: waves[] = collection.docs.map((doc) => ({
+			id: doc.id,
+			...doc.data(),
+		})) as waves[];
+		cb(docs);
 	});
 };
 
