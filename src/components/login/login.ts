@@ -101,7 +101,7 @@ class LoginComponent extends HTMLElement {
 		const inputEmail = document.createElement('input');
 		inputEmail.type = 'Email';
 		inputEmail.addEventListener('change', this.changeEmail);
-		inputEmail.placeholder = 'Email or Username';
+		inputEmail.placeholder = 'Email';
 
 		const inputPassword = document.createElement('input');
 		inputPassword.type = 'Password';
@@ -116,7 +116,7 @@ class LoginComponent extends HTMLElement {
 		buttonLogin.id = 'login';
 		buttonLogin.type = 'submit';
 		buttonLogin.addEventListener('click', this.submitForm);
-		buttonLogin.textContent = 'Sign In';
+		buttonLogin.textContent = 'Log In';
 
 		form.appendChild(buttonLogin);
 
@@ -180,7 +180,9 @@ class LoginComponent extends HTMLElement {
 		});
 
 		const login = this.shadowRoot?.querySelector('#login');
-		login?.addEventListener('click', () => {});
+		login?.addEventListener('click', () => {
+			dispatch(navigate('DASHBOARD'));
+		});
 
 		const cssRegister = this.ownerDocument.createElement('style');
 		cssRegister.innerHTML = styles;

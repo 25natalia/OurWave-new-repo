@@ -102,6 +102,7 @@ class Perfil extends HTMLElement {
 		h1Add.textContent = 'Add your own song';
 		h1Add.classList.add('h1Add');
 		this.shadowRoot?.appendChild(h1Add);
+
 		const section = this.ownerDocument.createElement('section');
 		section.classList.add('create-song');
 		const artist = this.ownerDocument.createElement('input');
@@ -109,22 +110,26 @@ class Perfil extends HTMLElement {
 		artist.classList.add('artist');
 		artist.addEventListener('change', this.changeArtist);
 		section.appendChild(artist);
+
 		const title = this.ownerDocument.createElement('input');
 		title.placeholder = 'Add the song title';
 		title.classList.add('title');
 		title.addEventListener('change', this.changeTitle);
 		section.appendChild(title);
+
 		const image = this.ownerDocument.createElement('input');
 		image.placeholder = 'Add the album cover';
 		image.classList.add('coverImage');
 		image.addEventListener('change', this.changeImage);
 		section.appendChild(image);
+
 		this.shadowRoot?.appendChild(section);
 		const save = this.ownerDocument.createElement('button');
 		save.innerText = 'Save';
 		save.classList.add('save');
 		save.addEventListener('click', this.submitForm);
 		this.shadowRoot?.appendChild(save);
+
 		const addedSongs = await Firebase.getCreatedSongs();
 		addedSongs.forEach((p: typeAddSongs) => {
 			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
