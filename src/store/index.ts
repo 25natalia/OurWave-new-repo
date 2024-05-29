@@ -4,6 +4,7 @@ import { auth } from '../services/Firebase';
 import { navigate } from './actions';
 import { Screens } from '../types/navigation';
 import { setUserCredentials } from './actions';
+import { Observer } from '../types/store';
 
 onAuthStateChanged(auth, (user) => {
 	if (user) {
@@ -17,6 +18,8 @@ onAuthStateChanged(auth, (user) => {
 export let emptyState = {
 	screen: 'REGISTER',
 	userId: '',
+	userSongs: [],
+	myUserSongs: [],
 };
 
 export let appState = emptyState;

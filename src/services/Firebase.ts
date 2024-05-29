@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, updateDoc, onSnapshot } from 'firebase/firestore';
-import { collection, addDoc, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, doc, setDoc, getDoc, where, query } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
 import { waves } from '../types/waves';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
@@ -110,6 +110,32 @@ export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
 	}
 };
 
+export const getCreatedSongs = async () => {
+	const querySnapshot = await getDocs(collection(db, 'playlist'));
+	const transformed: Array<typeAddSongs> = [];
+
+	querySnapshot.forEach((doc) => {
+		const data: Omit<typeAddSongs, 'id'> = doc.data() as any;
+		transformed.push({ id: doc.id, ...data });
+	});
+
+	return transformed;
+};
+
+export const getUserCreatedSongs = async (idUser: string) => {
+	const q = query(collection(db, 'playlist'), where('idUser', '==', idUser));
+	const querySnapshot = await getDocs(q);
+	const arrayProducts: Array<typeAddSongs> = [];
+
+	querySnapshot.forEach((doc) => {
+		const data = doc.data() as any;
+		arrayProducts.push({ id: doc.id, ...data });
+	});
+
+	return arrayProducts;
+};
+// con esto se añaden los wave
+
 export const addWave = async (wave: Omit<waves, 'id'>) => {
 	try {
 		const where = collection(db, 'waves');
@@ -125,18 +151,6 @@ const getWave = async () => {
 	const transformed: Array<waves> = [];
 	querySnapshot.forEach((doc) => {
 		const data: Omit<waves, 'id'> = doc.data() as any;
-		transformed.push({ id: doc.id, ...data });
-	});
-
-	return transformed;
-};
-
-const getCreatedSongs = async () => {
-	const querySnapshot = await getDocs(collection(db, 'playlist'));
-	const transformed: Array<typeAddSongs> = [];
-
-	querySnapshot.forEach((doc) => {
-		const data: Omit<typeAddSongs, 'id'> = doc.data() as any;
 		transformed.push({ id: doc.id, ...data });
 	});
 

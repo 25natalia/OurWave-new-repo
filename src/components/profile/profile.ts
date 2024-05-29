@@ -5,13 +5,16 @@ import { typeAddSongs } from '../../types/songs';
 import Firebase from '../../services/Firebase';
 import { SongsComponent } from '../../components/indexpadre';
 import { AttributeSongs } from '../../components/Songs/Songs';
+import { addObserver, appState, dispatch } from '../../store';
+import { getUserSongs, getMyUserSongs } from '../../store/actions';
 
-const formData: Omit<typeAddSongs, 'id'> = {
+const formData = {
 	top: '',
 	artist: '',
 	song_title: '',
 	image: '',
 	duration: '',
+	idUser: '',
 };
 
 export enum AttributeProfile {
@@ -30,6 +33,7 @@ class Perfil extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
+		addObserver(this);
 	}
 
 	static get observedAttributes() {
@@ -50,12 +54,17 @@ class Perfil extends HTMLElement {
 		}
 	}
 
-	connectedCallback() {
-		this.render();
+	async connectedCallback() {
+		if (appState.userSongs.length === 0) {
+			const action = await getUserSongs();
+			dispatch(action);
+		} else {
+			this.render();
+		}
 	}
 
 	submitForm() {
-		console.log(formData);
+		formData.idUser = appState.userId;
 		Firebase.addSong(formData);
 	}
 
@@ -146,8 +155,7 @@ class Perfil extends HTMLElement {
 		save.addEventListener('click', this.submitForm);
 		this.shadowRoot?.appendChild(save);
 
-		const addedSongs = await Firebase.getCreatedSongs();
-		addedSongs.forEach((p: typeAddSongs) => {
+		appState.userSongs.forEach((p: typeAddSongs) => {
 			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
 			card.setAttribute(AttributeSongs.top, '●');
 			card.setAttribute(AttributeSongs.image, p.image);
