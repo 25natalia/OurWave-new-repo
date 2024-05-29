@@ -20,7 +20,6 @@ export let emptyState = {
 };
 
 export let appState = emptyState;
-console.log('holis', appState);
 
 let observers: any[] = [];
 

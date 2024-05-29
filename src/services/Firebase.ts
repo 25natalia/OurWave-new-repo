@@ -4,6 +4,7 @@ import { collection, addDoc, getDocs, doc, setDoc, getDoc } from 'firebase/fires
 import { typeAddSongs } from '../types/songs';
 import { waves } from '../types/waves';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { appState } from '../store';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAS_sGDbQYUNZAoF-ZqZcpjWtLQtBmDvsw',
@@ -142,11 +143,19 @@ const getCreatedSongs = async () => {
 	return transformed;
 };
 
-// aquí se crean las nuevas canciones favoritas
+// aquí se actualiza la canción favorita
 export const updateFavCancion = async (favSong: any) => {
-	const userRef = doc(db, 'users');
+	const userRef = doc(db, 'users', appState.userId);
 	await updateDoc(userRef, {
 		fav_song: favSong,
+	});
+};
+
+// aquí se actualiza la foto de perfil
+export const updateProfileImg = async (profileImg: any) => {
+	const userRef = doc(db, 'users', appState.userId);
+	await updateDoc(userRef, {
+		profile_image: profileImg,
 	});
 };
 

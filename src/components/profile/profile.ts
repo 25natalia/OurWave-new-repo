@@ -1,5 +1,6 @@
 import styles from './profile.css';
 import { updateFavCancion } from '../../services/Firebase';
+import { updateProfileImg } from '../../services/Firebase';
 import { typeAddSongs } from '../../types/songs';
 import Firebase from '../../services/Firebase';
 import { SongsComponent } from '../../components/indexpadre';
@@ -74,9 +75,11 @@ class Perfil extends HTMLElement {
 			this.shadowRoot.innerHTML = `
 		<section class="todo">
 		<section class="profile">
-		<img class="image" src="${this.profile_image}"></img>
+		<section class="profileimg">
+		<img src="${this.profile_image}"></img>
+		</section>
 		<h1>${this.username}</h1>
-		<Button class="edit">Edit picture</Button>
+		<Button class="edit" id="edit">Edit picture</Button>
 		<button id="ButtonSong">
 		<p class="fav_song"><svg class="pin"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(46, 196, 182);transform: ;msFilter:;"><path d="M15 11.586V6h2V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2h2v5.586l-2.707 1.707A.996.996 0 0 0 6 14v2a1 1 0 0 0 1 1h4v3l1 2 1-2v-3h4a1 1 0 0 0 1-1v-2a.996.996 0 0 0-.293-.707L15 11.586z"></path></svg></svg>
 		${this.fav_song}</p>
@@ -89,6 +92,7 @@ class Perfil extends HTMLElement {
 		<Button class="playlist">Playlists</Button>
 		</section>
 		</section>
+
 		<section class="modalContainer" style="display:none;">
 		<form class="waveSong">
 		    <span class="close">X</span>
@@ -96,6 +100,18 @@ class Perfil extends HTMLElement {
 		    <textarea id="writtenSong" name="wave"></textarea>
 		    <span role="button" class="post">Post</span>
 		</form>
+		</section>
+
+		<section id="modalContainerProfileImg" style="display:none;">
+		<form class="profileImgForm">
+		    <h2>Set your new profile image</h2>
+				<textarea id="newProfileImage" name="profileImage"></textarea>
+				<section class="botones">
+				<span role="button" class="Cancel">Cancel</span>
+		    <span role="button" class="Accept">Done</span>
+				</section>
+		</form>
+		</section>
 		`;
 		}
 		const h1Add = this.ownerDocument.createElement('h1');
@@ -141,13 +157,14 @@ class Perfil extends HTMLElement {
 		});
 		// funciones para actualizar canción
 		const modal = this.shadowRoot?.querySelector('.modalContainer') as HTMLDivElement;
-		const button = this.shadowRoot?.querySelector('#ButtonSong') as HTMLButtonElement;
+		const buttonSong = this.shadowRoot?.querySelector('#ButtonSong') as HTMLButtonElement;
 		const span = this.shadowRoot?.querySelector('.close') as HTMLSpanElement;
 		const postNewSong = this.shadowRoot?.querySelector('.post') as HTMLDivElement;
+
 		postNewSong.addEventListener('click', async () => {
 			const textArea = this.shadowRoot?.querySelector('#writtenSong') as HTMLTextAreaElement;
 			const waveSong = textArea.value;
-			updateFavCancion(waveSong || 'Add your Wave');
+			updateFavCancion(waveSong);
 			textArea.value = '';
 			modal.style.display = 'none';
 			document.body.style.overflow = 'auto';
@@ -165,7 +182,7 @@ class Perfil extends HTMLElement {
 		// funciones del modal
 		const body = document.body;
 		if (body) {
-			button.addEventListener('click', () => {
+			buttonSong.addEventListener('click', () => {
 				modal.style.display = 'block';
 				body.style.overflow = 'hidden';
 			});
@@ -180,6 +197,48 @@ class Perfil extends HTMLElement {
 				});
 			});
 		}
+
+		const modalImg = this.shadowRoot?.querySelector('#modalContainerProfileImg') as HTMLDivElement;
+		const buttonImg = this.shadowRoot?.querySelector('#edit') as HTMLButtonElement;
+		const changeProfileImg = this.shadowRoot?.querySelector('.Accept') as HTMLDivElement;
+		const cancel = this.shadowRoot?.querySelector('.Cancel') as HTMLSpanElement;
+
+		buttonImg.addEventListener('click', () => {
+			modalImg.style.display = 'block';
+			document.body.style.overflow = 'hidden';
+		});
+
+		changeProfileImg.addEventListener('click', async () => {
+			const textAreaImg = this.shadowRoot?.querySelector('#newProfileImage') as HTMLTextAreaElement;
+			const profileImg = textAreaImg.value;
+			updateProfileImg(profileImg);
+			textAreaImg.value = '';
+			modalImg.style.display = 'none';
+			document.body.style.overflow = 'auto';
+		});
+		const formImg = this.shadowRoot?.querySelector('.Accept') as HTMLFormElement;
+		formImg.addEventListener('click', (event) => {
+			event.preventDefault();
+			const textAreaImg = this.shadowRoot?.querySelector('#newProfileImage') as HTMLTextAreaElement;
+			const profileImg = textAreaImg.value;
+			console.log('Entered wave:', profileImg);
+			textAreaImg.value = '';
+			modalImg.style.display = 'none';
+			body.style.overflow = 'auto';
+		});
+
+		cancel.addEventListener('click', () => {
+			modalImg.style.display = 'none';
+			document.body.style.overflow = 'auto';
+		});
+
+		window.addEventListener('click', (event) => {
+			if (event.target === modalImg) {
+				modalImg.style.display = 'none';
+				document.body.style.overflow = 'auto';
+			}
+		});
+
 		const cssProfile = this.ownerDocument.createElement('style');
 		cssProfile.innerHTML = styles;
 		this.shadowRoot?.appendChild(cssProfile);

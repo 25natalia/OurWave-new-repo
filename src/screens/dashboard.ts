@@ -60,13 +60,6 @@ export class Dashboard extends HTMLElement {
 			forYou.textContent = 'For You';
 			this.shadowRoot?.appendChild(forYou);
 
-			// const waves = await Firebase.getWave();
-			// waves.forEach((wave: waves) => {
-			// 	const newWave = this.ownerDocument.createElement('p');
-			// 	newWave.innerText = wave.wave;
-			// 	this.shadowRoot?.appendChild(newWave);
-			// });
-
 			profile.forEach((element) => {
 				const myCard = document.createElement('my-card');
 				myCard.setAttribute(AttributesCard.name, element.name);
