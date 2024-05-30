@@ -188,17 +188,16 @@ export const getPostListener = (cb: (docs: waves[]) => void) => {
 
 // imagen de perfil
 
-export const uploadFile = async (file: File) => {
-	const storageRef = ref(storage, 'imgsProfile/' + file.name);
+export const uploadFile = async (file: File, id: string) => {
+	const storageRef = ref(storage, 'imgsProfile/' + id);
 	uploadBytes(storageRef, file).then((snapshot) => {
-		localStorage.setItem('imgProfile', file.name);
 		console.log('Uploaded a blob or file!');
 	});
 };
 
-export const getFile = async () => {
+export const getFile = async (id: string) => {
 	const routeName = localStorage.getItem('imgProfile');
-	const storageRef = ref(storage, 'imgsProfile/' + routeName);
+	const storageRef = ref(storage, 'imgsProfile/' + id);
 	const urlImg = await getDownloadURL(ref(storageRef))
 		.then((url) => {
 			return url;

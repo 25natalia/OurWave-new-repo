@@ -1,5 +1,5 @@
 import styles from './profile.css';
-import { updateFavCancion, uploadFile, updateProfileImg } from '../../services/Firebase';
+import { updateFavCancion, uploadFile, updateProfileImg, getFile } from '../../services/Firebase';
 import { typeAddSongs } from '../../types/songs';
 import Firebase from '../../services/Firebase';
 import { SongsComponent } from '../../components/indexpadre';
@@ -116,7 +116,7 @@ class Perfil extends HTMLElement {
 				<section class="fileContainer">
 				<input role="button" class="File"></input>
 				</section>
-				<textarea readonly id="newProfileImage" name="profileImage" placeholder="Or insert URL"></textarea>
+				<textarea id="newProfileImage" name="profileImage" placeholder="Or insert URL"></textarea>
 				<section class="botones">
 				<span role="button" class="Cancel">Cancel</span>
 		    <span role="button" class="Accept">Done</span>
@@ -130,9 +130,14 @@ class Perfil extends HTMLElement {
 		selectFile.type = 'file';
 		selectFile.addEventListener('change', () => {
 			const file = selectFile.files?.[0];
-			if (file) uploadFile(file);
+			if (file) uploadFile(file, appState.userId);
 			this.shadowRoot?.appendChild(selectFile);
 		});
+
+		// const urlImg = await getFile(appState.userId);
+		// const uploadImg = this.ownerDocument?.createElement('img');
+		// uploadImg.src = String(urlImg);
+		// this.shadowRoot?.appendChild(uploadImg);
 
 		const h1Add = this.ownerDocument.createElement('h1');
 		h1Add.textContent = 'Add your own song';
