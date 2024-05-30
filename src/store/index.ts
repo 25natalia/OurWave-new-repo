@@ -16,7 +16,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 export let emptyState = {
-	screen: 'REGISTER',
+	screen: '',
 	userId: '',
 	userSongs: [],
 	myUserSongs: [],

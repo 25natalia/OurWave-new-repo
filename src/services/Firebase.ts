@@ -3,6 +3,7 @@ import { getFirestore, updateDoc, onSnapshot } from 'firebase/firestore';
 import { collection, addDoc, getDocs, doc, setDoc, getDoc, where, query } from 'firebase/firestore';
 import { typeAddSongs } from '../types/songs';
 import { waves } from '../types/waves';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { appState } from '../store';
 
@@ -19,6 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 export const auth = getAuth(app);
+const storage = getStorage();
 
 let userId: string | null = null;
 
@@ -182,6 +184,29 @@ export const getPostListener = (cb: (docs: waves[]) => void) => {
 		})) as waves[];
 		cb(docs);
 	});
+};
+
+// imagen de perfil
+
+export const uploadFile = async (file: File) => {
+	const storageRef = ref(storage, 'imgsProfile/' + file.name);
+	uploadBytes(storageRef, file).then((snapshot) => {
+		localStorage.setItem('imgProfile', file.name);
+		console.log('Uploaded a blob or file!');
+	});
+};
+
+export const getFile = async () => {
+	const routeName = localStorage.getItem('imgProfile');
+	const storageRef = ref(storage, 'imgsProfile/' + routeName);
+	const urlImg = await getDownloadURL(ref(storageRef))
+		.then((url) => {
+			return url;
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+	return urlImg;
 };
 
 export default {

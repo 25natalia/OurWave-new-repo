@@ -17,10 +17,16 @@
 #writtenSong,
 #newProfileImage {
 	padding: 4%;
-	margin-top: 2%;
-	margin-bottom: 6%;
-	width: 40%;
+	margin-bottom: 2vh;
 	border-radius: 30px;
+	width: 32vh;
+	height: 1vh;
+}
+
+#newProfileImage::placeholder {
+	font-family: 'inter';
+	justify-content: center;
+	align-items: center;
 }
 
 .Accept {
@@ -53,6 +59,56 @@
 	margin-right: 6px;
 }
 
+.fileContainer {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+	padding-bottom: 2vh;
+}
+
+.fileContainer input[type='file'] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.fileContainer:before {
+	content: 'Select file';
+	white-space: nowrap;
+	background-color: #ff9f1c;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	height: 5vh;
+	width: 40vh;
+	transition: background-color 0.2s ease;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1vh;
+	margin-left: 1vh;
+	margin-right: 1vh;
+}
+.fileContainer:hover:before {
+	background-color: #ffbf69;
+}
+
+.file-name {
+	margin-left: 10px;
+	font-size: 16px;
+	color: #333;
+	display: inline-block;
+	vertical-align: middle;
+}
+
 .Accept:hover,
 .Cancel:hover {
 	background-color: #ffbf69;
@@ -81,8 +137,7 @@
 	padding: 20px;
 	border-radius: 40px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	width: 50%;
-	height: 30%;
+	width: 45%;
 	overflow-y: auto;
 	display: flex;
 	flex-direction: column;
