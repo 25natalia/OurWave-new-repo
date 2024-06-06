@@ -54,8 +54,10 @@ class Perfil extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		if (appState.userSongs.length === 0) {
-			const action = await getUserSongs();
+		if (appState.myUserSongs.length === 0) {
+			const action = await getMyUserSongs(appState.userId);
+			// if (appState.userSongs.length === 0) {
+			// 	const action = await getUserSongs();
 			dispatch(action);
 		} else {
 			this.render();
@@ -171,7 +173,8 @@ class Perfil extends HTMLElement {
 		save.addEventListener('click', this.submitForm);
 		this.shadowRoot?.appendChild(save);
 
-		appState.userSongs.forEach((p: typeAddSongs) => {
+		//appState.userSongs.forEach((p: typeAddSongs) => {
+		appState.myUserSongs.forEach((p: typeAddSongs) => {
 			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
 			card.setAttribute(AttributeSongs.top, '●');
 			card.setAttribute(AttributeSongs.image, p.image);

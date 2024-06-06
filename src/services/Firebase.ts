@@ -112,6 +112,7 @@ export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
 	}
 };
 
+//aquí se traen las canciones creadas por todos los usuarios
 export const getCreatedSongs = async () => {
 	const querySnapshot = await getDocs(collection(db, 'playlist'));
 	const transformed: Array<typeAddSongs> = [];
@@ -124,7 +125,9 @@ export const getCreatedSongs = async () => {
 	return transformed;
 };
 
+//aquí se traen las canciones creadas por el usuario loggeado
 export const getUserCreatedSongs = async (idUser: string) => {
+	console.log(`userId: ${idUser}`);
 	const q = query(collection(db, 'playlist'), where('idUser', '==', idUser));
 	const querySnapshot = await getDocs(q);
 	const arrayProducts: Array<typeAddSongs> = [];
@@ -133,11 +136,11 @@ export const getUserCreatedSongs = async (idUser: string) => {
 		const data = doc.data() as any;
 		arrayProducts.push({ id: doc.id, ...data });
 	});
-
+	console.log(`User posts:`, arrayProducts);
 	return arrayProducts;
 };
-// con esto se añaden los wave
 
+// con esto se añaden los wave
 export const addWave = async (wave: Omit<waves, 'id'>) => {
 	try {
 		const where = collection(db, 'waves');
