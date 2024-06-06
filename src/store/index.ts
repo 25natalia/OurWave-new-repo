@@ -4,6 +4,7 @@ import storage, { PersistanceKeys } from '../utils/storage';
 
 export let emptyState = {
 	screen: 'REGISTER',
+	userID: '',
 };
 
 export let appState = Storage.get({ key: PersistanceKeys.STORE, defaultValue: emptyState });
