@@ -139,3 +139,9 @@ form {
 		height: 4vh;
 	}
 }
+
+.inputs {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}

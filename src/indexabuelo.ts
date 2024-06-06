@@ -1,5 +1,5 @@
 import './screens/dashboard';
-import './screens/perfil';
+import './screens/profile';
 import './screens/explore';
 import './screens/register';
 import './screens/login';

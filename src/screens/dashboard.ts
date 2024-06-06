@@ -8,6 +8,8 @@ import { addObserver } from '../store';
 import Firebase, { addWave } from '../services/Firebase';
 import { waves } from '../types/waves';
 import styles from './dashboard.css';
+import { getUser } from '../services/Firebase';
+import { appState } from '../store';
 
 const formData: Omit<waves, 'id'> = {
 	wave: '',
@@ -20,8 +22,9 @@ export class Dashboard extends HTMLElement {
 		addObserver(this);
 	}
 
-	connectedCallback() {
-		this.render();
+	async connectedCallback() {
+		const dataUser = await getUser(appState.userId);
+		this.render(dataUser);
 	}
 
 	changeWave(e: any) {
@@ -32,7 +35,7 @@ export class Dashboard extends HTMLElement {
 		Firebase.addWave(formData);
 	}
 
-	async render() {
+	async render(dataUser: any) {
 		if (this.shadowRoot) {
 			header.forEach((iconoHeader) => {
 				const myHeader = document.createElement('my-header');
@@ -60,17 +63,14 @@ export class Dashboard extends HTMLElement {
 			forYou.textContent = 'For You';
 			this.shadowRoot?.appendChild(forYou);
 
-			// const waves = await Firebase.getWave();
-			// waves.forEach((wave: waves) => {
-			// 	const newWave = this.ownerDocument.createElement('p');
-			// 	newWave.innerText = wave.wave;
-			// 	this.shadowRoot?.appendChild(newWave);
-			// });
-
 			profile.forEach((element) => {
 				const myCard = document.createElement('my-card');
-				myCard.setAttribute(AttributesCard.name, element.name);
-				myCard.setAttribute(AttributesCard.image, element.image);
+				myCard.setAttribute(AttributesCard.name, dataUser.username);
+				myCard.setAttribute(
+					AttributesCard.image,
+					dataUser.profile_image ||
+						'https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg'
+				);
 				myCard.setAttribute(AttributesCard.unlike, element.unlike);
 				myCard.setAttribute(AttributesCard.like, element.like);
 				myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
