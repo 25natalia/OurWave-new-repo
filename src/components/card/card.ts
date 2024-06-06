@@ -144,12 +144,20 @@ class Card extends HTMLElement {
 				svgUnlike.id = 'svg';
 				svgUnlike.className = 'unlike';
 				svgUnlike.innerHTML = this.unlike || 'undefined';
+				svgUnlike.addEventListener('click', () => {
+					svgUnlike.style.display = 'none';
+					svgLike.style.display = 'block';
+				});
 
 				const svgLike = document.createElement('svg');
 				svgLike.id = 'svg_like';
 				svgLike.className = 'like';
 				svgLike.style.display = 'none';
 				svgLike.innerHTML = this.like || 'undefined';
+				svgLike.addEventListener('click', () => {
+					svgLike.style.display = 'none';
+					svgUnlike.style.display = 'block';
+				});
 
 				const pCantidadLike = document.createElement('p');
 				pCantidadLike.textContent = this.cantidadlike || 'undefined';
@@ -192,10 +200,7 @@ class Card extends HTMLElement {
 				sectionCardEntera.appendChild(sectionWave);
 				sectionCardEntera.appendChild(sectionInteracciones);
 
-				// Finalmente, añades la sección completa al DOM, por ejemplo al body o a algún contenedor específico
-
 				this.shadowRoot?.appendChild(sectionCardEntera);
-				// o, por ejemplo: document.getElementById('someContainer').appendChild(sectionCardEntera);
 			});
 		}
 	}
