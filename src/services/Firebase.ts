@@ -101,7 +101,6 @@ export const getUser = async (idUser: string) => {
 };
 
 // con esto se añaden las nuevas canciones del perfil
-
 export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
 	try {
 		const where = collection(db, 'playlist');
@@ -136,7 +135,7 @@ export const getUserCreatedSongs = async (idUser: string) => {
 		const data = doc.data() as any;
 		arrayProducts.push({ id: doc.id, ...data });
 	});
-	console.log(`User posts:`, arrayProducts);
+	console.log(`UserPosts:`, arrayProducts);
 	return arrayProducts;
 };
 
@@ -178,6 +177,7 @@ export const updateProfileImg = async (profileImg: any) => {
 	});
 };
 
+// subir posts sin recargar
 export const getPostListener = (cb: (docs: waves[]) => void) => {
 	const ref = collection(db, 'waves');
 	onSnapshot(ref, (collection) => {
@@ -194,7 +194,7 @@ export const getPostListener = (cb: (docs: waves[]) => void) => {
 export const uploadFile = async (file: File, id: string) => {
 	const storageRef = ref(storage, 'imgsProfile/' + id);
 	uploadBytes(storageRef, file).then((snapshot) => {
-		console.log('Uploaded a blob or file!');
+		console.log('Uploaded a file!');
 	});
 };
 

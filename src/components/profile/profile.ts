@@ -56,12 +56,13 @@ class Perfil extends HTMLElement {
 	async connectedCallback() {
 		if (appState.myUserSongs.length === 0) {
 			const action = await getMyUserSongs(appState.userId);
+			dispatch(action);
+			console.log(appState.myUserSongs.length);
+
 			// if (appState.userSongs.length === 0) {
 			// 	const action = await getUserSongs();
-			dispatch(action);
-		} else {
-			this.render();
 		}
+		this.render();
 	}
 
 	submitForm() {
@@ -173,15 +174,18 @@ class Perfil extends HTMLElement {
 		save.addEventListener('click', this.submitForm);
 		this.shadowRoot?.appendChild(save);
 
-		//appState.userSongs.forEach((p: typeAddSongs) => {
-		appState.myUserSongs.forEach((p: typeAddSongs) => {
-			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
-			card.setAttribute(AttributeSongs.top, '●');
-			card.setAttribute(AttributeSongs.image, p.image);
-			card.setAttribute(AttributeSongs.artist, p.artist);
-			card.setAttribute(AttributeSongs.song_title, p.song_title);
-			this.shadowRoot?.appendChild(card);
-		});
+		// appState.userSongs.forEach((p: typeAddSongs) => {
+		if (appState.myUserSongs.length > 0) {
+			appState.myUserSongs.forEach((p: typeAddSongs) => {
+				const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
+				card.setAttribute(AttributeSongs.top, '●');
+				card.setAttribute(AttributeSongs.image, p.image);
+				card.setAttribute(AttributeSongs.artist, p.artist);
+				card.setAttribute(AttributeSongs.song_title, p.song_title);
+				this.shadowRoot?.appendChild(card);
+			});
+		}
+
 		// funciones para actualizar canción
 		const modal = this.shadowRoot?.querySelector('.modalContainer') as HTMLDivElement;
 		const buttonSong = this.shadowRoot?.querySelector('#ButtonSong') as HTMLButtonElement;

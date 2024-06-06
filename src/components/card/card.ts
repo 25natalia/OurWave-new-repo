@@ -147,6 +147,7 @@ class Card extends HTMLElement {
 				svgUnlike.addEventListener('click', () => {
 					svgUnlike.style.display = 'none';
 					svgLike.style.display = 'block';
+					localStorage.setItem('likeState', 'liked');
 				});
 
 				const svgLike = document.createElement('svg');
@@ -157,7 +158,17 @@ class Card extends HTMLElement {
 				svgLike.addEventListener('click', () => {
 					svgLike.style.display = 'none';
 					svgUnlike.style.display = 'block';
+					localStorage.setItem('likeState', 'unliked');
 				});
+
+				// const likeState = localStorage.getItem('likeState');
+				// if (likeState === 'liked') {
+				// 	svgLike.style.display = 'block';
+				// 	svgUnlike.style.display = 'none';
+				// } else {
+				// 	svgLike.style.display = 'none';
+				// 	svgUnlike.style.display = 'block';
+				// }
 
 				const pCantidadLike = document.createElement('p');
 				pCantidadLike.textContent = this.cantidadlike || 'undefined';

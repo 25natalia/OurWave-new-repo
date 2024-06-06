@@ -1,13 +1,23 @@
 import styles from './register.css';
-import { dispatch } from '../../store';
+import { dispatch, appState, addObserver } from '../../store';
 import { navigate } from '../../store/actions';
 import { createUser } from '../../services/Firebase';
+import Firebase from '../../services/Firebase';
 
 const formData = {
 	email: '',
 	username: '',
 	completeName: '',
 	password: '',
+};
+
+const formDataSongs = {
+	top: '●',
+	artist: 'Here will be your artist',
+	song_title: 'Here will be your song title',
+	image: 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg',
+	duration: '',
+	idUser: appState.userId,
 };
 
 export enum AttributeRegister {
@@ -68,6 +78,8 @@ class RegisterComponent extends HTMLElement {
 
 	submitForm() {
 		createUser(formData);
+		formDataSongs.idUser = appState.userId;
+		Firebase.addSong(formDataSongs);
 	}
 
 	render() {

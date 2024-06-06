@@ -6,7 +6,9 @@ import { header } from '../services/dataHeader';
 import { AttributesHeader } from '../components/header/header';
 import { iconosExplore } from '../services/dataMenuExplore';
 import { Attribute } from '../components/menu/menu';
-import { addObserver } from '../store';
+import { addObserver, appState, dispatch } from '../store';
+import { typeAddSongs } from '../types/songs';
+import { getUserSongs } from '../store/actions';
 import styles from './explore.css';
 
 export class Explore extends HTMLElement {
@@ -20,6 +22,10 @@ export class Explore extends HTMLElement {
 		const dataFriends = await getFriends();
 		const dataSongs = await getSongs();
 		console.log(dataFriends, dataSongs);
+		if (appState.userSongs.length === 0) {
+			const action = await getUserSongs();
+			dispatch(action);
+		}
 		this.render(dataFriends, dataSongs);
 	}
 
@@ -70,8 +76,20 @@ export class Explore extends HTMLElement {
 			myFriend.setAttribute(AttributesFriends.song, friend.song);
 			section.appendChild(myFriend);
 		});
-
 		this.shadowRoot?.appendChild(section);
+
+		const titleFriendsSongs = this.ownerDocument.createElement('h1');
+		titleFriendsSongs.textContent = 'Wave songs';
+		this.shadowRoot?.appendChild(titleFriendsSongs);
+
+		appState.userSongs.forEach((p: typeAddSongs) => {
+			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
+			card.setAttribute(AttributeSongs.top, '●');
+			card.setAttribute(AttributeSongs.image, p.image);
+			card.setAttribute(AttributeSongs.artist, p.artist);
+			card.setAttribute(AttributeSongs.song_title, p.song_title);
+			this.shadowRoot?.appendChild(card);
+		});
 
 		const cssExplore = this.ownerDocument.createElement('style');
 		cssExplore.innerHTML = styles;
