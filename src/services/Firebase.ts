@@ -112,6 +112,7 @@ export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
 	}
 };
 
+
 //aquí se traen las canciones creadas por todos los usuarios
 export const getCreatedSongs = async () => {
 	const querySnapshot = await getDocs(collection(db, 'playlist'));
@@ -151,7 +152,7 @@ export const addWave = async (wave: Omit<waves, 'id'>) => {
 	}
 };
 
-const getWave = async () => {
+export const getWave = async () => {
 	const querySnapshot = await getDocs(collection(db, 'waves'));
 	const transformed: Array<waves> = [];
 	querySnapshot.forEach((doc) => {

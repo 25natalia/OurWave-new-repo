@@ -17,6 +17,10 @@ export const reducer = (currentAction: any, currentState: any) => {
 		case 'GETMYUSERSONGS':
 			currentState.myUserSongs = payload;
 			break;
+
+			case 'GETWAVES':
+				currentState.waves = payload;
+				break;
 	}
 
 	return currentState;

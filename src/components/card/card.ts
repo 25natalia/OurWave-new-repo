@@ -1,6 +1,8 @@
 import styles from './card.css';
 import Firebase from '../../services/Firebase';
 import { waves } from '../../types/waves';
+import { appState, dispatch,addObserver } from '../../store';
+import { getWaves } from '../../store/actions';
 
 const formData: Omit<waves, 'id'> = {
 	wave: '',
@@ -67,8 +69,13 @@ class Card extends HTMLElement {
 		}
 	}
 
-	connectedCallback() {
-		this.render();
+	async connectedCallback() {
+		if (appState.waves.length === 0) {
+			const action = await getWaves();
+			dispatch(action);
+		} else {
+			this.render();
+		}
 		this.attachEventHandlers();
 	}
 
@@ -105,8 +112,7 @@ class Card extends HTMLElement {
 			cssCard.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssCard);
 
-			const waves = await Firebase.getWave();
-			waves.forEach((wave: waves) => {
+			appState.waves.forEach((wave: waves) => {
 				const sectionCardEntera = document.createElement('section');
 				sectionCardEntera.className = 'cardEntera';
 
