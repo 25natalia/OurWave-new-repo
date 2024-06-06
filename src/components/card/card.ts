@@ -3,6 +3,7 @@ import Firebase from '../../services/Firebase';
 import { waves } from '../../types/waves';
 import { appState, dispatch,addObserver } from '../../store';
 import { getWaves } from '../../store/actions';
+import { getPostListener } from '../../services/Firebase';
 
 const formData: Omit<waves, 'id'> = {
 	wave: '',
@@ -70,13 +71,13 @@ class Card extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		if (appState.waves.length === 0) {
-			const action = await getWaves();
-			dispatch(action);
-		} else {
-			this.render();
-		}
-	
+		// if (appState.waves.length === 0) {
+		// 	const action = await getWaves();
+		// 	dispatch(action);
+		// } else {
+		// 	this.render();
+		// }
+this.render
 	}
 
 
@@ -88,7 +89,16 @@ class Card extends HTMLElement {
 			cssCard.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssCard);
 
-			appState.waves.forEach((wave: waves) => {
+
+				const postList = this.ownerDocument.createElement('section');
+		this.shadowRoot?.appendChild(postList);
+
+		getPostListener((posts) => {
+			while (postList.firstChild) {
+				postList.removeChild(postList.firstChild);
+			}
+
+			posts.forEach((p) => {
 				const sectionCardEntera = document.createElement('section');
 				sectionCardEntera.className = 'cardEntera';
 
@@ -113,7 +123,7 @@ class Card extends HTMLElement {
 				sectionWave.className = 'wave';
 
 				const newWave = this.ownerDocument.createElement('p');
-				newWave.innerText = wave.wave;
+				newWave.innerText = this.wave || 'undefined';
 				sectionWave.appendChild(newWave);
 
 				const sectionInteracciones = document.createElement('section');
@@ -174,14 +184,13 @@ class Card extends HTMLElement {
 				sectionCardEntera.appendChild(sectionWave);
 				sectionCardEntera.appendChild(sectionInteracciones);
 
-				// Finalmente, añades la sección completa al DOM, por ejemplo al body o a algún contenedor específico
+				this.shadowRoot?.appendChild(sectionCardEntera);});
+		});
 
-				this.shadowRoot?.appendChild(sectionCardEntera);
-				// o, por ejemplo: document.getElementById('someContainer').appendChild(sectionCardEntera);
-			});
+			};
 		}
 	}
-}
+
 
 customElements.define('my-card', Card);
 export default Card;
