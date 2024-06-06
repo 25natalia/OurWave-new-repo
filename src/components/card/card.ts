@@ -76,33 +76,9 @@ class Card extends HTMLElement {
 		} else {
 			this.render();
 		}
-		this.attachEventHandlers();
+	
 	}
 
-	attachEventHandlers() {
-		const likeIcon = this.shadowRoot?.querySelector('.like') as HTMLElement;
-		const unlikeIcon = this.shadowRoot?.querySelector('.unlike') as HTMLElement;
-
-		if (likeIcon && unlikeIcon) {
-			likeIcon.addEventListener('click', () => {
-				likeIcon.style.display = 'none';
-				unlikeIcon.style.display = 'block';
-				localStorage.setItem('likeState', 'block');
-			});
-
-			unlikeIcon.addEventListener('click', () => {
-				likeIcon.style.display = 'block';
-				unlikeIcon.style.display = 'none';
-				localStorage.setItem('likeState', 'none');
-			});
-
-			const likeState = localStorage.getItem('likeState');
-			if (likeState === 'none') {
-				likeIcon.style.display = 'none';
-				unlikeIcon.style.display = 'block';
-			}
-		}
-	}
 
 	async render() {
 		if (this.shadowRoot) {
