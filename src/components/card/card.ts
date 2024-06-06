@@ -183,8 +183,9 @@ this.render
 				sectionCardEntera.appendChild(sectionProfile);
 				sectionCardEntera.appendChild(sectionWave);
 				sectionCardEntera.appendChild(sectionInteracciones);
+				postList.prepend(sectionCardEntera)
+				;});
 
-				this.shadowRoot?.appendChild(sectionCardEntera);});
 		});
 
 			};
