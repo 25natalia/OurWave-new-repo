@@ -20,6 +20,7 @@ export let emptyState = {
 	userId: '',
 	userSongs: [],
 	myUserSongs: [],
+	waves: [],
 };
 
 export let appState = emptyState;

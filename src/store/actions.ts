@@ -1,4 +1,4 @@
-import { getCreatedSongs, getUserCreatedSongs } from '../services/Firebase';
+import { getCreatedSongs, getUserCreatedSongs, getWave } from '../services/Firebase';
 
 export const navigate = (screen: any) => {
 	return {
@@ -21,6 +21,15 @@ export const getUserSongs = async () => {
 		payload: userSongs,
 	};
 };
+
+export const getWaves = async () => {
+	const waves = await getWave();
+	return {
+		action: 'GETWAVES',
+		payload: waves,
+	};
+};
+
 
 export const getMyUserSongs = async (idUser: string) => {
 	const myUserSongs = await getUserCreatedSongs(idUser);
