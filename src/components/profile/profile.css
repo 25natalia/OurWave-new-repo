@@ -7,18 +7,111 @@
 	margin-top: 30px;
 }
 
-#ButtonSong {
+#ButtonSong,
+#edit {
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
 }
 
-#writtenSong {
+#writtenSong,
+#newProfileImage {
 	padding: 4%;
-	margin-top: 2%;
-	margin-bottom: 6%;
-	width: 40%;
+	margin-bottom: 2vh;
 	border-radius: 30px;
+	width: 32vh;
+	height: 1vh;
+}
+
+#newProfileImage::placeholder {
+	font-family: 'inter';
+	justify-content: center;
+	align-items: center;
+}
+
+.Accept {
+	background-color: #2ec4b6;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	height: 40px;
+	width: 120px;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.3s;
+	margin-left: 6px;
+}
+
+.Cancel {
+	background-color: rgba(46, 196, 182, 0.7);
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	height: 40px;
+	width: 120px;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.3s;
+	margin-right: 6px;
+}
+
+.fileContainer {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+	padding-bottom: 2vh;
+}
+
+.fileContainer input[type='file'] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.fileContainer:before {
+	content: 'Select file';
+	white-space: nowrap;
+	background-color: #ff9f1c;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	height: 5vh;
+	width: 40vh;
+	transition: background-color 0.2s ease;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1vh;
+	margin-left: 1vh;
+	margin-right: 1vh;
+}
+.fileContainer:hover:before {
+	background-color: #ffbf69;
+}
+
+.file-name {
+	margin-left: 10px;
+	font-size: 16px;
+	color: #333;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.Accept:hover,
+.Cancel:hover {
+	background-color: #ffbf69;
 }
 
 .waveSong {
@@ -39,7 +132,25 @@
 	transform: translateY(-50%);
 }
 
-.modalContainer {
+.profileImgForm {
+	background-color: white;
+	padding: 20px;
+	border-radius: 40px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	width: 45%;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	margin: auto;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.modalContainer,
+#modalContainerProfileImg {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -80,9 +191,22 @@ h2 {
 	color: #2ec4b6;
 }
 
-.image {
+.profileimg {
+	width: 200px;
 	height: 200px;
-	border-radius: 100px;
+	border-radius: 50%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #fff;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.profileimg img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .pin {
@@ -193,6 +317,64 @@ h1 {
 	font-family: 'inter';
 }
 
+.h1Add {
+	font-size: 24px;
+	margin-bottom: 15px;
+	color: #1e1e1e;
+	font-weight: 700;
+	font-family: 'Inter';
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+}
+
+.artist,
+.title,
+.coverImage {
+	width: 20%;
+	padding: 10px;
+	margin: 4px;
+	height: 12px;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	font-size: 15px;
+}
+
+.create-song {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.artist:focus,
+.title:focus,
+.coverImage:focus {
+	border-color: #ff9f1c;
+	outline: none;
+}
+
+.save {
+	padding: 10px 65px;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	background-color: #ff9f1c;
+	color: white;
+	cursor: pointer;
+	transition: 0.3s;
+	margin-left: 45%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.save:hover {
+	background-color: #ffbf69;
+}
+
 .playlist:hover {
 	background-color: #ffbf69;
+}
+.botones {
+	display: flex;
+	margin: 10px;
 }

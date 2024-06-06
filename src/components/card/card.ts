@@ -1,5 +1,5 @@
 import styles from './card.css';
-import Firebase, { addWave } from '../../services/Firebase';
+import Firebase from '../../services/Firebase';
 import { waves } from '../../types/waves';
 
 const formData: Omit<waves, 'id'> = {
@@ -97,44 +97,107 @@ class Card extends HTMLElement {
 		}
 	}
 
-	render() {
+	async render() {
 		if (this.shadowRoot) {
-			this.shadowRoot.innerHTML = `
-			<section class= "cardEntera">
-			<section class= profile>
-			<section class="image">
-			<img src="${this.image}"></img>
-			</section>
-			<p class="username">${this.name || 'No Username'}</p>
-			</section>
+			this.shadowRoot.innerHTML = ``;
 
-			<section class='wave'>
-			<p id='wave'>${this.wave}</p>
-			</section>
+			const cssCard = this.ownerDocument.createElement('style');
+			cssCard.innerHTML = styles;
+			this.shadowRoot?.appendChild(cssCard);
 
-			<section class="interacciones">
-			<section class="like_group">
-			<svg id="svg" class="unlike">${this.unlike}</svg>
-			<svg id="svg_like" class="like" style="display: none;">${this.like}</svg>
-			<p>${this.cantidadlike}</p>
-			</section>
+			const waves = await Firebase.getWave();
+			waves.forEach((wave: waves) => {
+				const sectionCardEntera = document.createElement('section');
+				sectionCardEntera.className = 'cardEntera';
 
-			<sections class='share'>
-			<svg id="svg">${this.share}</svg>
-			<p>${this.cantidadshare}</p>
-			</sections>
+				const sectionProfile = document.createElement('section');
+				sectionProfile.className = 'profile';
 
-			<section class='comment'>
-			<svg id="svg">${this.comentar}</svg>
-			<p>${this.cantidadcomentar}</p>
-			</section>
-			</section>
-			</section>`;
+				const sectionImage = document.createElement('section');
+				sectionImage.className = 'image';
+
+				const img = document.createElement('img');
+				img.src = this.image || 'undefined';
+				sectionImage.appendChild(img);
+
+				const pUsername = document.createElement('p');
+				pUsername.className = 'username';
+				pUsername.textContent = this.name || 'No Username';
+
+				sectionProfile.appendChild(sectionImage);
+				sectionProfile.appendChild(pUsername);
+
+				const sectionWave = document.createElement('section');
+				sectionWave.className = 'wave';
+
+				const newWave = this.ownerDocument.createElement('p');
+				newWave.innerText = wave.wave;
+				sectionWave.appendChild(newWave);
+
+				const sectionInteracciones = document.createElement('section');
+				sectionInteracciones.className = 'interacciones';
+
+				const sectionLikeGroup = document.createElement('section');
+				sectionLikeGroup.className = 'like_group';
+
+				const svgUnlike = document.createElement('svg');
+				svgUnlike.id = 'svg';
+				svgUnlike.className = 'unlike';
+				svgUnlike.innerHTML = this.unlike || 'undefined';
+
+				const svgLike = document.createElement('svg');
+				svgLike.id = 'svg_like';
+				svgLike.className = 'like';
+				svgLike.style.display = 'none';
+				svgLike.innerHTML = this.like || 'undefined';
+
+				const pCantidadLike = document.createElement('p');
+				pCantidadLike.textContent = this.cantidadlike || 'undefined';
+
+				sectionLikeGroup.appendChild(svgUnlike);
+				sectionLikeGroup.appendChild(svgLike);
+				sectionLikeGroup.appendChild(pCantidadLike);
+
+				const sectionShare = document.createElement('section');
+				sectionShare.className = 'share';
+
+				const svgShare = document.createElement('svg');
+				svgShare.id = 'svg';
+				svgShare.innerHTML = this.share || 'undefined';
+
+				const pCantidadShare = document.createElement('p');
+				pCantidadShare.textContent = this.cantidadshare || 'undefined';
+
+				sectionShare.appendChild(svgShare);
+				sectionShare.appendChild(pCantidadShare);
+
+				const sectionComment = document.createElement('section');
+				sectionComment.className = 'comment';
+
+				const svgComment = document.createElement('svg');
+				svgComment.id = 'svg';
+				svgComment.innerHTML = this.comentar || 'undefined';
+
+				const pCantidadComment = document.createElement('p');
+				pCantidadComment.textContent = this.cantidadcomentar || 'undefined';
+
+				sectionComment.appendChild(svgComment);
+				sectionComment.appendChild(pCantidadComment);
+
+				sectionInteracciones.appendChild(sectionLikeGroup);
+				sectionInteracciones.appendChild(sectionShare);
+				sectionInteracciones.appendChild(sectionComment);
+
+				sectionCardEntera.appendChild(sectionProfile);
+				sectionCardEntera.appendChild(sectionWave);
+				sectionCardEntera.appendChild(sectionInteracciones);
+
+				// Finalmente, añades la sección completa al DOM, por ejemplo al body o a algún contenedor específico
+
+				this.shadowRoot?.appendChild(sectionCardEntera);
+				// o, por ejemplo: document.getElementById('someContainer').appendChild(sectionCardEntera);
+			});
 		}
-
-		const cssCard = this.ownerDocument.createElement('style');
-		cssCard.innerHTML = styles;
-		this.shadowRoot?.appendChild(cssCard);
 	}
 }
 

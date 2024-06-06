@@ -8,6 +8,8 @@ import { addObserver } from '../store';
 import Firebase, { addWave } from '../services/Firebase';
 import { waves } from '../types/waves';
 import styles from './dashboard.css';
+import { getUser } from '../services/Firebase';
+import { appState } from '../store';
 
 const formData: Omit<waves, 'id'> = {
 	wave: '',
@@ -20,11 +22,20 @@ export class Dashboard extends HTMLElement {
 		addObserver(this);
 	}
 
-	connectedCallback() {
-		this.render();
+	async connectedCallback() {
+		const dataUser = await getUser(appState.userId);
+		this.render(dataUser);
 	}
 
-	render() {
+	changeWave(e: any) {
+		formData.wave = e.target.value;
+	}
+
+	submitForm() {
+		Firebase.addWave(formData);
+	}
+
+	async render(dataUser: any) {
 		if (this.shadowRoot) {
 			header.forEach((iconoHeader) => {
 				const myHeader = document.createElement('my-header');
@@ -52,23 +63,22 @@ export class Dashboard extends HTMLElement {
 			forYou.textContent = 'For You';
 			this.shadowRoot?.appendChild(forYou);
 
-			const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
-
-			savedWaves.forEach((wave: string) => {
-				profile.forEach((element) => {
-					const myCard = document.createElement('my-card');
-					myCard.setAttribute(AttributesCard.name, element.name);
-					myCard.setAttribute(AttributesCard.image, element.image);
-					myCard.setAttribute(AttributesCard.unlike, element.unlike);
-					myCard.setAttribute(AttributesCard.like, element.like);
-					myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
-					myCard.setAttribute(AttributesCard.share, element.share);
-					myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
-					myCard.setAttribute(AttributesCard.comentar, element.comentar);
-					myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
-					myCard.setAttribute(AttributesCard.wave, wave);
-					this.shadowRoot?.appendChild(myCard);
-				});
+			profile.forEach((element) => {
+				const myCard = document.createElement('my-card');
+				myCard.setAttribute(AttributesCard.name, dataUser.username);
+				myCard.setAttribute(
+					AttributesCard.image,
+					dataUser.profile_image ||
+						'https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg'
+				);
+				myCard.setAttribute(AttributesCard.unlike, element.unlike);
+				myCard.setAttribute(AttributesCard.like, element.like);
+				myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
+				myCard.setAttribute(AttributesCard.share, element.share);
+				myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
+				myCard.setAttribute(AttributesCard.comentar, element.comentar);
+				myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
+				this.shadowRoot?.appendChild(myCard);
 			});
 
 			iconos.forEach((iconoData) => {
@@ -84,46 +94,5 @@ export class Dashboard extends HTMLElement {
 			this.shadowRoot?.appendChild(cssDashboard);
 		}
 	}
-
-	restoreSavedWaves() {
-		const sectionWave = this.shadowRoot?.querySelector('.wave');
-		const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
-		savedWaves.forEach((wave: string) => {
-			const waveDisplay = document.createElement('p');
-			waveDisplay.textContent = wave;
-			sectionWave?.appendChild(waveDisplay);
-		});
-	}
-
-	submitForm() {
-		const enterWaveInput = this.shadowRoot?.querySelector('.image') as HTMLInputElement;
-		const waveText = enterWaveInput.value;
-		formData.wave = waveText;
-
-		console.log(formData);
-		Firebase.addWave(formData);
-
-		enterWaveInput.value = '';
-		const waveDisplay = document.createElement('p');
-		waveDisplay.textContent = waveText;
-
-		if (enterWaveInput.nextSibling) {
-			this.shadowRoot?.insertBefore(waveDisplay, enterWaveInput.nextSibling);
-		} else {
-			this.shadowRoot?.appendChild(waveDisplay);
-		}
-		this.saveWaveToLocalStorage(waveText);
-	}
-
-	saveWaveToLocalStorage(wave: string) {
-		const savedWaves = JSON.parse(localStorage.getItem('savedWaves') || '[]');
-		savedWaves.push(wave);
-		localStorage.setItem('savedWaves', JSON.stringify(savedWaves));
-	}
-
-	changeWave(e: any) {
-		formData.wave = e.target.value;
-	}
 }
-
 customElements.define('app-dashboard', Dashboard);
