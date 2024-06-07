@@ -116,9 +116,6 @@ class Perfil extends HTMLElement {
 		<section id="modalContainerProfileImg" style="display:none;">
 		<form class="profileImgForm">
 		    <h2>Set your new profile image</h2>
-				<section class="fileContainer">
-				<input role="button" class="File"></input>
-				</section>
 				<textarea id="newProfileImage" name="profileImage" placeholder="Or insert URL"></textarea>
 				<section class="botones">
 				<span role="button" class="Cancel">Cancel</span>
@@ -128,19 +125,6 @@ class Perfil extends HTMLElement {
 		</section>
 		`;
 		}
-
-		const selectFile = this.shadowRoot?.querySelector('.File') as HTMLInputElement;
-		selectFile.type = 'file';
-		selectFile.addEventListener('change', () => {
-			const file = selectFile.files?.[0];
-			if (file) uploadFile(file, appState.userId);
-			this.shadowRoot?.appendChild(selectFile);
-		});
-
-		// const urlImg = await getFile(appState.userId);
-		// const uploadImg = this.ownerDocument?.createElement('img');
-		// uploadImg.src = String(urlImg);
-		// this.shadowRoot?.appendChild(uploadImg);
 
 		const h1Add = this.ownerDocument.createElement('h1');
 		h1Add.textContent = 'Add your own song';

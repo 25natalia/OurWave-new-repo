@@ -2,8 +2,6 @@ import { iconos } from '../services/dataMenu';
 import { Attribute } from '../components/menu/menu';
 import { header } from '../services/dataHeader';
 import { AttributesHeader } from '../components/header/header';
-import { profile } from '../services/dataProfile';
-import { AttributesCard } from '../components/card/card';
 import { addObserver } from '../store';
 import Firebase, { addWave } from '../services/Firebase';
 import { waves } from '../types/waves';
@@ -11,11 +9,8 @@ import styles from './dashboard.css';
 import { getUser } from '../services/Firebase';
 import { appState, dispatch } from '../store';
 import { getWaves } from '../store/actions';
-import { card } from '../components/indexpadre';
-import { AttributeProfile } from '../components/profile/profile';
-import { getMyUserWave } from '../store/actions';
 
-const formData = {
+const formData: Omit<waves, 'id'> = {
 	wave: '',
 	idUser: '',
 };
@@ -29,9 +24,8 @@ export class Dashboard extends HTMLElement {
 
 	async connectedCallback() {
 		const dataUser = await getUser(appState.userId);
+		console.log(formData.idUser);
 
-		//if (appState.userWaves.length === 0) {
-		//const action = await getMyUserWave(appState.userId);
 		if (appState.waves.length === 0) {
 			const action = await getWaves();
 			dispatch(action);
@@ -78,8 +72,6 @@ export class Dashboard extends HTMLElement {
 			this.shadowRoot?.appendChild(forYou);
 		}
 
-		//appState.userWaves.forEach((element: waves) => {
-
 		appState.waves.forEach((element: waves) => {
 			const cardEntera = this.ownerDocument.createElement('section');
 			cardEntera.className = 'cardEntera';
@@ -94,7 +86,9 @@ export class Dashboard extends HTMLElement {
 			photoUsername.appendChild(photoSection);
 
 			const profilePic = this.ownerDocument.createElement('img');
-			profilePic.src = dataUser.profile_image;
+			profilePic.src =
+				dataUser.profile_image ||
+				'https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg';
 			photoSection.appendChild(profilePic);
 
 			const usernameSection = this.ownerDocument.createElement('section');
@@ -104,10 +98,6 @@ export class Dashboard extends HTMLElement {
 			const username = this.ownerDocument.createElement('p');
 			username.innerText = dataUser.username;
 			usernameSection.appendChild(username);
-
-			// const id = this.ownerDocument.createElement('p');
-			// id.innerText = element.idUser;
-			// this.shadowRoot?.appendChild(id);
 
 			const waveSection = this.ownerDocument.createElement('section');
 			waveSection.className = 'waveSection';
