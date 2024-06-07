@@ -174,7 +174,7 @@ class Perfil extends HTMLElement {
 		this.shadowRoot?.appendChild(save);
 
 		appState.userSongs.forEach((p: typeAddSongs) => {
-			// appState.myUserSongs.forEach((p: typeAddSongs) => {
+			//appState.myUserSongs.forEach((p: typeAddSongs) => {
 			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
 			card.setAttribute(AttributeSongs.top, '●');
 			card.setAttribute(AttributeSongs.image, p.image);

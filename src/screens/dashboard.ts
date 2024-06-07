@@ -13,6 +13,7 @@ import { appState, dispatch } from '../store';
 import { getWaves } from '../store/actions';
 import { card } from '../components/indexpadre';
 import { AttributeProfile } from '../components/profile/profile';
+import { getMyUserWave } from '../store/actions';
 
 const formData = {
 	wave: '',
@@ -28,9 +29,8 @@ export class Dashboard extends HTMLElement {
 
 	async connectedCallback() {
 		const dataUser = await getUser(appState.userId);
-
-		// if (appState.userWaves.length === 0) {
-		// 	const action = await getUserWaves(appState.userId);
+		//if (appState.userWaves.length === 0) {
+		//const action = await getMyUserWave(appState.userId);
 		if (appState.waves.length === 0) {
 			const action = await getWaves();
 			dispatch(action);
@@ -77,11 +77,15 @@ export class Dashboard extends HTMLElement {
 			this.shadowRoot?.appendChild(forYou);
 		}
 
-		// appState.userWaves.forEach((element: waves) => {
+		//appState.userWaves.forEach((element: waves) => {
 		appState.waves.forEach((element: waves) => {
 			const username = this.ownerDocument.createElement('p');
 			username.innerText = dataUser.username;
 			this.shadowRoot?.appendChild(username);
+
+			const id = this.ownerDocument.createElement('p');
+			id.innerText = element.idUser;
+			this.shadowRoot?.appendChild(id);
 
 			const wave = this.ownerDocument.createElement('p');
 			wave.innerText = element.wave;
