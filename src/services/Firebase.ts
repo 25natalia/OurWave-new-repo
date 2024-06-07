@@ -198,6 +198,17 @@ export const getPostListener = (cb: (docs: waves[]) => void) => {
 	});
 };
 
+export const getSongsListener = (cb: (docs: typeAddSongs[]) => void) => {
+	const ref = collection(db, 'playlist');
+	onSnapshot(ref, (collection) => {
+		const docs: typeAddSongs[] = collection.docs.map((doc) => ({
+			id: doc.id,
+			...doc.data(),
+		})) as typeAddSongs[];
+		cb(docs);
+	});
+};
+
 // imagen de perfil
 
 export const uploadFile = async (file: File, id: string) => {

@@ -6,7 +6,7 @@ import { SongsComponent } from '../../components/indexpadre';
 import { AttributeSongs } from '../../components/Songs/Songs';
 import { addObserver, appState, dispatch } from '../../store';
 import { getUserSongs } from '../../store/actions';
-import { getPostListener } from '../../services/Firebase';
+import { getSongsListener } from '../../services/Firebase';
 
 const formData = {
 	top: '',
@@ -160,13 +160,21 @@ class Perfil extends HTMLElement {
 		const songs = this.ownerDocument.createElement('section');
 		this.shadowRoot?.appendChild(songs);
 
-		appState.userSongs.forEach((p: typeAddSongs) => {
-			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
-			card.setAttribute(AttributeSongs.top, '●');
-			card.setAttribute(AttributeSongs.image, p.image);
-			card.setAttribute(AttributeSongs.artist, p.artist);
-			card.setAttribute(AttributeSongs.song_title, p.song_title);
-			this.shadowRoot?.appendChild(card);
+		getSongsListener((song) => {
+			while (songs.firstChild) {
+				songs.removeChild(songs.firstChild);
+			}
+			song.forEach((p: typeAddSongs) => {
+				const container = this.ownerDocument.createElement('section');
+				songs.appendChild(container);
+
+				const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
+				card.setAttribute(AttributeSongs.top, '●');
+				card.setAttribute(AttributeSongs.image, p.image);
+				card.setAttribute(AttributeSongs.artist, p.artist);
+				card.setAttribute(AttributeSongs.song_title, p.song_title);
+				container?.appendChild(card);
+			});
 		});
 
 		// funciones para actualizar canción

@@ -24,7 +24,6 @@ export class Dashboard extends HTMLElement {
 
 	async connectedCallback() {
 		const dataUser = await getUser(appState.userId);
-
 		if (appState.waves.length === 0) {
 			const action = await getWaves();
 			dispatch(action);
@@ -80,6 +79,7 @@ export class Dashboard extends HTMLElement {
 			}
 
 			posts.forEach((element: waves) => {
+
 				const cardEntera = this.ownerDocument.createElement('section');
 				cardEntera.className = 'cardEntera';
 				waves.prepend(cardEntera);
