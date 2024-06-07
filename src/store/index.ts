@@ -21,6 +21,7 @@ export let emptyState = {
 	userSongs: [],
 	myUserSongs: [],
 	waves: [],
+	userWaves: [],
 };
 
 export let appState = emptyState;

@@ -9,11 +9,17 @@ import Firebase, { addWave } from '../services/Firebase';
 import { waves } from '../types/waves';
 import styles from './dashboard.css';
 import { getUser } from '../services/Firebase';
-import { appState } from '../store';
+import { appState, dispatch } from '../store';
+import { getWaves } from '../store/actions';
+import { card } from '../components/indexpadre';
+import { AttributeProfile } from '../components/profile/profile';
+import { getMyUserWave } from '../store/actions';
 
-const formData: Omit<waves, 'id'> = {
+const formData = {
 	wave: '',
+	idUser:'',
 };
+
 
 export class Dashboard extends HTMLElement {
 	constructor() {
@@ -24,18 +30,28 @@ export class Dashboard extends HTMLElement {
 
 	async connectedCallback() {
 		const dataUser = await getUser(appState.userId);
-		this.render(dataUser);
+		//if (appState.userWaves.length === 0) {
+			//const action = await getMyUserWave(appState.userId);
+		if (appState.waves.length === 0) {
+			const action = await getWaves();
+			dispatch(action);
+		} else {
+			this.render(dataUser);
+		}
+
 	}
+
 
 	changeWave(e: any) {
 		formData.wave = e.target.value;
 	}
 
 	submitForm() {
+		formData.idUser = appState.userId;
 		Firebase.addWave(formData);
 	}
 
-	async render(dataUser: any) {
+	render(dataUser: any) {
 		if (this.shadowRoot) {
 			header.forEach((iconoHeader) => {
 				const myHeader = document.createElement('my-header');
@@ -62,37 +78,37 @@ export class Dashboard extends HTMLElement {
 			const forYou = this.ownerDocument.createElement('h2');
 			forYou.textContent = 'For You';
 			this.shadowRoot?.appendChild(forYou);
-
-			profile.forEach((element) => {
-				const myCard = document.createElement('my-card');
-				myCard.setAttribute(AttributesCard.name, dataUser.username);
-				myCard.setAttribute(
-					AttributesCard.image,
-					dataUser.profile_image ||
-						'https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg'
-				);
-				myCard.setAttribute(AttributesCard.unlike, element.unlike);
-				myCard.setAttribute(AttributesCard.like, element.like);
-				myCard.setAttribute(AttributesCard.cantidadlike, element.cantidadlike);
-				myCard.setAttribute(AttributesCard.share, element.share);
-				myCard.setAttribute(AttributesCard.cantidadshare, element.cantidadshare);
-				myCard.setAttribute(AttributesCard.comentar, element.comentar);
-				myCard.setAttribute(AttributesCard.cantidadcomentar, element.cantidadcomentar);
-				this.shadowRoot?.appendChild(myCard);
-			});
-
-			iconos.forEach((iconoData) => {
-				const myIcono = document.createElement('my-iconos');
-				myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
-				myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
-				myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
-				this.shadowRoot?.appendChild(myIcono);
-			});
-
-			const cssDashboard = this.ownerDocument.createElement('style');
-			cssDashboard.innerHTML = styles;
-			this.shadowRoot?.appendChild(cssDashboard);
 		}
+
+
+
+		//appState.userWaves.forEach((element: waves) => {
+		appState.waves.forEach((element: waves) => {
+			const username = this.ownerDocument.createElement('p');
+			username.innerText = dataUser.username;
+			this.shadowRoot?.appendChild(username);
+
+			const id = this.ownerDocument.createElement('p');
+			id.innerText = element.idUser;
+			this.shadowRoot?.appendChild(id);
+
+			const wave = this.ownerDocument.createElement('p');
+			wave.innerText = element.wave;
+			this.shadowRoot?.appendChild(wave);
+		});
+
+		iconos.forEach((iconoData) => {
+			const myIcono = document.createElement('my-iconos');
+			myIcono.setAttribute(Attribute.iconohome, iconoData.iconohome);
+			myIcono.setAttribute(Attribute.iconoexplore, iconoData.iconoexplore);
+			myIcono.setAttribute(Attribute.iconoprofile, iconoData.iconoprofile);
+			this.shadowRoot?.appendChild(myIcono);
+		});
+
+		const cssDashboard = this.ownerDocument.createElement('style');
+		cssDashboard.innerHTML = styles;
+		this.shadowRoot?.appendChild(cssDashboard);
 	}
 }
+
 customElements.define('app-dashboard', Dashboard);

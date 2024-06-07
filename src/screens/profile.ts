@@ -15,6 +15,7 @@ export class Perfil extends HTMLElement {
 
 	async connectedCallback() {
 		const dataUser = await getUser(appState.userId);
+		console.log(dataUser);
 		this.render(dataUser);
 	}
 

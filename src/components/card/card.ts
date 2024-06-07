@@ -7,6 +7,7 @@ import { getPostListener } from '../../services/Firebase';
 
 const formData: Omit<waves, 'id'> = {
 	wave: '',
+	idUser:'',
 };
 
 export enum AttributesCard {

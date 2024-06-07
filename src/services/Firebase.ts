@@ -97,6 +97,7 @@ export const getFriends = async () => {
 export const getUser = async (idUser: string) => {
 	const docRef = doc(db, 'users', idUser);
 	const docSnap = await getDoc(docRef);
+	console.log(docSnap.data());
 	return docSnap.data();
 };
 
@@ -111,7 +112,6 @@ export const addSong = async (song: Omit<typeAddSongs, 'id'>) => {
 		console.error(error);
 	}
 };
-
 
 //aquí se traen las canciones creadas por todos los usuarios
 export const getCreatedSongs = async () => {
@@ -141,6 +141,19 @@ export const getUserCreatedSongs = async (idUser: string) => {
 	return arrayProducts;
 };
 
+export const getUserWave = async (idUser: string) => {
+	console.log(`userId: ${idUser}`);
+	const q = query(collection(db, 'waves'), where('idUser', '==', idUser));
+	const querySnapshot = await getDocs(q);
+	const arrayProducts: Array<waves> = [];
+
+	querySnapshot.forEach((doc) => {
+		const data = doc.data() as any;
+		arrayProducts.push({ id: doc.id, ...data });
+	});
+	console.log(`User posts:`, arrayProducts);
+	return arrayProducts;
+};
 // con esto se añaden los wave
 export const addWave = async (wave: Omit<waves, 'id'>) => {
 	try {
