@@ -72,11 +72,18 @@ export class Dashboard extends HTMLElement {
 			this.shadowRoot?.appendChild(forYou);
 		}
 
+		const waves = this.ownerDocument.createElement('section');
+		this.shadowRoot?.appendChild(waves);
+
 		getPostListener((posts) => {
+			while (waves.firstChild) {
+				waves.removeChild(waves.firstChild);
+			}
+
 			posts.forEach((element: waves) => {
 				const cardEntera = this.ownerDocument.createElement('section');
 				cardEntera.className = 'cardEntera';
-				this.shadowRoot?.appendChild(cardEntera);
+				waves.prepend(cardEntera);
 
 				const photoUsername = this.ownerDocument.createElement('section');
 				photoUsername.className = 'photoUsername';

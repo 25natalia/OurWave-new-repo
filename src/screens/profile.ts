@@ -28,6 +28,7 @@ export class Perfil extends HTMLElement {
 			});
 		}
 
+		
 		const myUser = document.createElement('my-perfil');
 		myUser.setAttribute(
 			AttributeProfile.profile_image,
