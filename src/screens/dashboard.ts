@@ -24,7 +24,6 @@ export class Dashboard extends HTMLElement {
 
 	async connectedCallback() {
 		const dataUser = await getUser(appState.userId);
-		console.log(formData.idUser);
 
 		if (appState.waves.length === 0) {
 			const action = await getWaves();

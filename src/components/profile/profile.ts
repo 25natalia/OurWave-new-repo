@@ -5,7 +5,8 @@ import Firebase from '../../services/Firebase';
 import { SongsComponent } from '../../components/indexpadre';
 import { AttributeSongs } from '../../components/Songs/Songs';
 import { addObserver, appState, dispatch } from '../../store';
-import { getUserSongs, getMyUserSongs } from '../../store/actions';
+import { getUserSongs } from '../../store/actions';
+import { getPostListener } from '../../services/Firebase';
 
 const formData = {
 	top: '',
@@ -54,8 +55,6 @@ class Perfil extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		// if (appState.myUserSongs.length === 0) {
-		// 	const action = await getMyUserSongs(appState.userId);
 		if (appState.userSongs.length === 0) {
 			const action = await getUserSongs();
 			dispatch(action);
@@ -158,8 +157,10 @@ class Perfil extends HTMLElement {
 		save.addEventListener('click', this.submitForm);
 		this.shadowRoot?.appendChild(save);
 
+		const songs = this.ownerDocument.createElement('section');
+		this.shadowRoot?.appendChild(songs);
+
 		appState.userSongs.forEach((p: typeAddSongs) => {
-			// appState.myUserSongs.forEach((p: typeAddSongs) => {
 			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
 			card.setAttribute(AttributeSongs.top, '●');
 			card.setAttribute(AttributeSongs.image, p.image);
@@ -167,6 +168,7 @@ class Perfil extends HTMLElement {
 			card.setAttribute(AttributeSongs.song_title, p.song_title);
 			this.shadowRoot?.appendChild(card);
 		});
+
 		// funciones para actualizar canción
 		const modal = this.shadowRoot?.querySelector('.modalContainer') as HTMLDivElement;
 		const buttonSong = this.shadowRoot?.querySelector('#ButtonSong') as HTMLButtonElement;
