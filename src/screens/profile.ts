@@ -15,6 +15,8 @@ export class Perfil extends HTMLElement {
 
 	async connectedCallback() {
 		const dataUser = await getUser(appState.userId);
+		console.log(dataUser);
+
 		this.render(dataUser);
 	}
 
@@ -28,18 +30,16 @@ export class Perfil extends HTMLElement {
 			});
 		}
 
-		if (dataUser) {
-			const myUser = document.createElement('my-perfil');
-			myUser.setAttribute(
-				AttributeProfile.profile_image,
-				dataUser.profile_image ||
-					'https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg'
-			);
-			myUser.setAttribute(AttributeProfile.username, dataUser.username);
-			myUser.setAttribute(AttributeProfile.completeName, dataUser.completeName);
-			myUser.setAttribute(AttributeProfile.fav_song, dataUser.fav_song || 'Add Your Wave Song');
-			this.shadowRoot?.appendChild(myUser);
-		}
+		const myUser = document.createElement('my-perfil');
+		myUser.setAttribute(
+			AttributeProfile.profile_image,
+			dataUser.profile_image ||
+				'https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg'
+		);
+		myUser.setAttribute(AttributeProfile.username, dataUser.username);
+		myUser.setAttribute(AttributeProfile.completeName, dataUser.completeName);
+		myUser.setAttribute(AttributeProfile.fav_song, dataUser.fav_song || 'Add Your Wave Song');
+		this.shadowRoot?.appendChild(myUser);
 
 		iconosProfile.forEach((iconoData) => {
 			const myIcono = document.createElement('my-iconos');

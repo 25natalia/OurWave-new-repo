@@ -2,12 +2,8 @@ import styles from './card.css';
 import Firebase from '../../services/Firebase';
 import { waves } from '../../types/waves';
 import { appState, dispatch, addObserver } from '../../store';
-import { getWaves } from '../../store/actions';
 import { getPostListener } from '../../services/Firebase';
-
-const formData: Omit<waves, 'id'> = {
-	wave: '',
-};
+import { getUser } from '../../services/Firebase';
 
 export enum AttributesCard {
 	'unlike' = 'unlike',
@@ -71,16 +67,11 @@ class Card extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		// if (appState.waves.length === 0) {
-		// 	const action = await getWaves();
-		// 	dispatch(action);
-		// } else {
-		// 	this.render();
-		// }
-		this.render;
+		const dataUser = await getUser(appState.userId);
+		this.render(dataUser);
 	}
 
-	async render() {
+	async render(dataUser: any) {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = ``;
 
@@ -91,102 +82,94 @@ class Card extends HTMLElement {
 			const postList = this.ownerDocument.createElement('section');
 			this.shadowRoot?.appendChild(postList);
 
-			getPostListener((posts) => {
-				while (postList.firstChild) {
-					postList.removeChild(postList.firstChild);
-				}
+			const sectionCardEntera = document.createElement('section');
+			sectionCardEntera.className = 'cardEntera';
 
-				posts.forEach((p) => {
-					const sectionCardEntera = document.createElement('section');
-					sectionCardEntera.className = 'cardEntera';
+			const sectionProfile = document.createElement('section');
+			sectionProfile.className = 'profile';
 
-					const sectionProfile = document.createElement('section');
-					sectionProfile.className = 'profile';
+			const sectionImage = document.createElement('section');
+			sectionImage.className = 'image';
 
-					const sectionImage = document.createElement('section');
-					sectionImage.className = 'image';
+			const img = document.createElement('img');
+			img.src = this.image || 'undefined';
+			sectionImage.appendChild(img);
 
-					const img = document.createElement('img');
-					img.src = this.image || 'undefined';
-					sectionImage.appendChild(img);
+			const pUsername = document.createElement('p');
+			pUsername.className = 'username';
+			pUsername.textContent = this.name || 'No Username';
 
-					const pUsername = document.createElement('p');
-					pUsername.className = 'username';
-					pUsername.textContent = this.name || 'No Username';
+			sectionProfile.appendChild(sectionImage);
+			sectionProfile.appendChild(pUsername);
 
-					sectionProfile.appendChild(sectionImage);
-					sectionProfile.appendChild(pUsername);
+			const sectionWave = document.createElement('section');
+			sectionWave.className = 'wave';
 
-					const sectionWave = document.createElement('section');
-					sectionWave.className = 'wave';
+			const newWave = this.ownerDocument.createElement('p');
+			newWave.innerText = this.wave || 'undefined';
+			sectionWave.appendChild(newWave);
 
-					const newWave = this.ownerDocument.createElement('p');
-					newWave.innerText = this.wave || 'undefined';
-					sectionWave.appendChild(newWave);
+			const sectionInteracciones = document.createElement('section');
+			sectionInteracciones.className = 'interacciones';
 
-					const sectionInteracciones = document.createElement('section');
-					sectionInteracciones.className = 'interacciones';
+			const sectionLikeGroup = document.createElement('section');
+			sectionLikeGroup.className = 'like_group';
 
-					const sectionLikeGroup = document.createElement('section');
-					sectionLikeGroup.className = 'like_group';
+			const svgUnlike = document.createElement('svg');
+			svgUnlike.id = 'svg';
+			svgUnlike.className = 'unlike';
+			svgUnlike.innerHTML = this.unlike || 'undefined';
 
-					const svgUnlike = document.createElement('svg');
-					svgUnlike.id = 'svg';
-					svgUnlike.className = 'unlike';
-					svgUnlike.innerHTML = this.unlike || 'undefined';
+			const svgLike = document.createElement('svg');
+			svgLike.id = 'svg_like';
+			svgLike.className = 'like';
+			svgLike.style.display = 'none';
+			svgLike.innerHTML = this.like || 'undefined';
 
-					const svgLike = document.createElement('svg');
-					svgLike.id = 'svg_like';
-					svgLike.className = 'like';
-					svgLike.style.display = 'none';
-					svgLike.innerHTML = this.like || 'undefined';
+			const pCantidadLike = document.createElement('p');
+			pCantidadLike.textContent = this.cantidadlike || 'undefined';
 
-					const pCantidadLike = document.createElement('p');
-					pCantidadLike.textContent = this.cantidadlike || 'undefined';
+			sectionLikeGroup.appendChild(svgUnlike);
+			sectionLikeGroup.appendChild(svgLike);
+			sectionLikeGroup.appendChild(pCantidadLike);
 
-					sectionLikeGroup.appendChild(svgUnlike);
-					sectionLikeGroup.appendChild(svgLike);
-					sectionLikeGroup.appendChild(pCantidadLike);
+			const sectionShare = document.createElement('section');
+			sectionShare.className = 'share';
 
-					const sectionShare = document.createElement('section');
-					sectionShare.className = 'share';
+			const svgShare = document.createElement('svg');
+			svgShare.id = 'svg';
+			svgShare.innerHTML = this.share || 'undefined';
 
-					const svgShare = document.createElement('svg');
-					svgShare.id = 'svg';
-					svgShare.innerHTML = this.share || 'undefined';
+			const pCantidadShare = document.createElement('p');
+			pCantidadShare.textContent = this.cantidadshare || 'undefined';
 
-					const pCantidadShare = document.createElement('p');
-					pCantidadShare.textContent = this.cantidadshare || 'undefined';
+			sectionShare.appendChild(svgShare);
+			sectionShare.appendChild(pCantidadShare);
 
-					sectionShare.appendChild(svgShare);
-					sectionShare.appendChild(pCantidadShare);
+			const sectionComment = document.createElement('section');
+			sectionComment.className = 'comment';
 
-					const sectionComment = document.createElement('section');
-					sectionComment.className = 'comment';
+			const svgComment = document.createElement('svg');
+			svgComment.id = 'svg';
+			svgComment.innerHTML = this.comentar || 'undefined';
 
-					const svgComment = document.createElement('svg');
-					svgComment.id = 'svg';
-					svgComment.innerHTML = this.comentar || 'undefined';
+			const pCantidadComment = document.createElement('p');
+			pCantidadComment.textContent = this.cantidadcomentar || 'undefined';
 
-					const pCantidadComment = document.createElement('p');
-					pCantidadComment.textContent = this.cantidadcomentar || 'undefined';
+			sectionComment.appendChild(svgComment);
+			sectionComment.appendChild(pCantidadComment);
 
-					sectionComment.appendChild(svgComment);
-					sectionComment.appendChild(pCantidadComment);
+			sectionInteracciones.appendChild(sectionLikeGroup);
+			sectionInteracciones.appendChild(sectionShare);
+			sectionInteracciones.appendChild(sectionComment);
 
-					sectionInteracciones.appendChild(sectionLikeGroup);
-					sectionInteracciones.appendChild(sectionShare);
-					sectionInteracciones.appendChild(sectionComment);
-
-					sectionCardEntera.appendChild(sectionProfile);
-					sectionCardEntera.appendChild(sectionWave);
-					sectionCardEntera.appendChild(sectionInteracciones);
-					postList.prepend(sectionCardEntera);
-				});
-			});
+			sectionCardEntera.appendChild(sectionProfile);
+			sectionCardEntera.appendChild(sectionWave);
+			sectionCardEntera.appendChild(sectionInteracciones);
+			postList.prepend(sectionCardEntera);
 		}
 	}
-
+}
 
 customElements.define('my-card', Card);
 export default Card;
