@@ -1,13 +1,27 @@
 import styles from './register.css';
-import { dispatch } from '../../store';
+import { dispatch, appState, addObserver } from '../../store';
 import { navigate } from '../../store/actions';
 import { createUser } from '../../services/Firebase';
+import Firebase from '../../services/Firebase';
 
 const formData = {
 	email: '',
 	username: '',
 	completeName: '',
 	password: '',
+};
+
+const formDataSongs = {
+	top: '●',
+	artist: 'Here will be your artist',
+	song_title: 'Here will be your song title',
+	image: 'https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg',
+	duration: '',
+	idUser: '',
+};
+
+const updateUserId = () => {
+	formDataSongs.idUser = appState.userId;
 };
 
 export enum AttributeRegister {
@@ -66,17 +80,27 @@ class RegisterComponent extends HTMLElement {
 		formData.completeName = e?.target?.value;
 	}
 
-	submitForm() {
-		createUser(formData);
+	async submitForm() {
+		try {
+			await createUser(formData);
+
+			// Update formDataSongs with the userId from appState
+			updateUserId();
+
+			await Firebase.addSong(formDataSongs);
+			console.log(formDataSongs);
+
+			dispatch(navigate('PROFILE'));
+		} catch (error) {
+			console.error('Error registering user:', error);
+		}
 	}
 
 	render() {
 		if (this.shadowRoot) {
-			// Crear el contenedor principal
 			const todoSection = this.ownerDocument.createElement('section');
 			todoSection.classList.add('todo');
 
-			// Crear el SVG y agregarlo al contenedor principal
 			const svg = this.ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'svg');
 			svg.classList.add('svg');
 			svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
@@ -87,13 +111,11 @@ class RegisterComponent extends HTMLElement {
 				'<!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#2ec4b6" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>';
 			todoSection.appendChild(svg);
 
-			// Crear el logo y agregarlo al contenedor principal
 			const logoImg = this.ownerDocument.createElement('img');
 			logoImg.classList.add('logo');
 			logoImg.src = this.logo || 'undefined';
 			todoSection.appendChild(logoImg);
 
-			// Crear la sección de información
 			const infoSection = this.ownerDocument.createElement('section');
 			infoSection.classList.add('info');
 
@@ -105,7 +127,6 @@ class RegisterComponent extends HTMLElement {
 			todoSection.appendChild(infoSection);
 			this.shadowRoot.appendChild(todoSection);
 
-			// Crear la sección de inputs
 			const section = this.ownerDocument.createElement('section');
 			section.classList.add('inputs');
 
@@ -131,12 +152,10 @@ class RegisterComponent extends HTMLElement {
 
 			const save = this.ownerDocument.createElement('button');
 			save.innerText = 'Registrarme';
-			save.addEventListener('click', this.submitForm);
+			save.addEventListener('click', this.submitForm.bind(this)); // Bind this context
 			section.appendChild(save);
-
 			this.shadowRoot.appendChild(section);
 
-			// Crear la segunda parte de la sección
 			const secondTodoSection = this.ownerDocument.createElement('section');
 			secondTodoSection.classList.add('todo');
 

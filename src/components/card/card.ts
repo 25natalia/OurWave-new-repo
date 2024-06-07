@@ -137,6 +137,7 @@ this.render
 				svgUnlike.id = 'svg';
 				svgUnlike.className = 'unlike';
 				svgUnlike.innerHTML = this.unlike || 'undefined';
+				
 
 				const svgLike = document.createElement('svg');
 				svgLike.id = 'svg_like';

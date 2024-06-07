@@ -56,8 +56,8 @@ class Perfil extends HTMLElement {
 	async connectedCallback() {
 		// if (appState.myUserSongs.length === 0) {
 		// 	const action = await getMyUserSongs(appState.userId);
-			 if (appState.userSongs.length === 0) {
-				const action = await getUserSongs();
+		if (appState.userSongs.length === 0) {
+			const action = await getUserSongs();
 			dispatch(action);
 		} else {
 			this.render();
@@ -84,6 +84,7 @@ class Perfil extends HTMLElement {
 		if (this.shadowRoot) {
 			this.shadowRoot.innerHTML = `
 		<section class="todo">
+
 		<section class="profile">
 		<section class="profileimg">
 		<img src="${this.profile_image}"></img>
@@ -173,9 +174,8 @@ class Perfil extends HTMLElement {
 		save.addEventListener('click', this.submitForm);
 		this.shadowRoot?.appendChild(save);
 
-
 		appState.userSongs.forEach((p: typeAddSongs) => {
-		//appState.myUserSongs.forEach((p: typeAddSongs) => {
+			// appState.myUserSongs.forEach((p: typeAddSongs) => {
 			const card = this.ownerDocument.createElement('my-songs') as SongsComponent;
 			card.setAttribute(AttributeSongs.top, '●');
 			card.setAttribute(AttributeSongs.image, p.image);
@@ -202,7 +202,6 @@ class Perfil extends HTMLElement {
 			event.preventDefault();
 			const textArea = this.shadowRoot?.querySelector('#writtenSong') as HTMLTextAreaElement;
 			const waveSong = textArea.value;
-			console.log('Entered wave:', waveSong);
 			textArea.value = '';
 			modal.style.display = 'none';
 			body.style.overflow = 'auto';
@@ -249,7 +248,6 @@ class Perfil extends HTMLElement {
 			event.preventDefault();
 			const textAreaImg = this.shadowRoot?.querySelector('#newProfileImage') as HTMLTextAreaElement;
 			const profileImg = textAreaImg.value;
-			console.log('Entered wave:', profileImg);
 			textAreaImg.value = '';
 			modalImg.style.display = 'none';
 			body.style.overflow = 'auto';

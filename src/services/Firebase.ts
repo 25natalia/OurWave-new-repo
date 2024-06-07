@@ -31,7 +31,6 @@ export const createUser = (formData: any) => {
 			//Primer paso es obtener el id
 			const user = userCredential.user;
 			userId = user.uid;
-			console.log(user.uid);
 
 			//Segundo paso es agregar un documento con más info bajo ese id
 			try {
@@ -41,7 +40,6 @@ export const createUser = (formData: any) => {
 					username: formData.username,
 					completeName: formData.completeName,
 				};
-				console.log(data);
 				await setDoc(where, data);
 				alert('Se creó el usuario');
 			} catch (error) {
@@ -57,12 +55,10 @@ export const createUser = (formData: any) => {
 
 //loguear
 export const logIn = (formData: any) => {
-	console.log(formData);
 	signInWithEmailAndPassword(auth, formData.email, formData.password)
 		.then(async (userCredential) => {
 			//Primer paso es obtener el id
 			const user = userCredential.user;
-			console.log(user.uid);
 		})
 		.catch((error: any) => {
 			const errorCode = error.code;
@@ -97,7 +93,6 @@ export const getFriends = async () => {
 export const getUser = async (idUser: string) => {
 	const docRef = doc(db, 'users', idUser);
 	const docSnap = await getDoc(docRef);
-	console.log(docSnap.data());
 	return docSnap.data();
 };
 

@@ -19,7 +19,6 @@ export class Explore extends HTMLElement {
 	async connectedCallback() {
 		const dataFriends = await getFriends();
 		const dataSongs = await getSongs();
-		console.log(dataFriends, dataSongs);
 		this.render(dataFriends, dataSongs);
 	}
 
@@ -63,7 +62,6 @@ export class Explore extends HTMLElement {
 
 		dataSongs.forEach((friend: any) => {
 			const myFriend = document.createElement('my-friend') as friends;
-			console.log(friend);
 			myFriend.setAttribute(AttributesFriends.name, friend.name);
 			myFriend.setAttribute(AttributesFriends.profile, friend.profile);
 			myFriend.setAttribute(AttributesFriends.photo, friend.photo);
