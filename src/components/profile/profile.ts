@@ -95,7 +95,6 @@ class Perfil extends HTMLElement {
 		${this.fav_song}</p>
 		</section>
 		<section class="name-following">
-		<p class="name">${this.completeName}</p>
 		<p class="following">100 following</p>
 		</section>
 		<p class="followers">238 followers</p>

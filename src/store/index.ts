@@ -22,7 +22,6 @@ export let emptyState = {
 	waves: [],
 	userWaves: [],
 };
-
 export let appState = emptyState;
 
 let observers: any[] = [];
