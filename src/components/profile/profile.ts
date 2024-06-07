@@ -86,11 +86,11 @@ class Perfil extends HTMLElement {
 
 		<section class="profile">
 		<section class="profileimg">
-		<img src="${this.profile_image}"></img>
+		<img src="${this.profile_image}" alt="profile image"></img>
 		</section>
 		<h1>${this.username}</h1>
 		<Button class="edit" id="edit">Edit picture</Button>
-		<button id="ButtonSong">
+		<button id="ButtonSong" alt="fav song">
 		<p class="fav_song"><svg class="pin"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(46, 196, 182);transform: ;msFilter:;"><path d="M15 11.586V6h2V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2h2v5.586l-2.707 1.707A.996.996 0 0 0 6 14v2a1 1 0 0 0 1 1h4v3l1 2 1-2v-3h4a1 1 0 0 0 1-1v-2a.996.996 0 0 0-.293-.707L15 11.586z"></path></svg></svg>
 		${this.fav_song}</p>
 		</section>
@@ -98,7 +98,7 @@ class Perfil extends HTMLElement {
 		<p class="following">100 following</p>
 		</section>
 		<p class="followers">238 followers</p>
-		<Button class="playlist">Playlists</Button>
+		<Button class="playlist" alt="playlist button">Playlists</Button>
 		</section>
 		</section>
 
@@ -106,18 +106,18 @@ class Perfil extends HTMLElement {
 		<form class="waveSong">
 		    <span class="close">X</span>
 		    <h2>What's your wave song at the moment?</h2>
-		    <textarea id="writtenSong" name="wave"></textarea>
-		    <span role="button" class="post">Post</span>
+		    <textarea id="writtenSong" name="wave" alt="insert song"></textarea>
+		    <span role="button" class="post" alt="post">Post</span>
 		</form>
 		</section>
 
 		<section id="modalContainerProfileImg" style="display:none;">
 		<form class="profileImgForm">
 		    <h2>Set your new profile image</h2>
-				<textarea id="newProfileImage" name="profileImage" placeholder="Or insert URL"></textarea>
+				<textarea id="newProfileImage" name="profileImage" alt="insert image link" placeholder="Or insert URL"></textarea>
 				<section class="botones">
-				<span role="button" class="Cancel">Cancel</span>
-		    <span role="button" class="Accept">Done</span>
+				<span role="button" alt="cancel" class="Cancel">Cancel</span>
+		    <span role="button" alt="accept" class="Accept">Done</span>
 				</section>
 		</form>
 		</section>
